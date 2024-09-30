@@ -52,4 +52,5 @@ dependencies {
     implementation("com.github.clans:fab:1.6.4")
     annotationProcessor("com.github.bumptech.glide:compiler:4.14.2")
     implementation ("com.google.android.gms:play-services-auth:20.2.0")
+    implementation ("com.github.denzcoskun:ImageSlideshow:0.1.0")
 }
