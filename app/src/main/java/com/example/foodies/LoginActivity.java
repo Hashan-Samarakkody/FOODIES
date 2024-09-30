@@ -33,6 +33,7 @@ public class LoginActivity extends AppCompatActivity {
     final String EMAIL_KEY = "email_key";
     final String PASSWORD_KEY = "password_key";
     final String SHARED_PREFS = "shared_prefs";
+    //Developing xml
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
