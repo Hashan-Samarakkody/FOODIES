@@ -39,9 +39,9 @@
     <EditText
         android:id="@+id/etName"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="50dp"
         android:layout_marginStart="40dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:layout_marginEnd="40dp"
         android:autofillHints="name"
         android:fontFamily="@font/inter_tight_medium"
@@ -51,12 +51,12 @@
     <EditText
         android:layout_marginStart="40dp"
         android:layout_marginEnd="40dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:fontFamily="@font/inter_tight_medium"
         android:id="@+id/etEmail"
         android:layout_width="match_parent"
         android:autofillHints="emailAddress"
-        android:layout_height="60dp"
+        android:layout_height="50dp"
         android:hint="Email"
         android:inputType="textEmailAddress" />
 
@@ -65,11 +65,11 @@
         android:layout_marginStart="40dp"
         android:layout_marginEnd="40dp"
         android:fontFamily="@font/inter_tight_medium"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:id="@+id/etpassword"
         android:layout_width="match_parent"
         android:autofillHints="password"
-        android:layout_height="60dp"
+        android:layout_height="50dp"
         android:hint="Password"
         android:inputType="textPassword" />
 
@@ -78,7 +78,7 @@
         android:fontFamily="@font/inter_tight_medium"
         android:textSize="20sp"
         android:backgroundTint="#46A020"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="10dp"
         android:layout_marginStart="40dp"
         android:layout_marginEnd="40dp"
         android:layout_width="match_parent"
@@ -93,7 +93,7 @@
         android:layout_marginTop="20dp"
         android:fontFamily="@font/inter_tight_medium"
         android:text="Already Have An Account? Log In"
-        android:textSize="16sp"
+        android:textSize="17sp"
         android:textStyle="bold" />
 
 </LinearLayout>
