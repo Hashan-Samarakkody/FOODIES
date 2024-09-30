@@ -15,7 +15,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_gravity="center_horizontal">
-
+<!--OK-->
         <ImageView
             android:id="@+id/backIcon"
             android:layout_width="45dp"
