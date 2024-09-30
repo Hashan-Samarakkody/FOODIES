@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".RegisterActivity"
+    android:background="@drawable/background_fill">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="center_horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="150dp"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/inter_tight_medium"
+            android:text="Sign Up"
+            android:textColor="@color/black"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+    </RelativeLayout>
+
+
+    <ImageView
+        android:layout_width="350dp"
+        android:layout_height="300dp"
+        android:src="@drawable/logo_1"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"/>
+
+    <EditText
+        android:id="@+id/etName"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="40dp"
+        android:autofillHints="name"
+        android:fontFamily="@font/inter_tight_medium"
+        android:hint="Name"
+        android:inputType="textPersonName" />
+
+    <EditText
+        android:layout_marginStart="40dp"
+        android:layout_marginEnd="40dp"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/inter_tight_medium"
+        android:id="@+id/etEmail"
+        android:layout_width="match_parent"
+        android:autofillHints="emailAddress"
+        android:layout_height="60dp"
+        android:hint="Email"
+        android:inputType="textEmailAddress" />
+
+
+    <EditText
+        android:layout_marginStart="40dp"
+        android:layout_marginEnd="40dp"
+        android:fontFamily="@font/inter_tight_medium"
+        android:layout_marginTop="20dp"
+        android:id="@+id/etpassword"
+        android:layout_width="match_parent"
+        android:autofillHints="password"
+        android:layout_height="60dp"
+        android:hint="Password"
+        android:inputType="textPassword" />
+
+    <Button
+        android:id="@+id/register"
+        android:fontFamily="@font/inter_tight_medium"
+        android:textSize="20sp"
+        android:backgroundTint="#46A020"
+        android:layout_marginTop="30dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginEnd="40dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Register" />
+
+    <TextView
+        android:id="@+id/haveAcc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/inter_tight_medium"
+        android:text="Already Have An Account? Log In"
+        android:textSize="16sp"
+        android:textStyle="bold" />
+
+</LinearLayout>
