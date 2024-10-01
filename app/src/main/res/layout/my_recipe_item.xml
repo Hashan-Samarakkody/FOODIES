@@ -1,63 +1,72 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/rCard"
-    android:layout_width="310dp"
-    android:layout_height="310dp"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    app:cardCornerRadius="40dp">
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_margin="10dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#DFF8D3"
-        android:padding="7dp">
+    <androidx.cardview.widget.CardView
+        android:id="@+id/rCard"
+        android:layout_width="180dp"
+        android:layout_height="190dp"
+        app:cardCornerRadius="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-        <com.google.android.material.imageview.ShapeableImageView
+        <ImageView
             android:id="@+id/rImage"
             android:layout_width="match_parent"
-            android:layout_height="190dp"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:layout_height="match_parent"
+            android:src="@drawable/baseline_image_24"
             android:scaleType="centerCrop"
-            android:src="@drawable/baseline_image_24" />
+            />
+
+        <ImageView
+            android:id="@+id/image_gradient"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:layout_gravity="bottom"
+            app:srcCompat="@drawable/image_bottom_overlay" />
 
         <TextView
             android:id="@+id/rTitle"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/rImage"
-            android:layout_marginStart="13dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="6dp"
-            android:layout_marginBottom="6dp"
-            android:ellipsize="end"
-            android:fontFamily="@font/inter_tight_medium"
-            android:maxLines="2"
-            android:text="Recipe Title"
-            android:textColor="@color/black"
-            android:textSize="21sp"
-            android:textStyle="bold" />
+            android:text="Here is sample"
+            android:textStyle="bold"
+            android:layout_gravity="bottom"
+            android:textSize="12dp"
+            android:textColor="@color/white"
+            android:fontFamily="@font/poppins_medium"
+            android:paddingStart="15dp"
+            android:paddingEnd="15dp"
+            android:paddingBottom="22dp"/>
 
         <ImageView
-            android:id="@+id/timeIcon"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_below="@id/rTitle"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="25dp"
-            android:src="@drawable/baseline_access_time_24" />
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:layout_marginTop="165dp"
+            android:layout_marginStart="15dp"
+            android:src="@drawable/baseline_access_time_24"/>
 
         <TextView
             android:id="@+id/rTime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignBaseline="@id/timeIcon"
-            android:layout_marginStart="3dp"
-            android:layout_marginTop="270dp"
-            android:layout_toEndOf="@id/timeIcon"
-            android:fontFamily="@font/inter_tight_medium"
-            android:text="20 min"
-            android:textColor="@color/black"
-            android:textSize="16sp" />
+            android:layout_gravity="bottom"
+            android:fontFamily="@font/poppins_medium"
+            android:maxLength="7"
+            android:text="30 mins"
+            app:emojiCompatEnabled="true"
+            android:textColor="@color/white"
+            android:textSize="10sp"
+            android:layout_marginStart="32dp"
+            android:layout_marginBottom="7dp"
+            tools:ignore="RtlHardcoded,SmallSp" />
 
-    </RelativeLayout>
-</androidx.cardview.widget.CardView>
+
+    </androidx.cardview.widget.CardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
