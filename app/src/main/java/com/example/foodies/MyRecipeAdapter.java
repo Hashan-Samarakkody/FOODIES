@@ -16,7 +16,7 @@ import java.util.List;
 
 public class MyRecipeAdapter extends RecyclerView.Adapter<MyViewHolder> {
 
-    private Context context;
+    final Context context;
     private List<DataClass> dataList;
 
     public MyRecipeAdapter(Context context, List<DataClass> dataList) {
@@ -70,10 +70,6 @@ public class MyRecipeAdapter extends RecyclerView.Adapter<MyViewHolder> {
         return dataList.size();
     }
 
-    public void searchDataList(ArrayList<DataClass> searchList) {
-        dataList = searchList;
-        notifyDataSetChanged();
-    }
 }
 
 class MyViewHolder extends RecyclerView.ViewHolder {

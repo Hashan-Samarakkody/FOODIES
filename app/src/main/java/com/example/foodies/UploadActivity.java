@@ -150,13 +150,10 @@ public class UploadActivity extends AppCompatActivity {
 
         if(!dataClass.isValidTime(time)){
             Toast.makeText(this, "Invalid Time Format!", Toast.LENGTH_SHORT).show();
-            return;
         } else if (!dataClass.isValidName(name)) {
             Toast.makeText(this, "Invalid Name!", Toast.LENGTH_SHORT).show();
-            return;
         }else if(!dataClass.isValidCategory(category)){
             Toast.makeText(this, "Invalid Category", Toast.LENGTH_SHORT).show();
-            return;
         }else {
             String recipeId = FirebaseDatabase.getInstance().getReference("Recipes").push().getKey();
             FirebaseDatabase.getInstance().getReference("Recipes").child(recipeId).setValue(dataClass)

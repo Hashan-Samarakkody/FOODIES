@@ -16,7 +16,7 @@ import java.util.List;
 
 public class SearchRecipeAdapter extends RecyclerView.Adapter<SearchViewHolder> {
 
-    private Context context;
+    final Context context;
     private List<DataClass> dataList;
 
     public SearchRecipeAdapter(Context context, List<DataClass> dataList) {

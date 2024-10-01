@@ -46,8 +46,8 @@ public class Users {
         }
         if (!isValidPassword(password)) {
             return false;
-        }
-        return true;
+        }else{
+        return true;}
     }
 
     public boolean isEmpty(String value) {
