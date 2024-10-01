@@ -33,27 +33,37 @@ public class MyRecipeAdapter extends RecyclerView.Adapter<MyViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        Glide.with(context).load(dataList.get(position).getDataImage()).into(holder.recImage);
-        holder.recTitle.setText(dataList.get(position).getDataName());
-        holder.recTime.setText(dataList.get(position).getDataTime());
+        DataClass data = dataList.get(position);
 
+        // Load image using Glide
+        Glide.with(context)
+                .load(data.getDataImage())
+                .placeholder(R.drawable.r_2) // Optional: add a placeholder image
+                .into(holder.recImage);
+
+        // Set text views
+        holder.recTitle.setText(data.getDataName());
+        holder.recTime.setText(data.getDataTime());
+
+        // Set click listener
         holder.recCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(context, DetailActivity.class);
-                intent.putExtra("Image", dataList.get(holder.getAdapterPosition()).getDataImage());
-                intent.putExtra("Name", dataList.get(holder.getAdapterPosition()).getDataName());
-                intent.putExtra("Time", dataList.get(holder.getAdapterPosition()).getDataTime());
-                intent.putExtra("Category", dataList.get(holder.getAdapterPosition()).getDataCategory());
-                intent.putExtra("Ingredients", dataList.get(holder.getAdapterPosition()).getDataIngredients());
-                intent.putExtra("Description", dataList.get(holder.getAdapterPosition()).getDataDescription());
-                intent.putExtra("Key", dataList.get(holder.getAdapterPosition()).getKey());
-                intent.putExtra("Owner", dataList.get(holder.getAdapterPosition()).getOwner());
+                intent.putExtra("Image", data.getDataImage());
+                intent.putExtra("Name", data.getDataName());
+                intent.putExtra("Time", data.getDataTime());
+                intent.putExtra("Category", data.getDataCategory());
+                intent.putExtra("Ingredients", data.getDataIngredients());
+                intent.putExtra("Description", data.getDataDescription());
+                intent.putExtra("Key", data.getKey());
+                intent.putExtra("Owner", data.getOwner());
 
                 context.startActivity(intent);
             }
         });
     }
+
 
     @Override
     public int getItemCount() {
