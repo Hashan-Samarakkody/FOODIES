@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rCard"
+    android:layout_width="310dp"
+    android:layout_height="310dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="40dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#DFF8D3"
+        android:padding="7dp">
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/rImage"
+            android:layout_width="match_parent"
+            android:layout_height="190dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/baseline_image_24" />
+
+        <TextView
+            android:id="@+id/rTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/rImage"
+            android:layout_marginStart="13dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="6dp"
+            android:layout_marginBottom="6dp"
+            android:ellipsize="end"
+            android:fontFamily="@font/inter_tight_medium"
+            android:maxLines="2"
+            android:text="Recipe Title"
+            android:textColor="@color/black"
+            android:textSize="21sp"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/timeIcon"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_below="@id/rTitle"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="25dp"
+            android:src="@drawable/baseline_access_time_24" />
+
+        <TextView
+            android:id="@+id/rTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@id/timeIcon"
+            android:layout_marginStart="3dp"
+            android:layout_marginTop="270dp"
+            android:layout_toEndOf="@id/timeIcon"
+            android:fontFamily="@font/inter_tight_medium"
+            android:text="20 min"
+            android:textColor="@color/black"
+            android:textSize="16sp" />
+
+    </RelativeLayout>
+</androidx.cardview.widget.CardView>
