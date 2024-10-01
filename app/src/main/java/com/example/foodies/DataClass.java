@@ -87,7 +87,7 @@ public class DataClass {
             if (parts.length == 1) {
                 // Only hours are present
                 return (hours >= 0 && hours < 24);
-            } else if (parts.length > 1 && parts[1].contains("min")) {
+            } else if (parts[1].contains("min")) {
                 String[] minutesPart = parts[1].split("min");
                 int minutes = Integer.parseInt(minutesPart[0].trim());
                 return (hours >= 0 && hours < 24 && minutes >= 0 && minutes < 60);

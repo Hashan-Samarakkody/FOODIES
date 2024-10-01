@@ -38,13 +38,14 @@
 
     <EditText
         android:id="@+id/etName"
+        android:textColorHint="#98BD93"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginStart="40dp"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="40dp"
         android:autofillHints="name"
-        android:fontFamily="@font/inter_tight_medium"
+        android:fontFamily="@font/poppins_medium"
         android:hint="Name"
         android:inputType="textPersonName" />
 
@@ -52,7 +53,8 @@
         android:layout_marginStart="40dp"
         android:layout_marginEnd="40dp"
         android:layout_marginTop="10dp"
-        android:fontFamily="@font/inter_tight_medium"
+        android:textColorHint="#98BD93"
+        android:fontFamily="@font/poppins_medium"
         android:id="@+id/etEmail"
         android:layout_width="match_parent"
         android:autofillHints="emailAddress"
@@ -64,7 +66,8 @@
     <EditText
         android:layout_marginStart="40dp"
         android:layout_marginEnd="40dp"
-        android:fontFamily="@font/inter_tight_medium"
+        android:fontFamily="@font/poppins_medium"
+        android:textColorHint="#98BD93"
         android:layout_marginTop="10dp"
         android:id="@+id/etpassword"
         android:layout_width="match_parent"
