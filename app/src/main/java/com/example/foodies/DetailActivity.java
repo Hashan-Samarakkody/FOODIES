@@ -184,7 +184,5 @@ public class DetailActivity extends AppCompatActivity {
             }
         });
 
-
-
     }
 }

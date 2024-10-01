@@ -4,6 +4,8 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -31,14 +33,20 @@ public class MainActivity extends AppCompatActivity {
     List<DataClass> dataList;
     DatabaseReference databaseReference;
     ValueEventListener eventListener;
-    SearchView searchView;
     MyRecipeAdapter adapter;
+    ImageView search;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        if (FirebaseAuth.getInstance().getCurrentUser() == null) {
+            // Redirect to login activity
+            startActivity(new Intent(this, LoginActivity.class));
+            finish();
+            return;
+        }
 
         ImageSlider imageSlider = findViewById(R.id.imageSlider);
         ArrayList<SlideModel> slideModels = new ArrayList<>();
@@ -55,8 +63,15 @@ public class MainActivity extends AppCompatActivity {
         imageSlider.setImageList(slideModels,ScaleTypes.FIT);
 
         recyclerView = findViewById(R.id.recyclerView);
-        searchView = findViewById(R.id.search);
-        searchView.clearFocus();
+        search = findViewById(R.id.search);
+
+        search.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this,SearchActivity.class));
+            }
+        });
+
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(MainActivity.this, LinearLayoutManager.HORIZONTAL, false);
         recyclerView.setLayoutManager(layoutManager);

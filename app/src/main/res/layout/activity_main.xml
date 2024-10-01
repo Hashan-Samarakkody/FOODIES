@@ -29,29 +29,20 @@
                 android:layout_marginStart="20dp"
                 android:src="@drawable/menu" />
 
-            <androidx.appcompat.widget.SearchView
-                android:id="@+id/search"
-                android:layout_width="250dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="77dp"
-                android:layout_marginTop="15dp"
-                android:background="@drawable/out_line"
-                app:iconifiedByDefault="false"
-                android:importantForAutofill="auto"
-                android:textAlignment="textStart"
-                android:focusable="false"
-                app:searchHintIcon="@drawable/baseline_search_24"
-                app:queryHint="Search..."
-                android:autofillHints="none"
-                app:closeIcon="@drawable/baseline_close_24"
-                app:searchIcon="@drawable/baseline_search_24"/>
-
             <ImageView
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
                 android:src="@drawable/logo_1"
                 android:layout_marginTop="15dp"
                 android:layout_marginStart="345dp"/>
+
+            <ImageView
+                android:id="@+id/search"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/baseline_search_24"
+                android:layout_marginTop="20dp"
+                android:layout_marginStart="295dp"/>
         </RelativeLayout>
 
         <LinearLayout
