@@ -12,11 +12,12 @@ public class DataClass {
     private String key;
     private String owner;
 
+    // Updated patterns to allow special characters in name and category
     private static final Pattern TIME_PATTERN = Pattern.compile(
-            "^(\\d{1,2}h\\s*\\d{1,2}min|\\d{1,2}h|\\d{1,2}-\\d{1,2})$"
+            "^(\\d{1,2}h\\s*\\d{1,2}min|\\d{1,2}h|\\d{1,2}min|\\d{1,2}-\\d{1,2}|\\d{1,2})$"
     );
-    private static final Pattern NAME_PATTERN = Pattern.compile("^[a-zA-Z\\s]+$");
-    private static final Pattern CATEGORY_PATTERN = Pattern.compile("^[a-zA-Z\\s]+$");
+    private static final Pattern NAME_PATTERN = Pattern.compile("^[a-zA-Z\\s\\W]+$"); // Allow special chars
+    private static final Pattern CATEGORY_PATTERN = Pattern.compile("^[a-zA-Z\\s\\W]+$"); // Allow special chars
 
     public DataClass() {
         // Required for Firebase
@@ -66,7 +67,6 @@ public class DataClass {
         return owner;
     }
 
-
     public void setKey(String key) {
         this.key = key;
     }
@@ -92,6 +92,10 @@ public class DataClass {
                 int minutes = Integer.parseInt(minutesPart[0].trim());
                 return (hours >= 0 && hours < 24 && minutes >= 0 && minutes < 60);
             }
+        } else if (time.contains("min")) {
+            String[] parts = time.split("min");
+            int minutes = Integer.parseInt(parts[0].trim());
+            return (minutes >= 0 && minutes < 60);
         } else {
             String[] parts = time.split("-");
             if (parts.length == 2) {
