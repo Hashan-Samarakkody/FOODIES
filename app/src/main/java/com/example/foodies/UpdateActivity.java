@@ -9,7 +9,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
-
 import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
@@ -17,7 +16,6 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-
 import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -31,33 +29,52 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+import java.util.Objects;
+
 public class UpdateActivity extends AppCompatActivity {
 
     ImageView updateImage, backIcon;
     Button updateButton, updateVideoButton;
     EditText updateName, updateCategory, updateTime, updateIngredients, updateDescription;
-    String name, category, time, ingredients, description;
     String imageUrl, videoUrl;
     String key, oldImageURL, oldVideoURL;
-    Uri newImageUri, newVideoUri, oldImageUri, oldVideoUri;
-    DatabaseReference databaseReference;
-    StorageReference storageReference;
+    Uri newImageUri, newVideoUri;
+    DatabaseReference databaseReference; // Declare databaseReference here
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update);
 
-        updateButton = findViewById(R.id.updateButton);
+        // Initialize UI components
+        updateImage = findViewById(R.id.updateImage);
+        backIcon = findViewById(R.id.back);
         updateName = findViewById(R.id.updateName);
         updateCategory = findViewById(R.id.updateCategory);
         updateTime = findViewById(R.id.updateTime);
         updateIngredients = findViewById(R.id.updateIngredients);
         updateDescription = findViewById(R.id.updateDescription);
-        updateImage = findViewById(R.id.updateImage);
-        backIcon = findViewById(R.id.back);
+        updateButton = findViewById(R.id.updateButton);
         updateVideoButton = findViewById(R.id.updateVideo);
 
+        // Load existing data
+        Bundle bundle = getIntent().getExtras();
+        if (bundle != null) {
+            Glide.with(UpdateActivity.this).load(bundle.getString("Image")).into(updateImage);
+            updateName.setText(bundle.getString("Name"));
+            updateCategory.setText(bundle.getString("Category"));
+            updateTime.setText(bundle.getString("Time"));
+            updateIngredients.setText(bundle.getString("Ingredients"));
+            updateDescription.setText(bundle.getString("Description"));
+            key = bundle.getString("Key");
+            oldImageURL = bundle.getString("Image");
+            oldVideoURL = bundle.getString("Video");
+        }
+
+        // Initialize database reference
+        databaseReference = FirebaseDatabase.getInstance().getReference("Recipes").child(key);
+
+        // Image selection
         ActivityResultLauncher<Intent> imageActivityResultLauncher = registerForActivityResult(
                 new ActivityResultContracts.StartActivityForResult(),
                 new ActivityResultCallback<ActivityResult>() {
@@ -65,7 +82,7 @@ public class UpdateActivity extends AppCompatActivity {
                     public void onActivityResult(ActivityResult result) {
                         if (result.getResultCode() == Activity.RESULT_OK) {
                             Intent data = result.getData();
-                            newImageUri = data.getData();
+                            newImageUri = data != null ? data.getData() : null;
                             updateImage.setImageURI(newImageUri);
                         } else {
                             Toast.makeText(UpdateActivity.this, "No Image Selected!", Toast.LENGTH_SHORT).show();
@@ -74,6 +91,7 @@ public class UpdateActivity extends AppCompatActivity {
                 }
         );
 
+        // Video selection
         ActivityResultLauncher<Intent> videoActivityResultLauncher = registerForActivityResult(
                 new ActivityResultContracts.StartActivityForResult(),
                 new ActivityResultCallback<ActivityResult>() {
@@ -81,7 +99,7 @@ public class UpdateActivity extends AppCompatActivity {
                     public void onActivityResult(ActivityResult result) {
                         if (result.getResultCode() == Activity.RESULT_OK) {
                             Intent data = result.getData();
-                            newVideoUri = data.getData();
+                            newVideoUri = data != null ? data.getData() : null;
                             Toast.makeText(UpdateActivity.this, "Video selected!", Toast.LENGTH_SHORT).show();
                         } else {
                             Toast.makeText(UpdateActivity.this, "No Video Selected!", Toast.LENGTH_SHORT).show();
@@ -90,65 +108,26 @@ public class UpdateActivity extends AppCompatActivity {
                 }
         );
 
-        Bundle bundle = getIntent().getExtras();
-        if (bundle != null) {
-            Glide.with(UpdateActivity.this).load(bundle.getString("Image")).into(updateImage);
-
-            updateName.setText(bundle.getString("Name"));
-            updateTime.setText(bundle.getString("Time"));
-            updateCategory.setText(bundle.getString("Category"));
-            updateIngredients.setText(bundle.getString("Ingredients"));
-            updateDescription.setText(bundle.getString("Description"));
-            key = bundle.getString("Key");
-            oldImageURL = bundle.getString("Image");
-            oldVideoURL = bundle.getString("Video");
-
-            oldImageUri = Uri.parse(oldImageURL);
-            oldVideoUri = Uri.parse(oldVideoURL);
-        }
-
-        databaseReference = FirebaseDatabase.getInstance().getReference("Recipes").child(key);
-
-        updateImage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent photoPicker = new Intent(Intent.ACTION_PICK);
-                photoPicker.setType("image/*");
-                imageActivityResultLauncher.launch(photoPicker);
-            }
+        // Set up listeners
+        updateImage.setOnClickListener(view -> {
+            Intent photoPicker = new Intent(Intent.ACTION_PICK);
+            photoPicker.setType("image/*");
+            imageActivityResultLauncher.launch(photoPicker);
         });
 
-        updateVideoButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent videoPicker = new Intent(Intent.ACTION_PICK);
-                videoPicker.setType("video/*");
-                videoActivityResultLauncher.launch(videoPicker);
-            }
+        updateVideoButton.setOnClickListener(view -> {
+            Intent videoPicker = new Intent(Intent.ACTION_PICK);
+            videoPicker.setType("video/*");
+            videoActivityResultLauncher.launch(videoPicker);
         });
 
-        updateButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                saveData();
-                Intent intent = new Intent(UpdateActivity.this, MainActivity.class);
-                startActivity(intent);
-            }
-        });
+        updateButton.setOnClickListener(view -> saveData());
 
-        backIcon.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finish();
-            }
-        });
+        backIcon.setOnClickListener(view -> finish());
     }
 
     public void saveData() {
-        Uri uploadImageUri = (newImageUri != null) ? newImageUri : oldImageUri;
-        Uri uploadVideoUri = (newVideoUri != null) ? newVideoUri : oldVideoUri;
-
-        if (uploadImageUri == null) {
+        if (newImageUri == null && oldImageURL == null) {
             Toast.makeText(this, "No image selected!", Toast.LENGTH_SHORT).show();
             return;
         }
@@ -162,132 +141,92 @@ public class UpdateActivity extends AppCompatActivity {
             return;
         }
 
+        String imageFileName = "image_" + System.currentTimeMillis() + "_" + (newImageUri != null ? Objects.requireNonNull(newImageUri.getLastPathSegment()) : "");
+        String videoFileName = "video_" + System.currentTimeMillis() + "_" + (newVideoUri != null ? Objects.requireNonNull(newVideoUri.getLastPathSegment()) : "");
+        StorageReference storageReference = FirebaseStorage.getInstance().getReference();
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(UpdateActivity.this);
+        builder.setCancelable(false);
+        builder.setView(R.layout.progress_layout);
+        AlertDialog dialog = builder.create();
+        dialog.show();
+
+        // Upload image
         if (newImageUri != null) {
-            String imageFileName = System.currentTimeMillis() + "_" + uploadImageUri.getLastPathSegment();
-            storageReference = FirebaseStorage.getInstance().getReference("Android Images").child(imageFileName);
-
-            AlertDialog.Builder builder = new AlertDialog.Builder(UpdateActivity.this);
-            builder.setCancelable(false);
-            builder.setView(R.layout.progress_layout);
-            AlertDialog dialog = builder.create();
-            dialog.show();
-
-            storageReference.putFile(uploadImageUri)
-                    .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                        @Override
-                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                            storageReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                                @Override
-                                public void onSuccess(Uri uri) {
-                                    imageUrl = uri.toString();
-                                    uploadVideo(dialog);
-                                }
-                            }).addOnFailureListener(new OnFailureListener() {
-                                @Override
-                                public void onFailure(@NonNull Exception e) {
-                                    Toast.makeText(UpdateActivity.this, "Failed to get download URL", Toast.LENGTH_SHORT).show();
-                                    dialog.dismiss();
-                                }
-                            });
-                        }
-                    }).addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            Toast.makeText(UpdateActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-                            dialog.dismiss();
-                        }
-                    });
+            StorageReference imageRef = storageReference.child("Android Images").child(imageFileName);
+            imageRef.putFile(newImageUri).addOnSuccessListener(taskSnapshot -> {
+                imageRef.getDownloadUrl().addOnSuccessListener(uri -> {
+                    imageUrl = uri.toString();
+                    uploadVideo(dialog, storageReference, videoFileName);
+                }).addOnFailureListener(e -> {
+                    Toast.makeText(UpdateActivity.this, "Failed to get image URL", Toast.LENGTH_SHORT).show();
+                    dialog.dismiss();
+                });
+            }).addOnFailureListener(e -> {
+                Toast.makeText(UpdateActivity.this, "Failed to upload image: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                dialog.dismiss();
+            });
         } else {
-            imageUrl = oldImageURL;
-            uploadVideo(null);
+            imageUrl = oldImageURL; // Keep the old image URL if no new image
+            uploadVideo(dialog, storageReference, videoFileName);
         }
     }
 
-    private void uploadVideo(AlertDialog dialog) {
+    private void uploadVideo(AlertDialog dialog, StorageReference storageReference, String videoFileName) {
         if (newVideoUri != null) {
-            String videoFileName = System.currentTimeMillis() + "_" + newVideoUri.getLastPathSegment();
-            StorageReference videoStorageReference = FirebaseStorage.getInstance().getReference("Android Videos").child(videoFileName);
-
-            videoStorageReference.putFile(newVideoUri)
-                    .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                        @Override
-                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                            videoStorageReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                                @Override
-                                public void onSuccess(Uri uri) {
-                                    videoUrl = uri.toString();
-                                    updateData(dialog);
-                                }
-                            }).addOnFailureListener(new OnFailureListener() {
-                                @Override
-                                public void onFailure(@NonNull Exception e) {
-                                    Toast.makeText(UpdateActivity.this, "Failed to get video URL", Toast.LENGTH_SHORT).show();
-                                    if (dialog != null) dialog.dismiss();
-                                }
-                            });
-                        }
-                    }).addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            Toast.makeText(UpdateActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-                            if (dialog != null) dialog.dismiss();
-                        }
-                    });
+            StorageReference videoRef = storageReference.child("Android Videos").child(videoFileName);
+            videoRef.putFile(newVideoUri).addOnSuccessListener(taskSnapshot -> {
+                videoRef.getDownloadUrl().addOnSuccessListener(uri -> {
+                    videoUrl = uri.toString();
+                    updateData(dialog);
+                }).addOnFailureListener(e -> {
+                    Toast.makeText(UpdateActivity.this, "Failed to get video URL", Toast.LENGTH_SHORT).show();
+                    dialog.dismiss();
+                });
+            }).addOnFailureListener(e -> {
+                Toast.makeText(UpdateActivity.this, "Failed to upload video: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                dialog.dismiss();
+            });
         } else {
-            videoUrl = oldVideoURL;
+            videoUrl = oldVideoURL; // Keep the old video URL if no new video
             updateData(dialog);
         }
     }
 
     public void updateData(AlertDialog dialog) {
-        name = updateName.getText().toString().trim();
-        category = updateCategory.getText().toString();
-        time = updateTime.getText().toString();
-        ingredients = updateIngredients.getText().toString();
-        description = updateDescription.getText().toString();
+        String name = updateName.getText().toString().trim();
+        String category = updateCategory.getText().toString();
+        String time = updateTime.getText().toString();
+        String ingredients = updateIngredients.getText().toString();
+        String description = updateDescription.getText().toString();
 
-        if (name.isEmpty() || category.isEmpty() || time.isEmpty() || ingredients.isEmpty() || description.isEmpty()) {
-            Toast.makeText(this, "Please fill all fields!", Toast.LENGTH_SHORT).show();
+        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        DataClass dataClass = new DataClass(name, category, time, ingredients, description, imageUrl, videoUrl, currentUser.getUid());
+
+        // Validate the data using DataClass methods
+        if (!dataClass.isValidTime(time)) {
+            Toast.makeText(this, "Invalid Time Format!", Toast.LENGTH_SHORT).show();
+            dialog.dismiss();
+            return;
+        } else if (!dataClass.isValidName(name)) {
+            Toast.makeText(this, "Invalid Name!", Toast.LENGTH_SHORT).show();
+            dialog.dismiss();
+            return;
+        } else if (!dataClass.isValidCategory(category)) {
+            Toast.makeText(this, "Invalid Category!", Toast.LENGTH_SHORT).show();
+            dialog.dismiss();
             return;
         }
 
-        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
-        DataClass dataClass = new DataClass(name, category, time, ingredients, description, imageUrl, currentUser.getUid(), videoUrl);
-
-        databaseReference.setValue(dataClass).addOnCompleteListener(new OnCompleteListener<Void>() {
-            @Override
-            public void onComplete(@NonNull Task<Void> task) {
-                if (task.isSuccessful()) {
-                    if (newImageUri != null) {
-                        StorageReference oldImageReference = FirebaseStorage.getInstance().getReferenceFromUrl(oldImageURL);
-                        oldImageReference.delete().addOnCompleteListener(new OnCompleteListener<Void>() {
-                            @Override
-                            public void onComplete(@NonNull Task<Void> task) {
-                                if (task.isSuccessful()) {
-                                    Toast.makeText(UpdateActivity.this, "Recipe updated and old image deleted", Toast.LENGTH_SHORT).show();
-                                } else {
-                                    Toast.makeText(UpdateActivity.this, "Failed to delete old image", Toast.LENGTH_SHORT).show();
-                                }
-                            }
-                        });
-                    }
-
-                    // Toast for video update
-                    Toast.makeText(UpdateActivity.this, "Video updated successfully!", Toast.LENGTH_SHORT).show();
-
-                    if (dialog != null) dialog.dismiss();
-                    finish();
-                } else {
-                    Toast.makeText(UpdateActivity.this, "Failed to update recipe", Toast.LENGTH_SHORT).show();
-                    if (dialog != null) dialog.dismiss();
-                }
+        databaseReference.setValue(dataClass).addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                Toast.makeText(UpdateActivity.this, "Updated Successfully", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(UpdateActivity.this,MainActivity.class));
             }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Toast.makeText(UpdateActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-                if (dialog != null) dialog.dismiss();
-            }
+            dialog.dismiss();
+        }).addOnFailureListener(e -> {
+            Toast.makeText(UpdateActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+            dialog.dismiss();
         });
     }
 }

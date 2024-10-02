@@ -80,7 +80,6 @@ public class OthersRecipeDetailActivity extends AppCompatActivity {
         MediaItem mediaItem = MediaItem.fromUri(videoUri);
         player.setMediaItem(mediaItem);
         player.prepare();
-        player.play(); // Start playback
     }
 
     private void shareRecipe() {
