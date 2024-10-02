@@ -9,8 +9,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
@@ -18,15 +20,15 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class LoginActivity extends AppCompatActivity {
-    EditText etEmail,etPassword;
-    String email,password;
+    EditText etEmail, etPassword;
     Button login;
     ImageView gotoRegister;
     FirebaseAuth auth;
+    SharedPreferences sharedPreferences;
+
     final String EMAIL_KEY = "email_key";
     final String PASSWORD_KEY = "password_key";
     final String SHARED_PREFS = "shared_prefs";
-    //Developing xml
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,17 +40,18 @@ public class LoginActivity extends AppCompatActivity {
         login = findViewById(R.id.login);
         gotoRegister = findViewById(R.id.backIcon);
 
-        SharedPreferences sharedPreferences;
-
         sharedPreferences = getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE);
 
-        email =  sharedPreferences.getString(EMAIL_KEY,null);
-        password = sharedPreferences.getString(PASSWORD_KEY,null);
+        // Fetch and set email and password if they exist
+        String email = sharedPreferences.getString(EMAIL_KEY, null);
+        String password = sharedPreferences.getString(PASSWORD_KEY, null);
 
-        if(email != null && password != null){
-            Toast.makeText(LoginActivity.this, "Logged In Successfully!", Toast.LENGTH_SHORT).show();
-            startActivity(new Intent(LoginActivity.this, MainActivity.class));
-            finish();
+        if (email != null) {
+            etEmail.setText(email);
+        }
+
+        if (password != null) {
+            etPassword.setText(password);
         }
 
         login.setOnClickListener(new View.OnClickListener() {
@@ -57,27 +60,28 @@ public class LoginActivity extends AppCompatActivity {
                 String userEmail = etEmail.getText().toString().trim();
                 String userPassword = etPassword.getText().toString().trim();
 
-                if(userEmail.isEmpty()){
+                if (userEmail.isEmpty()) {
                     etEmail.setError("Email required!");
                     return;
                 } else if (userPassword.isEmpty()) {
                     etPassword.setError("Password required!");
                     return;
-                }else {
+                } else {
+                    // Save the email and password in SharedPreferences
                     SharedPreferences.Editor editor = sharedPreferences.edit();
                     editor.putString(EMAIL_KEY, userEmail);
                     editor.putString(PASSWORD_KEY, userPassword);
-
                     editor.apply();
 
+                    // Authenticate the user
                     auth = FirebaseAuth.getInstance();
                     auth.signInWithEmailAndPassword(userEmail, userPassword).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
-
                             if (task.isSuccessful()) {
                                 Toast.makeText(LoginActivity.this, "Logged In Successfully!", Toast.LENGTH_SHORT).show();
                                 startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                                finish(); // End the LoginActivity
                             } else {
                                 Toast.makeText(LoginActivity.this, "User Authentication Failed!", Toast.LENGTH_SHORT).show();
                             }
@@ -95,9 +99,9 @@ public class LoginActivity extends AppCompatActivity {
         gotoRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(LoginActivity.this,RegisterActivity.class);
+                Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
                 startActivity(intent);
-                finish();
+                finish(); // End the LoginActivity
             }
         });
     }
