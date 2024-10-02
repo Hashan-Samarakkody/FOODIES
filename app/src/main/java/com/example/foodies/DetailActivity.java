@@ -2,6 +2,7 @@ package com.example.foodies;
 
 import android.app.AlertDialog;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -10,37 +11,39 @@ import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import com.bumptech.glide.Glide;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
+import androidx.media3.common.MediaItem;
+import androidx.media3.exoplayer.ExoPlayer;
+import androidx.media3.ui.PlayerView;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
+
 public class DetailActivity extends AppCompatActivity {
 
     RatingBar ratingBar;
-    TextView detailName,detailTime,detailCategory,detailIngredients,detailDesc;
-    ImageView detailImage,deleteDataImage,editDataImage,shareDataImage,backIcon;
+    PlayerView detailVideo;
+    ExoPlayer player;
+    TextView detailName, detailTime, detailCategory, detailIngredients, detailDesc;
+    ImageView deleteDataImage, editDataImage, shareDataImage, backIcon;
     String key = "";
-    String  imageUrl = "";
+    String imageUrl = "";
+    String videoUrl = ""; // Variable for video URL
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
 
-        detailImage = findViewById(R.id.detailImage);
+        detailVideo = findViewById(R.id.detailVideo); // Ensure you have a PlayerView in your layout
         deleteDataImage = findViewById(R.id.deleteData);
         shareDataImage = findViewById(R.id.shareData);
         editDataImage = findViewById(R.id.editData);
         backIcon = findViewById(R.id.back);
 
         ratingBar = findViewById(R.id.ratingBar);
-
         detailName = findViewById(R.id.detailName);
         detailTime = findViewById(R.id.detailTime);
         detailCategory = findViewById(R.id.detailCategory);
@@ -49,134 +52,140 @@ public class DetailActivity extends AppCompatActivity {
 
         Bundle bundle = getIntent().getExtras();
 
-        if(bundle != null){
+        if (bundle != null) {
             detailName.setText(bundle.getString("Name"));
             detailTime.setText(bundle.getString("Time"));
             detailCategory.setText(bundle.getString("Category"));
             detailIngredients.setText(bundle.getString("Ingredients"));
             detailDesc.setText(bundle.getString("Description"));
             key = bundle.getString("Key");
-            imageUrl = bundle.getString("Image");
+            imageUrl = bundle.getString("Image"); // Get image URL
+            videoUrl = bundle.getString("Video"); // Get video URL
 
-            Glide.with(this).load(bundle.getString("Image")).into(detailImage);
-
+            if (videoUrl != null && !videoUrl.isEmpty()) {
+                setupPlayer(Uri.parse(videoUrl)); // Setup player
+            }
         }
 
-        deleteDataImage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                LayoutInflater inflater = getLayoutInflater();
-                View dialogView = inflater.inflate(R.layout.popup_layout, null);
-                AlertDialog.Builder builder = new AlertDialog.Builder(DetailActivity.this);
-                builder.setView(dialogView);
-                AlertDialog dialog = builder.create();
+        deleteDataImage.setOnClickListener(view -> showDeleteConfirmationDialog());
+        editDataImage.setOnClickListener(view -> openUpdateActivity());
+        shareDataImage.setOnClickListener(view -> shareRecipe());
+        backIcon.setOnClickListener(view -> startActivity(new Intent(DetailActivity.this, MainActivity.class)));
+    }
 
-                TextView yesButton = dialogView.findViewById(R.id.button_yes);
-                TextView noButton = dialogView.findViewById(R.id.button_no);
+    private void setupPlayer(Uri videoUri) {
+        player = new ExoPlayer.Builder(this).build();
+        detailVideo.setPlayer(player);
 
-                yesButton.setOnClickListener(v -> {
-                    final DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Recipes");
-                    FirebaseStorage storage = FirebaseStorage.getInstance();
+        MediaItem mediaItem = MediaItem.fromUri(videoUri);
+        player.setMediaItem(mediaItem);
+        player.prepare();
+        player.play(); // Start playback
+    }
 
-                    // Log the current image URL
-                    Log.d("DetailActivity", "Image URL: " + imageUrl);
+    private void showDeleteConfirmationDialog() {
+        LayoutInflater inflater = getLayoutInflater();
+        View dialogView = inflater.inflate(R.layout.popup_layout, null);
+        AlertDialog.Builder builder = new AlertDialog.Builder(DetailActivity.this);
+        builder.setView(dialogView);
+        AlertDialog dialog = builder.create();
 
-                    if (imageUrl != null && !imageUrl.isEmpty()) {
-                        StorageReference storageReference = storage.getReferenceFromUrl(imageUrl);
+        TextView yesButton = dialogView.findViewById(R.id.button_yes);
+        TextView noButton = dialogView.findViewById(R.id.button_no);
 
-                        storageReference.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
-                            @Override
-                            public void onSuccess(Void unused) {
-                                reference.child(key).removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
-                                    @Override
-                                    public void onSuccess(Void unused) {
-                                        Toast.makeText(DetailActivity.this, "Deleted Successfully!", Toast.LENGTH_SHORT).show();
-                                        startActivity(new Intent(getApplicationContext(), MainActivity.class));
-                                        finish();
-                                    }
-                                }).addOnFailureListener(new OnFailureListener() {
-                                    @Override
-                                    public void onFailure(@NonNull Exception e) {
-                                        Toast.makeText(DetailActivity.this, "Error deleting recipe from database!", Toast.LENGTH_SHORT).show();
-                                        Log.e("DetailActivity", "Database deletion error: " + e.getMessage());
-                                    }
-                                });
-                            }
-                        }).addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                                Toast.makeText(DetailActivity.this, "Error deleting image from storage!", Toast.LENGTH_SHORT).show();
-                                Log.e("DetailActivity", "Storage deletion error: " + e.getMessage());
-                            }
-                        });
+        yesButton.setOnClickListener(v -> {
+            deleteRecipe();
+            dialog.dismiss();
+        });
+
+        noButton.setOnClickListener(v -> dialog.dismiss());
+        dialog.show();
+    }
+
+    private void deleteRecipe() {
+        final DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Recipes");
+        FirebaseStorage storage = FirebaseStorage.getInstance();
+
+        if (imageUrl != null && !imageUrl.isEmpty()) {
+            StorageReference storageReference = storage.getReferenceFromUrl(imageUrl);
+            storageReference.delete().addOnSuccessListener(unused -> {
+                reference.child(key).removeValue().addOnSuccessListener(unused1 -> {
+                    if (videoUrl != null && !videoUrl.isEmpty()) {
+                        deleteVideoFromStorage(videoUrl);
                     } else {
-                        // Handle case where image URL is empty
-                        reference.child(key).removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
-                            @Override
-                            public void onSuccess(Void unused) {
-                                Toast.makeText(DetailActivity.this, "Deleted Successfully without image!", Toast.LENGTH_SHORT).show();
-                                startActivity(new Intent(getApplicationContext(), MainActivity.class));
-                                finish();
-                            }
-                        }).addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                                Toast.makeText(DetailActivity.this, "Error deleting recipe from database!", Toast.LENGTH_SHORT).show();
-                                Log.e("DetailActivity", "Database deletion error: " + e.getMessage());
-                            }
-                        });
+                        showToast("Deleted Successfully!");
+                        navigateToMainActivity();
                     }
-                    dialog.dismiss();
-                });
+                }).addOnFailureListener(e -> handleDeleteFailure(e, "recipe from database"));
+            }).addOnFailureListener(e -> handleDeleteFailure(e, "image from storage"));
+        } else {
+            reference.child(key).removeValue().addOnSuccessListener(unused -> {
+                showToast("Deleted Successfully without image!");
+                navigateToMainActivity();
+            }).addOnFailureListener(e -> handleDeleteFailure(e, "recipe from database"));
+        }
+    }
 
-                noButton.setOnClickListener(v -> dialog.dismiss());
-                dialog.show();
-            }
-        });
+    private void deleteVideoFromStorage(String videoUrl) {
+        FirebaseStorage storage = FirebaseStorage.getInstance();
+        StorageReference videoReference = storage.getReferenceFromUrl(videoUrl);
+        videoReference.delete().addOnSuccessListener(aVoid -> {
+            showToast("Deleted Successfully!");
+            navigateToMainActivity();
+        }).addOnFailureListener(e -> handleDeleteFailure(e, "video from storage"));
+    }
 
-        editDataImage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(DetailActivity.this,UpdateActivity.class);
-                intent.putExtra("Name",detailName.getText().toString());
-                intent.putExtra("Time",detailTime.getText().toString());
-                intent.putExtra("Category",detailCategory.getText().toString());
-                intent.putExtra("Ingredients",detailIngredients.getText().toString());
-                intent.putExtra("Description",detailDesc.getText().toString());
-                intent.putExtra("Image",imageUrl);
-                intent.putExtra("Key",key);
+    private void handleDeleteFailure(Exception e, String type) {
+        showToast("Error deleting " + type + "!");
+        Log.e("DetailActivity", "Deletion error: " + e.getMessage());
+    }
 
-                startActivity(intent);
-            }
-        });
+    private void openUpdateActivity() {
+        Intent intent = new Intent(DetailActivity.this, UpdateActivity.class);
+        intent.putExtra("Name", detailName.getText().toString());
+        intent.putExtra("Time", detailTime.getText().toString());
+        intent.putExtra("Category", detailCategory.getText().toString());
+        intent.putExtra("Ingredients", detailIngredients.getText().toString());
+        intent.putExtra("Description", detailDesc.getText().toString());
+        intent.putExtra("Image", imageUrl);
+        intent.putExtra("Key", key);
+        intent.putExtra("Video", videoUrl); // Pass video URL
 
-        shareDataImage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String recipeDetails = "Check out this recipe:\n\n" +
-                        "Name: " + detailName.getText().toString() + "\n\n" +
-                        "Time: " + detailTime.getText().toString() + "\n\n" +
-                        "Category: " + detailCategory.getText().toString() + "\n" +
-                        "Ingredients: " + detailIngredients.getText().toString() + "\n\n" +
-                        "Description: " + detailDesc.getText().toString() + "\n\n" +
-                        "Click here to view image:"+ imageUrl; // Optionally include image URL
+        startActivity(intent);
+    }
 
-                Intent shareIntent = new Intent(Intent.ACTION_SEND);
-                shareIntent.setType("text/plain");
-                shareIntent.putExtra(Intent.EXTRA_TEXT, recipeDetails);
+    private void shareRecipe() {
+        String recipeDetails = "Check out this recipe:\n\n" +
+                "Name: " + detailName.getText().toString() + "\n\n" +
+                "Time: " + detailTime.getText().toString() + "\n\n" +
+                "Category: " + detailCategory.getText().toString() + "\n" +
+                "Ingredients: " + detailIngredients.getText().toString() + "\n\n" +
+                "Description: " + detailDesc.getText().toString() + "\n\n" +
+                "Click here to view image: " + imageUrl + "\n" +
+                "Watch video: " + videoUrl; // Optionally include video URL
 
+        Intent shareIntent = new Intent(Intent.ACTION_SEND);
+        shareIntent.setType("text/plain");
+        shareIntent.putExtra(Intent.EXTRA_TEXT, recipeDetails);
 
-                startActivity(Intent.createChooser(shareIntent, "Share Recipe via"));
-            }
-        });
+        startActivity(Intent.createChooser(shareIntent, "Share Recipe via"));
+    }
 
-        backIcon.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(DetailActivity.this,MainActivity.class);
-                startActivity(intent);
-            }
-        });
+    private void navigateToMainActivity() {
+        startActivity(new Intent(getApplicationContext(), MainActivity.class));
+        finish();
+    }
 
+    private void showToast(String message) {
+        Toast.makeText(DetailActivity.this, message, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        if (player != null) {
+            player.release();
+            player = null;
+        }
     }
 }

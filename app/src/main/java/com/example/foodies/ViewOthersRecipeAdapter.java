@@ -58,6 +58,7 @@ public class ViewOthersRecipeAdapter extends RecyclerView.Adapter<ViewOthersView
                 intent.putExtra("Description", data.getDataDescription());
                 intent.putExtra("Key", data.getKey());
                 intent.putExtra("Owner", data.getOwner());
+                intent.putExtra("Video", data.getDataVideo());
 
                 context.startActivity(intent);
             }

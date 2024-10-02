@@ -11,7 +11,6 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
-import java.util.ArrayList;
 import java.util.List;
 
 public class MyRecipeAdapter extends RecyclerView.Adapter<MyViewHolder> {
@@ -58,18 +57,17 @@ public class MyRecipeAdapter extends RecyclerView.Adapter<MyViewHolder> {
                 intent.putExtra("Description", data.getDataDescription());
                 intent.putExtra("Key", data.getKey());
                 intent.putExtra("Owner", data.getOwner());
+                intent.putExtra("Video", data.getDataVideo()); // Pass video URL
 
                 context.startActivity(intent);
             }
         });
     }
 
-
     @Override
     public int getItemCount() {
         return dataList.size();
     }
-
 }
 
 class MyViewHolder extends RecyclerView.ViewHolder {

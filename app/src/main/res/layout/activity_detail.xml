@@ -40,13 +40,12 @@
         app:cardCornerRadius="15dp"
         app:cardElevation="8dp">
 
-        <ImageView
-            android:id="@+id/detailImage"
+        <androidx.media3.ui.PlayerView
+            android:id="@+id/detailVideo"
             android:layout_width="match_parent"
             android:layout_height="260dp"
             android:layout_gravity="center"
-            android:scaleType="centerCrop"
-            android:src="@drawable/baseline_image_24"/>
+            android:scaleType="centerCrop"/>
 
     </androidx.cardview.widget.CardView>
 

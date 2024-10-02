@@ -31,15 +31,17 @@ import java.util.Objects;
 public class UploadActivity extends AppCompatActivity {
 
     ImageView uploadImage, backIcon;
-    Button save_button;
+    Button save_button, uploadVideoButton;
     EditText uploadName, uploadCategory, uploadTime, uploadIngredients, uploadDescription;
-    String imageURL;
-    Uri uri;
+    String imageURL, videoURL;
+    Uri imageUri, videoUri;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_upload);
+
+        // Initialize UI components
         uploadImage = findViewById(R.id.uploadImage);
         backIcon = findViewById(R.id.back);
         uploadName = findViewById(R.id.uploadName);
@@ -48,8 +50,10 @@ public class UploadActivity extends AppCompatActivity {
         uploadIngredients = findViewById(R.id.uploadIngredients);
         uploadDescription = findViewById(R.id.uploadDescription);
         save_button = findViewById(R.id.saveButton);
+        uploadVideoButton = findViewById(R.id.uploadVideo); // Add video upload button
 
-        ActivityResultLauncher<Intent> activityResultLauncher = registerForActivityResult(
+        // Image selection
+        ActivityResultLauncher<Intent> imageActivityResultLauncher = registerForActivityResult(
                 new ActivityResultContracts.StartActivityForResult(),
                 new ActivityResultCallback<ActivityResult>() {
                     @Override
@@ -57,8 +61,8 @@ public class UploadActivity extends AppCompatActivity {
                         if (result.getResultCode() == Activity.RESULT_OK) {
                             Intent data = result.getData();
                             assert data != null;
-                            uri = data.getData();
-                            uploadImage.setImageURI(uri);
+                            imageUri = data.getData();
+                            uploadImage.setImageURI(imageUri);
                         } else {
                             Toast.makeText(UploadActivity.this, "No Image Selected!", Toast.LENGTH_SHORT).show();
                         }
@@ -66,12 +70,40 @@ public class UploadActivity extends AppCompatActivity {
                 }
         );
 
+        // Video selection
+        ActivityResultLauncher<Intent> videoActivityResultLauncher = registerForActivityResult(
+                new ActivityResultContracts.StartActivityForResult(),
+                new ActivityResultCallback<ActivityResult>() {
+                    @Override
+                    public void onActivityResult(ActivityResult result) {
+                        if (result.getResultCode() == Activity.RESULT_OK) {
+                            Intent data = result.getData();
+                            assert data != null;
+                            videoUri = data.getData();
+                            Toast.makeText(UploadActivity.this, "Video selected!", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(UploadActivity.this, "No Video Selected!", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                }
+        );
+
+        // Set up listeners
         uploadImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent photoPicker = new Intent(Intent.ACTION_PICK);
                 photoPicker.setType("image/*");
-                activityResultLauncher.launch(photoPicker);
+                imageActivityResultLauncher.launch(photoPicker);
+            }
+        });
+
+        uploadVideoButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent videoPicker = new Intent(Intent.ACTION_PICK);
+                videoPicker.setType("video/*");
+                videoActivityResultLauncher.launch(videoPicker);
             }
         });
 
@@ -91,8 +123,13 @@ public class UploadActivity extends AppCompatActivity {
     }
 
     public void saveData() {
-        if (uri == null) {
+        if (imageUri == null) {
             Toast.makeText(this, "No image selected!", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        if (videoUri == null) {
+            Toast.makeText(this, "No video selected!", Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -105,8 +142,9 @@ public class UploadActivity extends AppCompatActivity {
             return;
         }
 
-        String fileName = "image_" + System.currentTimeMillis() + "_" + Objects.requireNonNull(uri.getLastPathSegment());
-        StorageReference storageReference = FirebaseStorage.getInstance().getReference().child("Android Images").child(fileName);
+        String imageFileName = "image_" + System.currentTimeMillis() + "_" + Objects.requireNonNull(imageUri.getLastPathSegment());
+        String videoFileName = "video_" + System.currentTimeMillis() + "_" + Objects.requireNonNull(videoUri.getLastPathSegment());
+        StorageReference storageReference = FirebaseStorage.getInstance().getReference();
 
         AlertDialog.Builder builder = new AlertDialog.Builder(UploadActivity.this);
         builder.setCancelable(false);
@@ -114,25 +152,44 @@ public class UploadActivity extends AppCompatActivity {
         AlertDialog dialog = builder.create();
         dialog.show();
 
-        storageReference.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+        // Upload image
+        StorageReference imageRef = storageReference.child("Android Images").child(imageFileName);
+        imageRef.putFile(imageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                Task<Uri> uriTask = taskSnapshot.getStorage().getDownloadUrl();
-                uriTask.addOnCompleteListener(new OnCompleteListener<Uri>() {
+                imageRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                     @Override
-                    public void onComplete(@NonNull Task<Uri> task) {
-                        if (task.isSuccessful()) {
-                            imageURL = task.getResult().toString();
-                            uploadData();
-                        }
-                        dialog.dismiss();
+                    public void onSuccess(Uri uri) {
+                        imageURL = uri.toString();
+
+                        // Upload video
+                        StorageReference videoRef = storageReference.child("Android Videos").child(videoFileName);
+                        videoRef.putFile(videoUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                            @Override
+                            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                                videoRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                    @Override
+                                    public void onSuccess(Uri uri) {
+                                        videoURL = uri.toString();
+                                        uploadData();
+                                        dialog.dismiss();
+                                    }
+                                });
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Toast.makeText(UploadActivity.this, "Failed to upload video: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                                dialog.dismiss();
+                            }
+                        });
                     }
                 });
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                Toast.makeText(UploadActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(UploadActivity.this, "Failed to upload image: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                 dialog.dismiss();
             }
         });
@@ -146,15 +203,15 @@ public class UploadActivity extends AppCompatActivity {
         String description = uploadDescription.getText().toString();
 
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
-        DataClass dataClass = new DataClass(name, category, time, ingredients, description, imageURL, currentUser.getUid());
+        DataClass dataClass = new DataClass(name, category, time, ingredients, description, imageURL, videoURL, currentUser.getUid());
 
-        if(!dataClass.isValidTime(time)){
+        if (!dataClass.isValidTime(time)) {
             Toast.makeText(this, "Invalid Time Format!", Toast.LENGTH_SHORT).show();
         } else if (!dataClass.isValidName(name)) {
             Toast.makeText(this, "Invalid Name!", Toast.LENGTH_SHORT).show();
-        }else if(!dataClass.isValidCategory(category)){
+        } else if (!dataClass.isValidCategory(category)) {
             Toast.makeText(this, "Invalid Category", Toast.LENGTH_SHORT).show();
-        }else {
+        } else {
             String recipeId = FirebaseDatabase.getInstance().getReference("Recipes").push().getKey();
             FirebaseDatabase.getInstance().getReference("Recipes").child(recipeId).setValue(dataClass)
                     .addOnCompleteListener(new OnCompleteListener<Void>() {

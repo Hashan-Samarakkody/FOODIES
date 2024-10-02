@@ -9,6 +9,7 @@ public class DataClass {
     private String dataIngredients;
     private String dataDescription;
     private String dataImage;
+    private String dataVideo;
     private String key;
     private String owner;
 
@@ -24,13 +25,14 @@ public class DataClass {
     }
 
     // Parameterized constructor
-    public DataClass(String dataName, String dataCategory, String dataTime, String dataIngredients, String dataDescription, String dataImage, String owner) {
+    public DataClass(String dataName, String dataCategory, String dataTime, String dataIngredients, String dataDescription, String dataImage,String dataVideo, String owner) {
         this.dataName = dataName;
         this.dataCategory = dataCategory;
         this.dataTime = dataTime;
         this.dataIngredients = dataIngredients;
         this.dataDescription = dataDescription;
         this.dataImage = dataImage;
+        this.dataVideo = dataVideo;
         this.owner = owner;
     }
 
@@ -57,6 +59,14 @@ public class DataClass {
 
     public String getDataImage() {
         return dataImage;
+    }
+
+    public String getDataVideo() {
+        return dataVideo;
+    }
+
+    public void setDataVideo(String dataVideo) {
+        this.dataVideo = dataVideo;
     }
 
     public String getKey() {
