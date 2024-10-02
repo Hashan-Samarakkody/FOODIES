@@ -49,7 +49,7 @@ public class ViewOthersRecipeAdapter extends RecyclerView.Adapter<ViewOthersView
         holder.recCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(context, DetailActivity.class);
+                Intent intent = new Intent(context, OthersRecipeDetailActivity.class);
                 intent.putExtra("Image", data.getDataImage());
                 intent.putExtra("Name", data.getDataName());
                 intent.putExtra("Time", data.getDataTime());

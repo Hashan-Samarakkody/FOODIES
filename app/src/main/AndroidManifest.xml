@@ -10,12 +10,15 @@
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
-        android:icon="@drawable/logo_1"
+        android:icon="@drawable/logo_without_backgound"
         android:label="@string/app_name"
-        android:roundIcon="@drawable/logo_1"
+        android:roundIcon="@drawable/logo_without_backgound"
         android:supportsRtl="true"
         android:theme="@style/Theme.FOODIES"
         tools:targetApi="31">
+        <activity
+            android:name=".OthersRecipeDetailActivity"
+            android:exported="false" />
         <activity
             android:name=".ProfileActivity"
             android:exported="false" />

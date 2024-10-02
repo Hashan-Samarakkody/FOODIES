@@ -6,7 +6,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/splash"
+    android:background="@drawable/background_fill"
     android:gravity="center"
     tools:context=".SplashActivity">
 
@@ -14,6 +14,6 @@
         android:id="@+id/imageView"
         android:layout_width="343dp"
         android:layout_height="336dp"
-        app:srcCompat="@drawable/logo_1" />
+        app:srcCompat="@drawable/logo_without_backgound" />
 
 </RelativeLayout>
