@@ -12,8 +12,8 @@
 
     <ImageView
         android:id="@+id/back"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
         android:layout_margin="10dp"
         app:srcCompat="@drawable/baseline_arrow_back_24" />
 
