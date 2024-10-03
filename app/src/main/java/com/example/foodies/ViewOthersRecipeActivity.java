@@ -16,6 +16,7 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -28,6 +29,7 @@ import java.util.List;
 
 public class ViewOthersRecipeActivity extends AppCompatActivity {
 
+    FloatingActionButton fabAdd,fabFavourite,fabProfile;
     SearchView searchView;
     RecyclerView recyclerView;
     List<DataClass> dataList;
@@ -107,6 +109,38 @@ public class ViewOthersRecipeActivity extends AppCompatActivity {
             public boolean onQueryTextChange(String newText) {
                 searchList(newText);
                 return true;
+            }
+        });
+
+        fabFavourite = findViewById(R.id.fabFav);
+        fabAdd = findViewById(R.id.fabAdd);
+        fabProfile = findViewById(R.id.fabProfile);
+
+        fabFavourite.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(ViewOthersRecipeActivity.this, SavedRecipesActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+
+        fabAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(ViewOthersRecipeActivity.this, UploadActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+
+
+        fabProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(ViewOthersRecipeActivity.this, ProfileActivity.class);
+                startActivity(intent);
+                finish();
             }
         });
     }

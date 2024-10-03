@@ -132,7 +132,6 @@
             android:layout_marginTop="10dp"
             android:layout_marginEnd="10dp"
             android:layout_marginBottom="5dp"/>
-
     </LinearLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -182,6 +181,5 @@
         android:src="@drawable/baseline_view_24"
         android:backgroundTint="#82E451"
         android:tint="@color/white"/>
-
 
 </RelativeLayout>
