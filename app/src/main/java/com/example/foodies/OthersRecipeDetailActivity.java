@@ -67,8 +67,8 @@ public class OthersRecipeDetailActivity extends AppCompatActivity {
         backIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(OthersRecipeDetailActivity.this, ViewOthersRecipeActivity.class);
-                startActivity(intent);
+                startActivity(new Intent(OthersRecipeDetailActivity.this,ViewOthersRecipeActivity.class));
+                finish();
             }
         });
     }

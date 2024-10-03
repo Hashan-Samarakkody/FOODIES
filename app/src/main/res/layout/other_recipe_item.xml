@@ -47,9 +47,9 @@
             android:paddingBottom="25dp"/>
 
         <ImageView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_marginTop="265dp"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginTop="195dp"
             android:layout_marginStart="15dp"
             android:src="@drawable/baseline_access_time_24"/>
 
@@ -64,8 +64,8 @@
             app:emojiCompatEnabled="true"
             android:textColor="@color/white"
             android:textSize="16sp"
-            android:layout_marginStart="45dp"
-            android:layout_marginBottom="5dp"
+            android:layout_marginStart="40dp"
+            android:layout_marginBottom="6dp"
             tools:ignore="RtlHardcoded,SmallSp" />
 
 

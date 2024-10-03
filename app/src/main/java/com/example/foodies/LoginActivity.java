@@ -62,10 +62,8 @@ public class LoginActivity extends AppCompatActivity {
 
                 if (userEmail.isEmpty()) {
                     etEmail.setError("Email required!");
-                    return;
                 } else if (userPassword.isEmpty()) {
                     etPassword.setError("Password required!");
-                    return;
                 } else {
                     // Save the email and password in SharedPreferences
                     SharedPreferences.Editor editor = sharedPreferences.edit();

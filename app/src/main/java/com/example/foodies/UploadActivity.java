@@ -117,6 +117,7 @@ public class UploadActivity extends AppCompatActivity {
         backIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                startActivity(new Intent(UploadActivity.this, MainActivity.class));
                 finish();
             }
         });

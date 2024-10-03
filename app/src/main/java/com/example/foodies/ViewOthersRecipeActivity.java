@@ -39,7 +39,6 @@ public class ViewOthersRecipeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_view_others_recipe);
 
         if (FirebaseAuth.getInstance().getCurrentUser() == null) {
-            // Redirect to login activity
             startActivity(new Intent(this, LoginActivity.class));
             finish();
             return;
@@ -89,8 +88,8 @@ public class ViewOthersRecipeActivity extends AppCompatActivity {
         backIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(ViewOthersRecipeActivity.this,MainActivity.class);
-                startActivity(intent);
+                startActivity(new Intent(ViewOthersRecipeActivity.this,MainActivity.class));
+                finish();
             }
         });
     }

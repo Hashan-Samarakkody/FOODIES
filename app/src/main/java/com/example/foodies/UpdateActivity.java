@@ -123,7 +123,13 @@ public class UpdateActivity extends AppCompatActivity {
 
         updateButton.setOnClickListener(view -> saveData());
 
-        backIcon.setOnClickListener(view -> finish());
+        backIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(UpdateActivity.this,DetailActivity.class));
+                finish();
+            }
+        });
     }
 
     public void saveData() {
@@ -222,6 +228,7 @@ public class UpdateActivity extends AppCompatActivity {
             if (task.isSuccessful()) {
                 Toast.makeText(UpdateActivity.this, "Updated Successfully", Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(UpdateActivity.this,MainActivity.class));
+                finish();
             }
             dialog.dismiss();
         }).addOnFailureListener(e -> {

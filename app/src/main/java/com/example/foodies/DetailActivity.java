@@ -70,7 +70,14 @@ public class DetailActivity extends AppCompatActivity {
         deleteDataImage.setOnClickListener(view -> showDeleteConfirmationDialog());
         editDataImage.setOnClickListener(view -> openUpdateActivity());
         shareDataImage.setOnClickListener(view -> shareRecipe());
-        backIcon.setOnClickListener(view -> startActivity(new Intent(DetailActivity.this, MainActivity.class)));
+
+        backIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(DetailActivity.this,MainActivity.class));
+                finish();
+            }
+        });
     }
 
     private void setupPlayer(Uri videoUri) {
@@ -151,6 +158,7 @@ public class DetailActivity extends AppCompatActivity {
         intent.putExtra("Video", videoUrl); // Pass video URL
 
         startActivity(intent);
+        finish();
     }
 
     private void shareRecipe() {

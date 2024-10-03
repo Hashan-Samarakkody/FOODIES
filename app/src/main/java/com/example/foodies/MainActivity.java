@@ -67,6 +67,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(MainActivity.this,SearchActivity.class));
+                finish();
             }
         });
 
@@ -120,6 +121,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, UploadActivity.class);
                 startActivity(intent);
+                finish();
             }
         });
 
@@ -128,6 +130,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, ViewOthersRecipeActivity.class);
                 startActivity(intent);
+                finish();
             }
         });
 
@@ -136,6 +139,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, ProfileActivity.class);
                 startActivity(intent);
+                finish();
             }
         });
 

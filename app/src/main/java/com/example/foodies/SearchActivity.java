@@ -91,8 +91,8 @@ public class SearchActivity extends AppCompatActivity {
         backIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(SearchActivity.this, MainActivity.class);
-                startActivity(intent);
+                startActivity(new Intent(SearchActivity.this,MainActivity.class));
+                finish();
             }
         });
     }
