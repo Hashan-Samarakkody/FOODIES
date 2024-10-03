@@ -17,6 +17,9 @@
         android:theme="@style/Theme.FOODIES"
         tools:targetApi="31">
         <activity
+            android:name=".NetworkErrorActivity"
+            android:exported="false" />
+        <activity
             android:name=".OthersRecipeDetailActivity"
             android:exported="false" />
         <activity
