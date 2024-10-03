@@ -182,24 +182,6 @@
                 android:layout_marginBottom="15dp"
                 android:fontFamily="@font/poppins_medium" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:text="Rating:"
-                android:textColor="@color/black"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                android:fontFamily="@font/poppins_medium" />
-
-            <RatingBar
-                android:theme="@style/RatingBar"
-                android:id="@+id/ratingBar"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:scaleX="0.8"
-                android:scaleY="0.8"
-                android:stepSize="1" />
         </LinearLayout>
     </ScrollView>
 

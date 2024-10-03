@@ -11,19 +11,26 @@ import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.media3.common.MediaItem;
 import androidx.media3.exoplayer.ExoPlayer;
 import androidx.media3.ui.PlayerView;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
+import java.util.ArrayList;
+import java.util.List;
 
 public class DetailActivity extends AppCompatActivity {
 
-    RatingBar ratingBar;
+
     PlayerView detailVideo;
     ExoPlayer player;
     TextView detailName, detailTime, detailCategory, detailIngredients, detailDesc;
@@ -43,7 +50,6 @@ public class DetailActivity extends AppCompatActivity {
         editDataImage = findViewById(R.id.editData);
         backIcon = findViewById(R.id.back);
 
-        ratingBar = findViewById(R.id.ratingBar);
         detailName = findViewById(R.id.detailName);
         detailTime = findViewById(R.id.detailTime);
         detailCategory = findViewById(R.id.detailCategory);
@@ -65,18 +71,16 @@ public class DetailActivity extends AppCompatActivity {
             if (videoUrl != null && !videoUrl.isEmpty()) {
                 setupPlayer(Uri.parse(videoUrl)); // Setup player
             }
-        }
+
+                    }
 
         deleteDataImage.setOnClickListener(view -> showDeleteConfirmationDialog());
         editDataImage.setOnClickListener(view -> openUpdateActivity());
         shareDataImage.setOnClickListener(view -> shareRecipe());
 
-        backIcon.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(DetailActivity.this,MainActivity.class));
-                finish();
-            }
+        backIcon.setOnClickListener(view -> {
+            startActivity(new Intent(DetailActivity.this, MainActivity.class));
+            finish();
         });
     }
 
@@ -89,7 +93,7 @@ public class DetailActivity extends AppCompatActivity {
         player.prepare();
     }
 
-    private void showDeleteConfirmationDialog() {
+        private void showDeleteConfirmationDialog() {
         LayoutInflater inflater = getLayoutInflater();
         View dialogView = inflater.inflate(R.layout.popup_layout, null);
         AlertDialog.Builder builder = new AlertDialog.Builder(DetailActivity.this);

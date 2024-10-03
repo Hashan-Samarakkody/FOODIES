@@ -207,9 +207,11 @@
                 android:textStyle="bold" />
 
             <RatingBar
+                android:id="@+id/ratingBar"
                 android:theme="@style/RatingBar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:numStars="4"
                 android:scaleX="0.8"
                 android:scaleY="0.8"
                 android:stepSize="1" />

@@ -15,7 +15,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_gravity="center_horizontal">
-<!--OK-->
+        <!--OK-->
         <ImageView
             android:id="@+id/backIcon"
             android:layout_width="45dp"
@@ -37,7 +37,6 @@
             android:textColor="@color/black"/>
     </RelativeLayout>
 
-
     <ImageView
         android:layout_width="350dp"
         android:layout_height="300dp"
@@ -45,55 +44,66 @@
         android:layout_gravity="center"
         android:layout_marginTop="20dp"/>
 
-    <EditText
-        android:layout_marginStart="40dp"
-        android:layout_marginEnd="40dp"
-        android:layout_marginTop="20dp"
-        android:textColorHint="#7DC572"
-        android:fontFamily="@font/poppins_medium"
-        android:id="@+id/etEmail"
-        android:layout_width="match_parent"
-        android:autofillHints="emailAddress"
-        android:layout_height="60dp"
-        android:hint="Email"
-        android:inputType="textEmailAddress" />
-
-
-    <EditText
-        android:id="@+id/etPassword"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="40dp"
-        android:autofillHints="password"
-        android:fontFamily="@font/poppins_medium"
-        android:hint="Password"
-        android:inputType="textPassword"
-        android:textColorHint="#7DC572" />
-
-    <Button
-        android:id="@+id/login"
-        android:fontFamily="@font/inter_tight_medium"
-        android:textSize="20sp"
-        android:backgroundTint="#46A020"
-        android:layout_marginTop="30dp"
-        android:layout_marginStart="40dp"
-        android:layout_marginEnd="40dp"
+    <!-- Start of ScrollView -->
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Log In" />
+        android:layout_marginTop="20dp">
 
-    <TextView
-        android:id="@+id/forgotPass"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="20dp"
-        android:fontFamily="@font/inter_tight_medium"
-        android:text="Forgot Password? Click Here"
-        android:textSize="18sp"
-        android:textStyle="bold" />
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
+            <EditText
+                android:layout_marginStart="40dp"
+                android:layout_marginEnd="40dp"
+                android:layout_marginTop="20dp"
+                android:textColorHint="#7DC572"
+                android:fontFamily="@font/poppins_medium"
+                android:id="@+id/etEmail"
+                android:layout_width="match_parent"
+                android:autofillHints="emailAddress"
+                android:layout_height="60dp"
+                android:hint="Email"
+                android:inputType="textEmailAddress" />
 
+            <EditText
+                android:id="@+id/etPassword"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginStart="40dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="40dp"
+                android:autofillHints="password"
+                android:fontFamily="@font/poppins_medium"
+                android:hint="Password"
+                android:inputType="textPassword"
+                android:textColorHint="#7DC572" />
+
+            <Button
+                android:id="@+id/login"
+                android:fontFamily="@font/inter_tight_medium"
+                android:textSize="20sp"
+                android:backgroundTint="#46A020"
+                android:layout_marginTop="30dp"
+                android:layout_marginStart="40dp"
+                android:layout_marginEnd="40dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Log In" />
+
+            <TextView
+                android:id="@+id/forgotPass"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/inter_tight_medium"
+                android:text="Forgot Password? Click Here"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+    </ScrollView>
+    <!-- End of ScrollView -->
 </LinearLayout>

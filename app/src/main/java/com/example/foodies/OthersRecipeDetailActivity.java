@@ -1,10 +1,13 @@
 package com.example.foodies;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,6 +26,8 @@ import com.google.firebase.database.DatabaseError;
 
 public class OthersRecipeDetailActivity extends AppCompatActivity {
 
+    // Declare UI components
+    RatingBar ratingBar;
     PlayerView detailVideo;
     ExoPlayer player;
     TextView detailName, detailTime, detailCategory, detailIngredients, detailDesc;
@@ -40,6 +45,7 @@ public class OthersRecipeDetailActivity extends AppCompatActivity {
 
         // Initialize views
         detailVideo = findViewById(R.id.detailVideo);
+        ratingBar = findViewById(R.id.ratingBar); // Initialize the rating bar
         shareDataImage = findViewById(R.id.shareData);
         backIcon = findViewById(R.id.back);
         saveIcon = findViewById(R.id.save);
@@ -82,6 +88,12 @@ public class OthersRecipeDetailActivity extends AppCompatActivity {
             finish();
         });
         saveIcon.setOnClickListener(view -> toggleFavorite());
+
+        // Setup rating bar listener
+        setupRatingBarListener();
+
+        // Load existing rating from the database
+        loadExistingRating();
     }
 
     private void setupPlayer(Uri videoUri) {
@@ -163,6 +175,82 @@ public class OthersRecipeDetailActivity extends AppCompatActivity {
         shareIntent.putExtra(Intent.EXTRA_TEXT, recipeDetails);
 
         startActivity(Intent.createChooser(shareIntent, "Share Recipe via"));
+    }
+
+    // Rating functionality
+    private void setupRatingBarListener() {
+        ratingBar.setOnRatingBarChangeListener((ratingBar, rating, fromUser) -> {
+            if (fromUser) {
+                showSubmitRatingDialog(rating);
+            }
+        });
+    }
+
+    private void showSubmitRatingDialog(float rating) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Submit Rating")
+                .setMessage("Are you sure you want to submit a rating of " + rating + " stars?")
+                .setPositiveButton("Yes", (dialog, which) -> {
+                    submitRating(rating);
+                })
+                .setNegativeButton("No", (dialog, which) -> {
+                    // Reset rating if cancelled, but keep the current rating
+                    loadExistingRating();
+                })
+                .show();
+    }
+
+    private void submitRating(float rating) {
+        if (currentUser != null) {
+            String userId = currentUser.getUid();
+            DatabaseReference recipeRatingsRef = FirebaseDatabase.getInstance().getReference("Recipes").child(key).child("ratings").child(userId);
+            recipeRatingsRef.setValue(new RatingData(rating)).addOnCompleteListener(task -> {
+                if (task.isSuccessful()) {
+                    Toast.makeText(OthersRecipeDetailActivity.this, "Rating submitted!", Toast.LENGTH_SHORT).show();
+                    ratingBar.setRating(rating); // Update the displayed rating
+                } else {
+                    Toast.makeText(OthersRecipeDetailActivity.this, "Failed to submit rating.", Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
+    }
+
+    private void loadExistingRating() {
+        if (currentUser != null) {
+            String userId = currentUser.getUid();
+            DatabaseReference recipeRatingsRef = FirebaseDatabase.getInstance().getReference("Recipes").child(key).child("ratings").child(userId);
+            recipeRatingsRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    if (dataSnapshot.exists()) {
+                        RatingData ratingData = dataSnapshot.getValue(RatingData.class);
+                        if (ratingData != null) {
+                            ratingBar.setRating(ratingData.rating); // Set the existing rating
+                        }
+                    } else {
+                        ratingBar.setRating(0); // No existing rating
+                    }
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+                    // Handle possible errors
+                }
+            });
+        }
+    }
+
+    // This is a simple model for storing ratings
+    public static class RatingData {
+        public float rating;
+
+        public RatingData() {
+            // Default constructor required for calls to DataSnapshot.getValue(RatingData.class)
+        }
+
+        public RatingData(float rating) {
+            this.rating = rating;
+        }
     }
 
     @Override

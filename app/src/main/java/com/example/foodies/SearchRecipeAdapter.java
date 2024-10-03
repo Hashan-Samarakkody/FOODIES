@@ -6,13 +6,21 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 import java.util.ArrayList;
 import java.util.List;
+
 
 public class SearchRecipeAdapter extends RecyclerView.Adapter<SearchViewHolder> {
 
@@ -45,6 +53,14 @@ public class SearchRecipeAdapter extends RecyclerView.Adapter<SearchViewHolder> 
         holder.recTitle.setText(data.getDataName());
         holder.recTime.setText(data.getDataTime());
 
+        // Fetch average rating and set it to the rating bar
+        getAverageRating(data.getKey(), new OnAverageRatingReceivedListener() {
+            @Override
+            public void onAverageRatingReceived(float averageRating) {
+                holder.recRatingBar.setRating(averageRating); // Set the average rating
+            }
+        });
+
         // Set click listener
         holder.recCard.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -70,6 +86,43 @@ public class SearchRecipeAdapter extends RecyclerView.Adapter<SearchViewHolder> 
         return dataList.size();
     }
 
+    // Method to fetch average rating from the database
+    public void getAverageRating(String recipeKey, OnAverageRatingReceivedListener listener) {
+        DatabaseReference ratingsRef = FirebaseDatabase.getInstance().getReference("Recipes").child(recipeKey).child("ratings");
+
+        ratingsRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                List<Float> ratingsList = new ArrayList<>();
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    OthersRecipeDetailActivity.RatingData ratingData = snapshot.getValue(OthersRecipeDetailActivity.RatingData.class);
+                    if (ratingData != null) {
+                        ratingsList.add(ratingData.rating);
+                    }
+                }
+                float averageRating = 0;
+                if (!ratingsList.isEmpty()) {
+                    float total = 0;
+                    for (float rating : ratingsList) {
+                        total += rating;
+                    }
+                    averageRating = roundToFirstDecimal(total / ratingsList.size());
+                }
+                listener.onAverageRatingReceived(averageRating);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                listener.onAverageRatingReceived(0); // Return 0 if there was an error
+            }
+        });
+    }
+
+    // Method to round the rating to the first decimal place
+    private float roundToFirstDecimal(float rating) {
+        return (float) (Math.round(rating * 10)) / 10; // Round to the first decimal
+    }
+
     public void searchDataList(ArrayList<DataClass> searchList) {
         dataList = searchList;
         notifyDataSetChanged();
@@ -81,6 +134,7 @@ class SearchViewHolder extends RecyclerView.ViewHolder {
     ImageView recImage;
     TextView recTitle, recTime;
     CardView recCard;
+    RatingBar recRatingBar; // Add RatingBar reference
 
     public SearchViewHolder(@NonNull View itemView) {
         super(itemView);
@@ -89,5 +143,6 @@ class SearchViewHolder extends RecyclerView.ViewHolder {
         recTitle = itemView.findViewById(R.id.recTitle);
         recTime = itemView.findViewById(R.id.recTime);
         recCard = itemView.findViewById(R.id.recCard);
+        recRatingBar = itemView.findViewById(R.id.ratingBar); // Initialize RatingBar
     }
 }
