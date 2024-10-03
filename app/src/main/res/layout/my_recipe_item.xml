@@ -75,6 +75,7 @@
             android:numStars="4"
             android:scaleY="0.4"
             android:scaleX="0.4"
+            android:theme="@style/RatingBar"
             android:id="@+id/recRatingBar"
             android:stepSize="0.1"/>
 
