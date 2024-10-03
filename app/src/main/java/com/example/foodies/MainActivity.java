@@ -26,7 +26,7 @@ import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
 
-    FloatingActionButton fabAdd,fabView,fabProfile;
+    FloatingActionButton fabAdd,fabView,fabProfile, fabFavourite;
     RecyclerView recyclerView;
     List<DataClass> dataList;
     DatabaseReference databaseReference;
@@ -112,9 +112,19 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        fabFavourite = findViewById(R.id.fabFav);
         fabAdd = findViewById(R.id.fabAdd);
         fabView = findViewById(R.id.fabView);
         fabProfile = findViewById(R.id.fabProfile);
+
+        fabFavourite.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, SavedRecipesActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
 
         fabAdd.setOnClickListener(new View.OnClickListener() {
             @Override

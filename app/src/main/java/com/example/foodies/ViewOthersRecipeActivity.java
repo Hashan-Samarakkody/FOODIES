@@ -9,6 +9,7 @@ import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
@@ -27,6 +28,7 @@ import java.util.List;
 
 public class ViewOthersRecipeActivity extends AppCompatActivity {
 
+    SearchView searchView;
     RecyclerView recyclerView;
     List<DataClass> dataList;
     DatabaseReference databaseReference;
@@ -92,5 +94,32 @@ public class ViewOthersRecipeActivity extends AppCompatActivity {
                 finish();
             }
         });
+
+        searchView = findViewById(R.id.searchOthers);
+        searchView.clearFocus();
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                searchList(newText);
+                return true;
+            }
+        });
+    }
+    public void searchList(String text) {
+        ArrayList<DataClass> searchList = new ArrayList<>();
+        for (DataClass dataClass : dataList) {
+            if (dataClass.getDataName().toLowerCase().contains(text.toLowerCase())) {
+                searchList.add(dataClass);
+            }
+        }
+        // Check if adapter is not null before calling its method
+        if (adapter != null) {
+            adapter.searchDataList(searchList);
+        }
     }
 }

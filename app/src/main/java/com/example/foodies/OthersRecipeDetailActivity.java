@@ -6,33 +6,43 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.media3.common.MediaItem;
 import androidx.media3.exoplayer.ExoPlayer;
 import androidx.media3.ui.PlayerView;
-import com.bumptech.glide.Glide;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 
 public class OthersRecipeDetailActivity extends AppCompatActivity {
 
     PlayerView detailVideo;
     ExoPlayer player;
     TextView detailName, detailTime, detailCategory, detailIngredients, detailDesc;
-    ImageView shareDataImage, backIcon;
+    ImageView shareDataImage, backIcon, saveIcon;
     String key = "";
     String imageUrl = "";
     String videoUrl = ""; // Variable for video URL
+    FirebaseUser currentUser;
+    DatabaseReference favoritesRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_others_recipe_detail);
 
+        // Initialize views
         detailVideo = findViewById(R.id.detailVideo);
         shareDataImage = findViewById(R.id.shareData);
         backIcon = findViewById(R.id.back);
-
+        saveIcon = findViewById(R.id.save);
         detailName = findViewById(R.id.detailName);
         detailTime = findViewById(R.id.detailTime);
         detailCategory = findViewById(R.id.detailCategory);
@@ -51,26 +61,27 @@ public class OthersRecipeDetailActivity extends AppCompatActivity {
             imageUrl = bundle.getString("Image");
             videoUrl = bundle.getString("Video"); // Get video URL
 
-
             if (videoUrl != null && !videoUrl.isEmpty()) {
                 setupPlayer(Uri.parse(videoUrl)); // Setup player
             }
         }
 
-        shareDataImage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                shareRecipe();
-            }
-        });
+        currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        favoritesRef = FirebaseDatabase.getInstance().getReference("Favorites").child(currentUser.getUid());
 
-        backIcon.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(OthersRecipeDetailActivity.this,ViewOthersRecipeActivity.class));
-                finish();
-            }
+        // Check if the recipe is already saved
+        checkIfFavorite();
+
+        // Set up a listener for the recipe
+        setupRecipeListener();
+
+        // Set click listeners
+        shareDataImage.setOnClickListener(view -> shareRecipe());
+        backIcon.setOnClickListener(view -> {
+            startActivity(new Intent(OthersRecipeDetailActivity.this, ViewOthersRecipeActivity.class));
+            finish();
         });
+        saveIcon.setOnClickListener(view -> toggleFavorite());
     }
 
     private void setupPlayer(Uri videoUri) {
@@ -80,6 +91,58 @@ public class OthersRecipeDetailActivity extends AppCompatActivity {
         MediaItem mediaItem = MediaItem.fromUri(videoUri);
         player.setMediaItem(mediaItem);
         player.prepare();
+    }
+
+    private void setupRecipeListener() {
+        DatabaseReference recipeRef = FirebaseDatabase.getInstance().getReference("Recipes").child(key);
+        recipeRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if (!dataSnapshot.exists()) {
+                    // Recipe has been deleted, remove from favorites and finish the activity
+                    favoritesRef.child(key).removeValue(); // Ensure it's removed from favorites
+                    Toast.makeText(OthersRecipeDetailActivity.this, "This recipe has been deleted.", Toast.LENGTH_SHORT).show();
+                    finish(); // Optionally finish the activity
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                // Handle possible errors
+            }
+        });
+    }
+
+    private void checkIfFavorite() {
+        favoritesRef.child(key).get().addOnCompleteListener(task -> {
+            if (task.isSuccessful() && task.getResult().exists()) {
+                saveIcon.setImageResource(R.drawable.img_5_2); // Change to saved icon
+            } else {
+                saveIcon.setImageResource(R.drawable.img_5); // Change to save icon
+            }
+        });
+    }
+
+    private void toggleFavorite() {
+        favoritesRef.child(key).get().addOnCompleteListener(task -> {
+            if (task.isSuccessful() && task.getResult().exists()) {
+                // Recipe is currently saved, so remove it
+                favoritesRef.child(key).removeValue().addOnCompleteListener(removeTask -> {
+                    if (removeTask.isSuccessful()) {
+                        saveIcon.setImageResource(R.drawable.img_5); // Change to save icon
+                        Toast.makeText(OthersRecipeDetailActivity.this, "Removed from favorites", Toast.LENGTH_SHORT).show();
+                    }
+                });
+            } else {
+                // Recipe is not saved, so add it
+                favoritesRef.child(key).setValue(true).addOnCompleteListener(addTask -> {
+                    if (addTask.isSuccessful()) {
+                        saveIcon.setImageResource(R.drawable.img_5_2); // Change to saved icon
+                        Toast.makeText(OthersRecipeDetailActivity.this, "Saved to favorites", Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
+        });
     }
 
     private void shareRecipe() {
