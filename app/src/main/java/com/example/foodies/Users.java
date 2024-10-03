@@ -5,11 +5,17 @@ public class Users {
     private String email;
     private String key;
 
+    // No-argument constructor (required for Firebase)
+    public Users() {
+    }
+
+    // Constructor with parameters
     public Users(String name, String email) {
         this.name = name;
         this.email = email;
     }
 
+    // Getters and Setters
     public String getName() {
         return name;
     }
@@ -34,6 +40,7 @@ public class Users {
         this.key = key;
     }
 
+    // Validation methods
     public boolean isValidInputs(String name, String email, String password) {
         if (isEmpty(name) || isEmpty(email) || isEmpty(password)) {
             return false;
@@ -46,8 +53,9 @@ public class Users {
         }
         if (!isValidPassword(password)) {
             return false;
-        }else{
-        return true;}
+        } else {
+            return true;
+        }
     }
 
     public boolean isEmpty(String value) {

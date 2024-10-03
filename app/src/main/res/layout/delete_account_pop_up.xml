@@ -11,8 +11,7 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="5dp"
-        android:background="@drawable/transparent_bg">
+        android:padding="10dp">
 
         <LinearLayout
             android:orientation="horizontal"
@@ -20,20 +19,24 @@
             android:layout_height="wrap_content"
             android:gravity="center_vertical">
 
+            <ImageView
+                android:src="@drawable/baseline_error_24"
+                android:layout_width="40dp"
+                android:layout_height="40dp"/>
+
             <TextView
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Do you want to delete this recipe?"
+                android:textAlignment="center"
+                android:text="Do you want to delete your account?"
                 android:textSize="17sp"
                 android:fontFamily="@font/poppins_medium"
                 android:textStyle="bold"
-                android:textColor="@color/black"
-                android:textAlignment="center" />
+                android:textColor="@color/black"/>
         </LinearLayout>
 
         <LinearLayout
-
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -46,8 +49,9 @@
                 android:fontFamily="@font/poppins_medium"
                 android:textStyle="bold"
                 android:textSize="15sp"
-                android:layout_marginEnd="20dp"
-                android:backgroundTint="@color/black"
+                android:layout_marginEnd="16dp"
+                android:layout_marginStart="26dp"
+                android:backgroundTint="#313131"
                 android:text="No" />
 
             <Button
@@ -61,5 +65,4 @@
                 android:text="Yes" />
         </LinearLayout>
     </LinearLayout>
-
 </androidx.cardview.widget.CardView>
