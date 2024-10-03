@@ -193,6 +193,7 @@
                 android:fontFamily="@font/poppins_medium" />
 
             <RatingBar
+                android:theme="@style/RatingBar"
                 android:id="@+id/ratingBar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

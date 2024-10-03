@@ -11,5 +11,10 @@
         <item name="cornerSize">50%</item>
     </style>
 
+    <style name="RatingBar" parent="Theme.Material3.Light.NoActionBar">
+        <item name="colorControlNormal">#FFF100</item>
+        <item name="colorControlActivated">#92FF66</item>
+    </style>
+
     <style name="Theme.FOODIES" parent="Base.Theme.FOODIES" />
 </resources>

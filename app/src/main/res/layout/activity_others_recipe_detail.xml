@@ -207,6 +207,7 @@
                 android:textStyle="bold" />
 
             <RatingBar
+                android:theme="@style/RatingBar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:scaleX="0.8"
