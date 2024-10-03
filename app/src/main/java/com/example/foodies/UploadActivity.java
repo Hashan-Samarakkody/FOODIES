@@ -220,6 +220,7 @@ public class UploadActivity extends AppCompatActivity {
                         public void onComplete(@NonNull Task<Void> task) {
                             if (task.isSuccessful()) {
                                 Toast.makeText(UploadActivity.this, "Saved", Toast.LENGTH_SHORT).show();
+                                startActivity(new Intent(UploadActivity.this,MainActivity.class));
                                 finish();
                             }
                         }

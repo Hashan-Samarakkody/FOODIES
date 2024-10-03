@@ -57,7 +57,11 @@ public class SearchRecipeAdapter extends RecyclerView.Adapter<SearchViewHolder> 
         getAverageRating(data.getKey(), new OnAverageRatingReceivedListener() {
             @Override
             public void onAverageRatingReceived(float averageRating) {
-                holder.recRatingBar.setRating(averageRating); // Set the average rating
+                if(averageRating>4){
+                    holder.recRatingBar.setRating(4);
+                }else{
+                    holder.recRatingBar.setRating(averageRating); // Set the average rating
+                }
             }
         });
 

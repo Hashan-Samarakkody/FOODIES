@@ -60,7 +60,12 @@ public class ViewOthersRecipeAdapter extends RecyclerView.Adapter<ViewOthersView
         getAverageRating(data.getKey(), new OnAverageRatingReceivedListener() {
             @Override
             public void onAverageRatingReceived(float averageRating) {
-                holder.recRatingbar.setRating(averageRating);
+                if(averageRating>4){
+                    holder.recRatingbar.setRating(4);
+                }else{
+                    holder.recRatingbar.setRating(averageRating);
+                }
+
             }
         });
 

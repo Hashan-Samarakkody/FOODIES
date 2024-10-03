@@ -78,6 +78,7 @@
             android:layout_marginStart="120dp"
             android:scaleX="0.5"
             android:scaleY="0.5"
+            android:numStars="4"
             android:theme="@style/RatingBar"/>
 
 
