@@ -4,4 +4,5 @@
     <string name="quote2">Your creations are just a step away,</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="defaullt_web_client_id">394255875272-42oih7f1phmg18hcjmlcjflkkd3qn9jf.apps.googleusercontent.com</string>
 </resources>

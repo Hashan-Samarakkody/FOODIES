@@ -115,6 +115,9 @@ public class ProfileActivity extends AppCompatActivity {
         TextView noButton = dialogView.findViewById(R.id.button_no);
 
         yesButton.setOnClickListener(v -> {
+
+            FirebaseAuth.getInstance().signOut();
+
             auth.signOut();
             SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE);
             SharedPreferences.Editor editor = sharedPreferences.edit();

@@ -93,6 +93,19 @@
                 android:layout_height="wrap_content"
                 android:text="Log In" />
 
+            <com.developer.gbuttons.GoogleSignInButton
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/inter_tight_medium"
+                android:textSize="20sp"
+                android:text="Sign in with Google"
+                android:id="@+id/googleBtn"
+                app:isDarkTheme = "true"
+                android:layout_gravity="center"
+                android:layout_marginTop="20dp"
+                android:layout_marginStart="40dp"
+                android:layout_marginEnd="40dp"
+                android:padding="8dp"/>
 
             <TextView
                 android:id="@+id/forgotPass"
