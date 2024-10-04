@@ -28,28 +28,34 @@ public class SearchActivity extends AppCompatActivity {
     ValueEventListener eventListener;
     DatabaseReference databaseReference;
 
+    //IM/2020/116
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
 
+        // Set up RecyclerView with GridLayoutManager to display items in a single column layout
         GridLayoutManager gridLayoutManager = new GridLayoutManager(SearchActivity.this, 1);
         recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(gridLayoutManager);
 
+        // Initialize and show loading dialog while fetching data from Firebase
         AlertDialog.Builder builder = new AlertDialog.Builder(SearchActivity.this);
         builder.setCancelable(false);
         builder.setView(R.layout.progress_layout);
         AlertDialog dialog = builder.create();
         dialog.show();
 
+        // Initialize adapter and data list
         dataList = new ArrayList<>();
         adapter = new SearchRecipeAdapter(SearchActivity.this, dataList);
         recyclerView.setAdapter(adapter);
 
+        // Reference to Firebase database for "Recipes" node
         databaseReference = FirebaseDatabase.getInstance().getReference("Recipes");
         String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
+        // Fetch recipes owned by the current user from Firebase and update data list
         eventListener = databaseReference.orderByChild("owner").equalTo(userId).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -61,6 +67,7 @@ public class SearchActivity extends AppCompatActivity {
                         dataList.add(dataClass);
                     }
                 }
+                // Notify adapter of data changes and dismiss loading dialog
                 adapter.notifyDataSetChanged();
                 dialog.dismiss();
             }
@@ -71,6 +78,7 @@ public class SearchActivity extends AppCompatActivity {
             }
         });
 
+        // Set up SearchView to listen for text changes and trigger search filtering
         searchView = findViewById(R.id.search);
         searchView.clearFocus();
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
@@ -86,6 +94,7 @@ public class SearchActivity extends AppCompatActivity {
             }
         });
 
+        // Set up back navigation to return to MainActivity
         backIcon = findViewById(R.id.back);
         backIcon.setOnClickListener(view -> {
             startActivity(new Intent(SearchActivity.this,MainActivity.class));
@@ -93,6 +102,7 @@ public class SearchActivity extends AppCompatActivity {
         });
     }
 
+    // Method to filter data list based on search query and update adapter
     public void searchList(String text) {
         ArrayList<DataClass> searchList = new ArrayList<>();
         for (DataClass dataClass : dataList) {
