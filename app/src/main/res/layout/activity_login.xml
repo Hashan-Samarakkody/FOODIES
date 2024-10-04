@@ -97,6 +97,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/inter_tight_medium"
+                android:textStyle="bold"
                 android:textSize="20sp"
                 android:text="Sign in with Google"
                 android:id="@+id/googleBtn"

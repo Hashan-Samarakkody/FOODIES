@@ -17,6 +17,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserInfo;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -115,9 +116,6 @@ public class ProfileActivity extends AppCompatActivity {
         TextView noButton = dialogView.findViewById(R.id.button_no);
 
         yesButton.setOnClickListener(v -> {
-
-            FirebaseAuth.getInstance().signOut();
-
             auth.signOut();
             SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE);
             SharedPreferences.Editor editor = sharedPreferences.edit();
@@ -134,7 +132,6 @@ public class ProfileActivity extends AppCompatActivity {
     }
 
     private void showDeleteAccountConfirmationDialog() {
-        // Similar to the logout dialog, implement this for deleting the account
         LayoutInflater inflater = getLayoutInflater();
         View dialogView = inflater.inflate(R.layout.delete_account_pop_up, null);
         AlertDialog.Builder builder = new AlertDialog.Builder(ProfileActivity.this);
@@ -157,11 +154,14 @@ public class ProfileActivity extends AppCompatActivity {
         FirebaseUser user = auth.getCurrentUser();
         if (user != null) {
             String userId = user.getUid();
-            // First delete the user from Firebase Auth
+
+            // Check if the user is authenticated with Google
+            boolean isGoogleUser = user.getProviderData().stream().anyMatch(profile -> "google.com".equals(profile.getProviderId()));
+
             user.delete()
                     .addOnCompleteListener(task -> {
                         if (task.isSuccessful()) {
-                            // Then delete user data from the database
+                            // Delete user data from the database
                             databaseReference.child(userId).removeValue()
                                     .addOnSuccessListener(aVoid -> {
                                         Toast.makeText(ProfileActivity.this, "Account deleted successfully!", Toast.LENGTH_SHORT).show();
@@ -172,7 +172,9 @@ public class ProfileActivity extends AppCompatActivity {
                                         Toast.makeText(ProfileActivity.this, "Failed to delete user data!", Toast.LENGTH_SHORT).show();
                                     });
                         } else {
-                            Toast.makeText(ProfileActivity.this, "Failed to delete account!", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(ProfileActivity.this,
+                                    isGoogleUser ? "Failed to delete Google account!" : "Failed to delete email account!",
+                                    Toast.LENGTH_SHORT).show();
                         }
                     });
         }
