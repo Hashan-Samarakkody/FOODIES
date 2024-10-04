@@ -53,34 +53,28 @@ public class MyRecipeAdapter extends RecyclerView.Adapter<MyViewHolder> {
         holder.recTime.setText(data.getDataTime());
 
         // Fetch average rating and set it to the rating bar
-        getAverageRating(data.getKey(), new OnAverageRatingReceivedListener() {
-            @Override
-            public void onAverageRatingReceived(float averageRating) {
-                if(averageRating>4){
-                    holder.recRatingBar.setRating(4);
-                }else{
-                    holder.recRatingBar.setRating(averageRating); // Set the average rating
-                }
+        getAverageRating(data.getKey(), averageRating -> {
+            if(averageRating>4){
+                holder.recRatingBar.setRating(4);
+            }else{
+                holder.recRatingBar.setRating(averageRating); // Set the average rating
             }
         });
 
         // Set click listener
-        holder.recCard.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(context, DetailActivity.class);
-                intent.putExtra("Image", data.getDataImage());
-                intent.putExtra("Name", data.getDataName());
-                intent.putExtra("Time", data.getDataTime());
-                intent.putExtra("Category", data.getDataCategory());
-                intent.putExtra("Ingredients", data.getDataIngredients());
-                intent.putExtra("Description", data.getDataDescription());
-                intent.putExtra("Key", data.getKey());
-                intent.putExtra("Owner", data.getOwner());
-                intent.putExtra("Video", data.getDataVideo()); // Pass video URL
+        holder.recCard.setOnClickListener(view -> {
+            Intent intent = new Intent(context, DetailActivity.class);
+            intent.putExtra("Image", data.getDataImage());
+            intent.putExtra("Name", data.getDataName());
+            intent.putExtra("Time", data.getDataTime());
+            intent.putExtra("Category", data.getDataCategory());
+            intent.putExtra("Ingredients", data.getDataIngredients());
+            intent.putExtra("Description", data.getDataDescription());
+            intent.putExtra("Key", data.getKey());
+            intent.putExtra("Owner", data.getOwner());
+            intent.putExtra("Video", data.getDataVideo()); // Pass video URL
 
-                context.startActivity(intent);
-            }
+            context.startActivity(intent);
         });
     }
 

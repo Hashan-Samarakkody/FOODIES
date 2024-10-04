@@ -2,7 +2,6 @@ package com.example.foodies;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.ImageView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -88,12 +87,9 @@ public class SearchActivity extends AppCompatActivity {
         });
 
         backIcon = findViewById(R.id.back);
-        backIcon.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(SearchActivity.this,MainActivity.class));
-                finish();
-            }
+        backIcon.setOnClickListener(view -> {
+            startActivity(new Intent(SearchActivity.this,MainActivity.class));
+            finish();
         });
     }
 

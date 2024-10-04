@@ -8,25 +8,16 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.media3.common.MediaItem;
 import androidx.media3.exoplayer.ExoPlayer;
 import androidx.media3.ui.PlayerView;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class DetailActivity extends AppCompatActivity {
 
@@ -118,16 +109,14 @@ public class DetailActivity extends AppCompatActivity {
 
         if (imageUrl != null && !imageUrl.isEmpty()) {
             StorageReference storageReference = storage.getReferenceFromUrl(imageUrl);
-            storageReference.delete().addOnSuccessListener(unused -> {
-                reference.child(key).removeValue().addOnSuccessListener(unused1 -> {
-                    if (videoUrl != null && !videoUrl.isEmpty()) {
-                        deleteVideoFromStorage(videoUrl);
-                    } else {
-                        showToast("Deleted Successfully!");
-                        navigateToMainActivity();
-                    }
-                }).addOnFailureListener(e -> handleDeleteFailure(e, "recipe from database"));
-            }).addOnFailureListener(e -> handleDeleteFailure(e, "image from storage"));
+            storageReference.delete().addOnSuccessListener(unused -> reference.child(key).removeValue().addOnSuccessListener(unused1 -> {
+                if (videoUrl != null && !videoUrl.isEmpty()) {
+                    deleteVideoFromStorage(videoUrl);
+                } else {
+                    showToast("Deleted Successfully!");
+                    navigateToMainActivity();
+                }
+            }).addOnFailureListener(e -> handleDeleteFailure(e, "recipe from database"))).addOnFailureListener(e -> handleDeleteFailure(e, "image from storage"));
         } else {
             reference.child(key).removeValue().addOnSuccessListener(unused -> {
                 showToast("Deleted Successfully without image!");

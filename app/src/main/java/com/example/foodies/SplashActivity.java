@@ -1,10 +1,12 @@
 package com.example.foodies;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import androidx.appcompat.app.AppCompatActivity;
 
+@SuppressLint("CustomSplashScreen")
 public class SplashActivity extends AppCompatActivity {
 
     final int DELAY = 1500;  // Delay in milliseconds
@@ -21,13 +23,10 @@ public class SplashActivity extends AppCompatActivity {
             finish();
         } else {
             // Internet is available, proceed to RegisterActivity after a delay
-            new Handler().postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    Intent intent = new Intent(SplashActivity.this, RegisterActivity.class);
-                    startActivity(intent);
-                    finish();
-                }
+            new Handler().postDelayed(() -> {
+                Intent intent = new Intent(SplashActivity.this, RegisterActivity.class);
+                startActivity(intent);
+                finish();
             }, DELAY);
         }
     }

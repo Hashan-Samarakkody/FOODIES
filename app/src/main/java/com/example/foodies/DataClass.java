@@ -21,7 +21,6 @@ public class DataClass {
     private static final Pattern CATEGORY_PATTERN = Pattern.compile("^[a-zA-Z\\s\\W]+$"); // Allow special chars
 
     public DataClass() {
-        // Required for Firebase
     }
 
     // Parameterized constructor
@@ -65,10 +64,6 @@ public class DataClass {
         return dataVideo;
     }
 
-    public void setDataVideo(String dataVideo) {
-        this.dataVideo = dataVideo;
-    }
-
     public String getKey() {
         return key;
     }
@@ -81,9 +76,6 @@ public class DataClass {
         this.key = key;
     }
 
-    public void setOwner(String owner) {
-        this.owner = owner;
-    }
 
     public boolean isValidTime(String time) {
         if (!TIME_PATTERN.matcher(time).matches()) {

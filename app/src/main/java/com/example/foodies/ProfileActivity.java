@@ -12,13 +12,10 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.appcompat.app.AppCompatActivity;
-
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.auth.UserInfo;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -67,6 +64,7 @@ public class ProfileActivity extends AppCompatActivity {
                 Toast.makeText(ProfileActivity.this, "Name cannot be empty!", Toast.LENGTH_SHORT).show();
                 return;
             }
+            assert user != null;
             updateUserData(user.getUid(), newName);
         });
 
@@ -83,40 +81,28 @@ public class ProfileActivity extends AppCompatActivity {
         fabFavourite = findViewById(R.id.fabFav);
 
 
-        fabAdd.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(ProfileActivity.this, UploadActivity.class);
-                startActivity(intent);
-                finish();
-            }
+        fabAdd.setOnClickListener(view -> {
+            Intent intent = new Intent(ProfileActivity.this, UploadActivity.class);
+            startActivity(intent);
+            finish();
         });
 
-        fabAdd.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(ProfileActivity.this, UploadActivity.class);
-                startActivity(intent);
-                finish();
-            }
+        fabAdd.setOnClickListener(view -> {
+            Intent intent = new Intent(ProfileActivity.this, UploadActivity.class);
+            startActivity(intent);
+            finish();
         });
 
-        fabHome.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(ProfileActivity.this, MainActivity.class);
-                startActivity(intent);
-                finish();
-            }
+        fabHome.setOnClickListener(view -> {
+            Intent intent = new Intent(ProfileActivity.this, MainActivity.class);
+            startActivity(intent);
+            finish();
         });
 
-        fabView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(ProfileActivity.this, ViewOthersRecipeActivity.class);
-                startActivity(intent);
-                finish();
-            }
+        fabView.setOnClickListener(view -> {
+            Intent intent = new Intent(ProfileActivity.this, ViewOthersRecipeActivity.class);
+            startActivity(intent);
+            finish();
         });
 
     }
@@ -145,9 +131,7 @@ public class ProfileActivity extends AppCompatActivity {
                     Toast.makeText(ProfileActivity.this, "Name updated successfully!", Toast.LENGTH_SHORT).show();
                     userName.setText(newName);
                 })
-                .addOnFailureListener(e -> {
-                    Toast.makeText(ProfileActivity.this, "Failed to update name!", Toast.LENGTH_SHORT).show();
-                });
+                .addOnFailureListener(e -> Toast.makeText(ProfileActivity.this, "Failed to update name!", Toast.LENGTH_SHORT).show());
     }
 
     private void showLogOutConfirmationDialog() {
@@ -217,9 +201,7 @@ public class ProfileActivity extends AppCompatActivity {
                                         startActivity(new Intent(ProfileActivity.this, LoginActivity.class));
                                         finish();
                                     })
-                                    .addOnFailureListener(e -> {
-                                        Toast.makeText(ProfileActivity.this, "Failed to delete user data!", Toast.LENGTH_SHORT).show();
-                                    });
+                                    .addOnFailureListener(e -> Toast.makeText(ProfileActivity.this, "Failed to delete user data!", Toast.LENGTH_SHORT).show());
                         } else {
                             Toast.makeText(ProfileActivity.this,
                                     isGoogleUser ? "Failed to delete Google account!" : "Failed to delete email account!",

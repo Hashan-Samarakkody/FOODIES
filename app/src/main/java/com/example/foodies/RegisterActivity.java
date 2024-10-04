@@ -61,15 +61,11 @@ public class RegisterActivity extends AppCompatActivity {
                                 startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
                                 finish();
                             })
-                            .addOnFailureListener(e -> {
-                                Toast.makeText(RegisterActivity.this, "Failed to save user data!", Toast.LENGTH_SHORT).show();
-                            });
+                            .addOnFailureListener(e -> Toast.makeText(RegisterActivity.this, "Failed to save user data!", Toast.LENGTH_SHORT).show());
                 } else {
                     Toast.makeText(RegisterActivity.this, "Registration Failed!", Toast.LENGTH_SHORT).show();
                 }
-            }).addOnFailureListener(e -> {
-                Toast.makeText(RegisterActivity.this, "User cannot be registered!", Toast.LENGTH_SHORT).show();
-            });
+            }).addOnFailureListener(e -> Toast.makeText(RegisterActivity.this, "User cannot be registered!", Toast.LENGTH_SHORT).show());
         });
 
         haveAccount.setOnClickListener(view -> {

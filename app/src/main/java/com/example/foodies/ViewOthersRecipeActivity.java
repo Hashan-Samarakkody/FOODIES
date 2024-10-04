@@ -2,20 +2,13 @@ package com.example.foodies;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.ImageView;
-
-import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -89,12 +82,9 @@ public class ViewOthersRecipeActivity extends AppCompatActivity {
             }
         });
 
-        backIcon.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(ViewOthersRecipeActivity.this,MainActivity.class));
-                finish();
-            }
+        backIcon.setOnClickListener(view -> {
+            startActivity(new Intent(ViewOthersRecipeActivity.this,MainActivity.class));
+            finish();
         });
 
         searchView = findViewById(R.id.searchOthers);
@@ -117,41 +107,29 @@ public class ViewOthersRecipeActivity extends AppCompatActivity {
         fabAdd = findViewById(R.id.fabAdd);
         fabProfile = findViewById(R.id.fabProfile);
 
-        fabFavourite.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(ViewOthersRecipeActivity.this, SavedRecipesActivity.class);
-                startActivity(intent);
-                finish();
-            }
+        fabFavourite.setOnClickListener(view -> {
+            Intent intent = new Intent(ViewOthersRecipeActivity.this, SavedRecipesActivity.class);
+            startActivity(intent);
+            finish();
         });
 
-        fabHome.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(ViewOthersRecipeActivity.this, MainActivity.class);
-                startActivity(intent);
-                finish();
-            }
+        fabHome.setOnClickListener(view -> {
+            Intent intent = new Intent(ViewOthersRecipeActivity.this, MainActivity.class);
+            startActivity(intent);
+            finish();
         });
 
-        fabAdd.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(ViewOthersRecipeActivity.this, UploadActivity.class);
-                startActivity(intent);
-                finish();
-            }
+        fabAdd.setOnClickListener(view -> {
+            Intent intent = new Intent(ViewOthersRecipeActivity.this, UploadActivity.class);
+            startActivity(intent);
+            finish();
         });
 
 
-        fabProfile.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(ViewOthersRecipeActivity.this, ProfileActivity.class);
-                startActivity(intent);
-                finish();
-            }
+        fabProfile.setOnClickListener(view -> {
+            Intent intent = new Intent(ViewOthersRecipeActivity.this, ProfileActivity.class);
+            startActivity(intent);
+            finish();
         });
     }
     public void searchList(String text) {

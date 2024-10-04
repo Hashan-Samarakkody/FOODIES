@@ -2,16 +2,13 @@ package com.example.foodies;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -20,7 +17,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -73,40 +69,28 @@ public class SavedRecipesActivity extends AppCompatActivity {
         fabProfile = findViewById(R.id.fabProfile);
 
 
-        fabAdd.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(SavedRecipesActivity.this, UploadActivity.class);
-                startActivity(intent);
-                finish();
-            }
+        fabAdd.setOnClickListener(view -> {
+            Intent intent = new Intent(SavedRecipesActivity.this, UploadActivity.class);
+            startActivity(intent);
+            finish();
         });
 
-        fabHome.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(SavedRecipesActivity.this, MainActivity.class);
-                startActivity(intent);
-                finish();
-            }
+        fabHome.setOnClickListener(view -> {
+            Intent intent = new Intent(SavedRecipesActivity.this, MainActivity.class);
+            startActivity(intent);
+            finish();
         });
 
-        fabView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(SavedRecipesActivity.this, ViewOthersRecipeActivity.class);
-                startActivity(intent);
-                finish();
-            }
+        fabView.setOnClickListener(view -> {
+            Intent intent = new Intent(SavedRecipesActivity.this, ViewOthersRecipeActivity.class);
+            startActivity(intent);
+            finish();
         });
 
-        fabProfile.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(SavedRecipesActivity.this, ProfileActivity.class);
-                startActivity(intent);
-                finish();
-            }
+        fabProfile.setOnClickListener(view -> {
+            Intent intent = new Intent(SavedRecipesActivity.this, ProfileActivity.class);
+            startActivity(intent);
+            finish();
         });
     }
 

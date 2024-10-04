@@ -57,35 +57,29 @@ public class ViewOthersRecipeAdapter extends RecyclerView.Adapter<ViewOthersView
         holder.recTime.setText(data.getDataTime());
 
         // Fetch average rating and set it to the rating bar
-        getAverageRating(data.getKey(), new OnAverageRatingReceivedListener() {
-            @Override
-            public void onAverageRatingReceived(float averageRating) {
-                if(averageRating>4){
-                    holder.recRatingbar.setRating(4);
-                }else{
-                    holder.recRatingbar.setRating(averageRating);
-                }
-
+        getAverageRating(data.getKey(), averageRating -> {
+            if(averageRating>4){
+                holder.recRatingbar.setRating(4);
+            }else{
+                holder.recRatingbar.setRating(averageRating);
             }
+
         });
 
         // Set click listener
-        holder.recCard.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(context, OthersRecipeDetailActivity.class);
-                intent.putExtra("Image", data.getDataImage());
-                intent.putExtra("Name", data.getDataName());
-                intent.putExtra("Time", data.getDataTime());
-                intent.putExtra("Category", data.getDataCategory());
-                intent.putExtra("Ingredients", data.getDataIngredients());
-                intent.putExtra("Description", data.getDataDescription());
-                intent.putExtra("Key", data.getKey());
-                intent.putExtra("Owner", data.getOwner());
-                intent.putExtra("Video", data.getDataVideo());
+        holder.recCard.setOnClickListener(view -> {
+            Intent intent = new Intent(context, OthersRecipeDetailActivity.class);
+            intent.putExtra("Image", data.getDataImage());
+            intent.putExtra("Name", data.getDataName());
+            intent.putExtra("Time", data.getDataTime());
+            intent.putExtra("Category", data.getDataCategory());
+            intent.putExtra("Ingredients", data.getDataIngredients());
+            intent.putExtra("Description", data.getDataDescription());
+            intent.putExtra("Key", data.getKey());
+            intent.putExtra("Owner", data.getOwner());
+            intent.putExtra("Video", data.getDataVideo());
 
-                context.startActivity(intent);
-            }
+            context.startActivity(intent);
         });
     }
 

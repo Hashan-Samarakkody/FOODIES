@@ -66,22 +66,19 @@ public class SearchRecipeAdapter extends RecyclerView.Adapter<SearchViewHolder> 
         });
 
         // Set click listener
-        holder.recCard.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(context, DetailActivity.class);
-                intent.putExtra("Image", data.getDataImage());
-                intent.putExtra("Name", data.getDataName());
-                intent.putExtra("Time", data.getDataTime());
-                intent.putExtra("Category", data.getDataCategory());
-                intent.putExtra("Ingredients", data.getDataIngredients());
-                intent.putExtra("Description", data.getDataDescription());
-                intent.putExtra("Key", data.getKey());
-                intent.putExtra("Owner", data.getOwner());
-                intent.putExtra("Video", data.getDataVideo());
+        holder.recCard.setOnClickListener(view -> {
+            Intent intent = new Intent(context, DetailActivity.class);
+            intent.putExtra("Image", data.getDataImage());
+            intent.putExtra("Name", data.getDataName());
+            intent.putExtra("Time", data.getDataTime());
+            intent.putExtra("Category", data.getDataCategory());
+            intent.putExtra("Ingredients", data.getDataIngredients());
+            intent.putExtra("Description", data.getDataDescription());
+            intent.putExtra("Key", data.getKey());
+            intent.putExtra("Owner", data.getOwner());
+            intent.putExtra("Video", data.getDataVideo());
 
-                context.startActivity(intent);
-            }
+            context.startActivity(intent);
         });
     }
 
