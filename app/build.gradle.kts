@@ -58,6 +58,7 @@ dependencies {
     implementation("com.github.clans:fab:1.6.4")
     annotationProcessor("com.github.bumptech.glide:compiler:4.14.2")
     implementation ("com.google.android.gms:play-services-auth:20.2.0")
+    implementation ("com.github.TutorialsAndroid:GButton:v1.0.19")
     implementation ("com.github.denzcoskun:ImageSlideshow:0.1.0")
     implementation ("androidx.media3:media3-exoplayer-dash:1.3.1")
 }

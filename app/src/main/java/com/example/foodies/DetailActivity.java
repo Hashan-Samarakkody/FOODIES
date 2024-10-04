@@ -72,7 +72,7 @@ public class DetailActivity extends AppCompatActivity {
                 setupPlayer(Uri.parse(videoUrl)); // Setup player
             }
 
-                    }
+        }
 
         deleteDataImage.setOnClickListener(view -> showDeleteConfirmationDialog());
         editDataImage.setOnClickListener(view -> openUpdateActivity());
@@ -93,7 +93,7 @@ public class DetailActivity extends AppCompatActivity {
         player.prepare();
     }
 
-        private void showDeleteConfirmationDialog() {
+    private void showDeleteConfirmationDialog() {
         LayoutInflater inflater = getLayoutInflater();
         View dialogView = inflater.inflate(R.layout.popup_layout, null);
         AlertDialog.Builder builder = new AlertDialog.Builder(DetailActivity.this);
