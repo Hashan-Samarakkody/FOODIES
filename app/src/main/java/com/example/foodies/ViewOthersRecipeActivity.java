@@ -29,7 +29,7 @@ import java.util.List;
 
 public class ViewOthersRecipeActivity extends AppCompatActivity {
 
-    FloatingActionButton fabAdd,fabFavourite,fabProfile;
+    FloatingActionButton fabAdd,fabFavourite,fabProfile,fabHome;
     SearchView searchView;
     RecyclerView recyclerView;
     List<DataClass> dataList;
@@ -113,6 +113,7 @@ public class ViewOthersRecipeActivity extends AppCompatActivity {
         });
 
         fabFavourite = findViewById(R.id.fabFav);
+        fabHome = findViewById(R.id.fabHome);
         fabAdd = findViewById(R.id.fabAdd);
         fabProfile = findViewById(R.id.fabProfile);
 
@@ -120,6 +121,15 @@ public class ViewOthersRecipeActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(ViewOthersRecipeActivity.this, SavedRecipesActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+
+        fabHome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(ViewOthersRecipeActivity.this, MainActivity.class);
                 startActivity(intent);
                 finish();
             }

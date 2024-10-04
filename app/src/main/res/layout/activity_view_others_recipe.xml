@@ -74,10 +74,22 @@
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:id="@+id/fabFav"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginStart="55dp"
+        android:layout_marginBottom="50dp"
+        android:src="@drawable/baseline_bookmark_24"
+        android:backgroundTint="#82E451"
+        android:tint="@color/white"/>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:id="@+id/fabProfile"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
-        android:layout_marginStart="100dp"
+        android:layout_marginStart="136dp"
         android:layout_marginBottom="50dp"
         android:src="@drawable/baseline_person_24"
         android:backgroundTint="#82E451"
@@ -89,7 +101,7 @@
         android:id="@+id/fabAdd"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
-        android:layout_marginStart="178dp"
+        android:layout_marginStart="217dp"
         android:layout_marginBottom="50dp"
         android:src="@drawable/baseline_add_24"
         android:backgroundTint="#82E451"
@@ -98,13 +110,12 @@
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/fabFav"
+        android:id="@+id/fabHome"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
-        android:layout_marginEnd="100dp"
+        android:layout_marginEnd="55dp"
         android:layout_marginBottom="50dp"
-        android:src="@drawable/baseline_bookmark_24"
+        android:src="@drawable/baseline_home_24"
         android:backgroundTint="#82E451"
         android:tint="@color/white"/>
-
 </RelativeLayout>
