@@ -115,7 +115,7 @@ public class LoginActivity extends AppCompatActivity {
         });
 
         gOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestIdToken(getString(R.string.defaullt_web_client_id)) // Update with your client ID
+                .requestIdToken(getString(R.string.default_web_client_id)) // Update with your client ID
                 .requestEmail()
                 .build();
 
