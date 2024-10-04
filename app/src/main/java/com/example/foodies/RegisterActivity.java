@@ -2,6 +2,7 @@ package com.example.foodies;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Patterns;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -44,6 +45,9 @@ public class RegisterActivity extends AppCompatActivity {
 
             if (!user.isValidInputs(name, email, password)) { // Fix condition
                 Toast.makeText(RegisterActivity.this, "Invalid Input!", Toast.LENGTH_SHORT).show();
+                return; // Remove finish()
+            }else if(!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
+                Toast.makeText(RegisterActivity.this, "Email not valid!", Toast.LENGTH_SHORT).show();
                 return; // Remove finish()
             }
 

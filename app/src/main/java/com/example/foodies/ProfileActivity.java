@@ -187,6 +187,10 @@ public class ProfileActivity extends AppCompatActivity {
         TextView noButton = dialogView.findViewById(R.id.button_no);
 
         yesButton.setOnClickListener(v -> {
+            SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.clear();
+            editor.apply();
             deleteAccount();
             dialog.dismiss();
         });
