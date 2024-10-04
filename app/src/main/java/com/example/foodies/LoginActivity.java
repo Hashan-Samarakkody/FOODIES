@@ -30,7 +30,7 @@ import java.util.HashMap;
 
 public class LoginActivity extends AppCompatActivity {
 
-    static final int RC_SIGN_IN = 20;
+    static final int RC_SIGN_IN = 21;
 
     GoogleSignInButton googleBtn;
     GoogleSignInOptions gOptions;

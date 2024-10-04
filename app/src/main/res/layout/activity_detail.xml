@@ -21,6 +21,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textAlignment="center"
         android:id="@+id/detailName"
         android:text="Recipe Name"
         android:textSize="25sp"

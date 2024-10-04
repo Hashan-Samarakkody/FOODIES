@@ -31,21 +31,21 @@
             android:id="@+id/recTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="22dp"
-            android:layout_marginTop="12dp"
+            android:layout_marginStart="1dp"
+            android:layout_marginTop="5dp"
             android:layout_toEndOf="@+id/recImage"
             android:singleLine="false"
             android:fontFamily="@font/inter_tight_medium"
             android:text="Name"
             android:textColor="@color/black"
-            android:textSize="18sp" />
+            android:textSize="16sp" />
 
         <TextView
             android:id="@+id/recTime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="235dp"
-            android:layout_marginTop="26dp"
+            android:layout_marginStart="215dp"
+            android:layout_marginTop="50dp"
             android:layout_toEndOf="@+id/recImage"
             android:fontFamily="@font/inter_tight_medium"
             android:text="Time"
@@ -60,15 +60,15 @@
             android:id="@+id/ratingBar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="29dp"
             android:scaleX="0.45"
             android:scaleY="0.45"
             android:layout_marginStart="15dp" />
 
         <ImageView
             android:id="@+id/imageView"
-            android:layout_marginStart="280dp"
-            android:layout_marginTop="25dp"
+            android:layout_marginStart="260dp"
+            android:layout_marginTop="50dp"
             android:layout_width="17dp"
             android:layout_height="17dp"
             app:srcCompat="@drawable/baseline_access_time_25" />
