@@ -92,7 +92,7 @@ public class DataClass {
             } else if (parts[1].contains("min")) {
                 String[] minutesPart = parts[1].split("min");
                 int minutes = Integer.parseInt(minutesPart[0].trim());
-                return (hours >= 0 && hours < 24 && minutes >= 0 && minutes < 60);
+                return (hours >= 0 && hours <= 24 && minutes >= 0 && minutes <= 60);
             }
         } else if (time.contains("min")) {
             String[] parts = time.split("min");
@@ -104,11 +104,11 @@ public class DataClass {
                 // Validate hour and minute
                 int hours = Integer.parseInt(parts[0].trim());
                 int minutes = Integer.parseInt(parts[1].trim());
-                return (hours >= 0 && hours < 24 && minutes >= 0 && minutes < 60);
+                return (hours >= 0 && hours < 24 && minutes >= 0 && minutes <= 60);
             } else if (parts.length == 1) {
                 // Validate if only hours are present
                 int hours = Integer.parseInt(parts[0].trim());
-                return (hours >= 0 && hours < 24);
+                return (hours >= 0 && hours <= 24);
             }
         }
         return false;
