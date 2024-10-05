@@ -13,6 +13,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -23,6 +25,7 @@ import com.google.firebase.database.ValueEventListener;
 
 public class ProfileActivity extends AppCompatActivity {
 
+    FloatingActionButton fabAdd,fabView,fabProfile,fabHome;
     FirebaseAuth auth;
     Button logOut, save, deleteAccount, cancel;
     ImageView backIcon;
@@ -43,7 +46,8 @@ public class ProfileActivity extends AppCompatActivity {
         save = findViewById(R.id.saveButton);
         cancel = findViewById(R.id.cancelButton);
         deleteAccount = findViewById(R.id.deleteButton);
-        backIcon = findViewById(R.id.back);
+        backIcon = findViewById(R.id.backIcon);
+        fabHome = findViewById(R.id.fabHome);
 
         auth = FirebaseAuth.getInstance();
         databaseReference = FirebaseDatabase.getInstance().getReference("users");
@@ -70,6 +74,12 @@ public class ProfileActivity extends AppCompatActivity {
 
         backIcon.setOnClickListener(v -> {
             startActivity(new Intent(ProfileActivity.this, MainActivity.class));
+            finish();
+        });
+
+        fabHome.setOnClickListener(view -> {
+            Intent intent = new Intent(ProfileActivity.this, MainActivity.class);
+            startActivity(intent);
             finish();
         });
 
