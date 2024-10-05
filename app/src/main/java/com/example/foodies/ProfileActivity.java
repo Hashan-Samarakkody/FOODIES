@@ -13,7 +13,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
-
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -25,7 +24,7 @@ import com.google.firebase.database.ValueEventListener;
 
 public class ProfileActivity extends AppCompatActivity {
 
-    FloatingActionButton fabAdd,fabView,fabProfile,fabHome;
+    FloatingActionButton fabHome;
     FirebaseAuth auth;
     Button logOut, save, deleteAccount, cancel;
     ImageView backIcon;
@@ -69,7 +68,15 @@ public class ProfileActivity extends AppCompatActivity {
             assert user != null;
             updateUserData(user.getUid(), newName);
         });
-
+        
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                loadUserData(user.getUid());
+                Toast.makeText(ProfileActivity.this, "Update canceled!", Toast.LENGTH_SHORT).show();
+            }
+        });
+        
         deleteAccount.setOnClickListener(v -> showDeleteAccountConfirmationDialog());
 
         backIcon.setOnClickListener(v -> {
