@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
-    android:background="@drawable/bg_2"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/bg_2"
+    android:orientation="vertical"
     tools:context=".OthersRecipeDetailActivity">
 
     <ImageView
@@ -18,41 +17,41 @@
         app:srcCompat="@drawable/baseline_arrow_back_24" />
 
     <TextView
-        android:layout_width="wrap_content"
-        android:textAlignment="center"
-        android:layout_height="wrap_content"
         android:id="@+id/detailName"
-        android:layout_marginTop="10dp"
-        android:text="Recipe Name"
-        android:textSize="24sp"
-        android:textColor="@color/black"
-        android:textStyle="bold"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:fontFamily="@font/inter_tight_medium" />
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/inter_tight_medium"
+        android:text="Recipe Name"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardImage"
         android:layout_width="match_parent"
         android:layout_height="260dp"
-        android:layout_marginStart="15dp"
-        android:layout_marginEnd="15dp"
         android:layout_gravity="center"
+        android:layout_marginStart="15dp"
         android:layout_marginTop="10dp"
+        android:layout_marginEnd="15dp"
         app:cardCornerRadius="30dp"
         app:cardElevation="8dp"
-        app:layout_constraintTop_toBottomOf="@id/detailName"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintTop_toBottomOf="@id/detailName">
 
         <androidx.media3.ui.PlayerView
             android:id="@+id/detailVideo"
             android:layout_width="match_parent"
             android:layout_height="260dp"
             android:layout_gravity="center"
-            android:scaleType="centerCrop"/>
+            android:scaleType="centerCrop" />
 
     </androidx.cardview.widget.CardView>
 
@@ -78,9 +77,9 @@
                 android:id="@+id/save"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
+                android:layout_margin="7dp"
                 android:clickable="true"
                 android:focusable="true"
-                android:layout_margin="7dp"
                 android:scaleType="centerCrop"
                 android:src="@drawable/img_5" />
 
@@ -88,9 +87,9 @@
                 android:id="@+id/shareData"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
+                android:layout_margin="7dp"
                 android:clickable="true"
                 android:focusable="true"
-                android:layout_margin="7dp"
                 android:scaleType="centerCrop"
                 android:src="@drawable/img_8" />
 
@@ -100,38 +99,38 @@
 
     <!-- Wrap content from Duration label in ScrollView -->
     <ScrollView
-        android:layout_height="wrap_content"
         android:layout_width="match_parent"
-        app:layout_constraintTop_toBottomOf="@id/cardImage2"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
-        >
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cardImage2">
+
         <LinearLayout
 
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
             android:layout_margin="15dp"
             android:background="@color/white"
+            android:orientation="vertical"
             android:padding="16dp">
 
             <!-- Category Text -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/inter_tight_medium"
                 android:text="Category:"
                 android:textColor="@color/black"
                 android:textSize="18sp"
-                android:textStyle="bold"
-                android:fontFamily="@font/inter_tight_medium" />
+                android:textStyle="bold" />
 
             <!-- Category Text -->
             <TextView
-                android:fontFamily="@font/inter_tight_medium"
                 android:id="@+id/detailCategory"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="12dp"
+                android:fontFamily="@font/inter_tight_medium"
                 android:text="category"
                 android:textSize="16sp" />
 
@@ -139,49 +138,49 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/inter_tight_medium"
                 android:text="Duration:"
                 android:textColor="@color/black"
                 android:textSize="18sp"
-                android:textStyle="bold"
-                android:fontFamily="@font/inter_tight_medium" />
+                android:textStyle="bold" />
 
 
             <!-- Time Text -->
             <TextView
-                android:fontFamily="@font/inter_tight_medium"
                 android:id="@+id/detailTime"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="12dp"
+                android:fontFamily="@font/inter_tight_medium"
                 android:text="time"
                 android:textSize="16sp" />
 
 
             <!-- Ingredients Label -->
             <TextView
-                android:fontFamily="@font/inter_tight_medium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/inter_tight_medium"
                 android:text="Ingredients:"
                 android:textColor="@color/black"
                 android:textSize="18sp"
-                android:textStyle="bold"/>
+                android:textStyle="bold" />
 
             <!-- Ingredients Text -->
             <TextView
-                android:fontFamily="@font/inter_tight_medium"
                 android:id="@+id/detailIngredients"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp"
+                android:fontFamily="@font/inter_tight_medium"
                 android:text="HuevosRancherosIngredients"
-                android:textSize="16sp"
-                android:layout_marginBottom="12dp" />
+                android:textSize="16sp" />
 
             <!-- Steps Label -->
             <TextView
-                android:fontFamily="@font/inter_tight_medium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/inter_tight_medium"
                 android:text="Steps:"
                 android:textColor="@color/black"
                 android:textSize="18sp"
@@ -189,19 +188,19 @@
 
             <!-- Steps Description -->
             <TextView
-                android:fontFamily="@font/inter_tight_medium"
                 android:id="@+id/detailDesc"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="15dp"
+                android:fontFamily="@font/inter_tight_medium"
                 android:text="HuevosRancherosDesc"
-                android:textSize="16sp"
-                android:layout_marginBottom="15dp" />
+                android:textSize="16sp" />
 
             <TextView
-                android:fontFamily="@font/inter_tight_medium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
+                android:fontFamily="@font/inter_tight_medium"
                 android:text="Rate This Recipe:"
                 android:textColor="@color/black"
                 android:textSize="18sp"
@@ -209,13 +208,13 @@
 
             <RatingBar
                 android:id="@+id/ratingBar"
-                android:theme="@style/RatingBar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:numStars="4"
                 android:scaleX="0.8"
                 android:scaleY="0.8"
-                android:stepSize="1" />
+                android:stepSize="1"
+                android:theme="@style/RatingBar" />
         </LinearLayout>
     </ScrollView>
 

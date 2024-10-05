@@ -57,6 +57,7 @@ public class ForgotPasswordActivity extends AppCompatActivity {
         });
 
         // IM/2021/110 Set onClickListener for cancel button
+
         btnCancel.setOnClickListener(view -> {
             startActivity(new Intent(ForgotPasswordActivity.this, LoginActivity.class)); // IM/2021/110 Navigate to LoginActivity
             finish(); // IM/2021/110 Close this activity

@@ -105,16 +105,15 @@ public class LoginActivity extends AppCompatActivity {
                 editor.apply(); // IM/2021/110 Apply changes to SharedPreferences
 
                 // IM/2021/110 Authenticate the user
-                auth.signInWithEmailAndPassword(userEmail, userPassword)
-                        .addOnCompleteListener(task -> {
-                            if (task.isSuccessful()) {
-                                Toast.makeText(LoginActivity.this, "Logged In Successfully!", Toast.LENGTH_SHORT).show(); // IM/2021/110 Show success message
-                                startActivity(new Intent(LoginActivity.this, MainActivity.class)); // IM/2021/110 Navigate to MainActivity
-                                finish(); // IM/2021/110 End the LoginActivity
-                            } else {
-                                Toast.makeText(LoginActivity.this, "User Authentication Failed!", Toast.LENGTH_SHORT).show(); // IM/2021/110 Show error message
-                            }
-                        }).addOnFailureListener(e -> Toast.makeText(LoginActivity.this, "User Login Failed: " + e.getMessage(), Toast.LENGTH_SHORT).show()); // IM/2021/110 Handle login failure
+                auth.signInWithEmailAndPassword(userEmail, userPassword).addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        Toast.makeText(LoginActivity.this, "Logged In Successfully!", Toast.LENGTH_SHORT).show(); // IM/2021/110 Show success message
+                        startActivity(new Intent(LoginActivity.this, MainActivity.class)); // IM/2021/110 Navigate to MainActivity
+                        finish(); // IM/2021/110 End the LoginActivity
+                    } else {
+                        Toast.makeText(LoginActivity.this, "User Authentication Failed!", Toast.LENGTH_SHORT).show(); // IM/2021/110 Show error message
+                    }
+                }).addOnFailureListener(e -> Toast.makeText(LoginActivity.this, "User Login Failed: " + e.getMessage(), Toast.LENGTH_SHORT).show()); // IM/2021/110 Handle login failure
             }
         });
 
@@ -127,8 +126,7 @@ public class LoginActivity extends AppCompatActivity {
 
         gOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN) // IM/2021/110 Build Google Sign-In options
                 .requestIdToken(getString(R.string.default_web_client_id)) // IM/2021/110 Update with your client ID
-                .requestEmail()
-                .build();
+                .requestEmail().build();
 
         gClient = GoogleSignIn.getClient(LoginActivity.this, gOptions); // IM/2021/110 Initialize GoogleSignInClient
 

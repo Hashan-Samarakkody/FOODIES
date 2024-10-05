@@ -8,10 +8,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
+
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+
 import com.bumptech.glide.Glide;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -67,32 +69,26 @@ public class UpdateActivity extends AppCompatActivity {
         databaseReference = FirebaseDatabase.getInstance().getReference("Recipes").child(key); // Sets the database reference to the specific recipe IM/2022/120
 
         // Image selection logic using activity result launcher IM/2022/120
-        ActivityResultLauncher<Intent> imageActivityResultLauncher = registerForActivityResult(
-                new ActivityResultContracts.StartActivityForResult(),
-                result -> {
-                    if (result.getResultCode() == Activity.RESULT_OK) { // Checks if the result is OK IM/2022/120
-                        Intent data = result.getData(); // Retrieves the data from the result IM/2022/120
-                        newImageUri = data != null ? data.getData() : null; // Gets the image URI IM/2022/120
-                        updateImage.setImageURI(newImageUri); // Updates the ImageView with the new image IM/2022/120
-                    } else {
-                        Toast.makeText(UpdateActivity.this, "No Image Selected!", Toast.LENGTH_SHORT).show(); // Displays a toast if no image is selected IM/2022/120
-                    }
-                }
-        );
+        ActivityResultLauncher<Intent> imageActivityResultLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
+            if (result.getResultCode() == Activity.RESULT_OK) { // Checks if the result is OK IM/2022/120
+                Intent data = result.getData(); // Retrieves the data from the result IM/2022/120
+                newImageUri = data != null ? data.getData() : null; // Gets the image URI IM/2022/120
+                updateImage.setImageURI(newImageUri); // Updates the ImageView with the new image IM/2022/120
+            } else {
+                Toast.makeText(UpdateActivity.this, "No Image Selected!", Toast.LENGTH_SHORT).show(); // Displays a toast if no image is selected IM/2022/120
+            }
+        });
 
         // Video selection logic using activity result launcher IM/2022/120
-        ActivityResultLauncher<Intent> videoActivityResultLauncher = registerForActivityResult(
-                new ActivityResultContracts.StartActivityForResult(),
-                result -> {
-                    if (result.getResultCode() == Activity.RESULT_OK) { // Checks if the result is OK IM/2022/120
-                        Intent data = result.getData(); // Retrieves the data from the result IM/2022/120
-                        newVideoUri = data != null ? data.getData() : null; // Gets the video URI IM/2022/120
-                        Toast.makeText(UpdateActivity.this, "Video selected!", Toast.LENGTH_SHORT).show(); // Displays a toast confirming video selection IM/2022/120
-                    } else {
-                        Toast.makeText(UpdateActivity.this, "No Video Selected!", Toast.LENGTH_SHORT).show(); // Displays a toast if no video is selected IM/2022/120
-                    }
-                }
-        );
+        ActivityResultLauncher<Intent> videoActivityResultLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
+            if (result.getResultCode() == Activity.RESULT_OK) { // Checks if the result is OK IM/2022/120
+                Intent data = result.getData(); // Retrieves the data from the result IM/2022/120
+                newVideoUri = data != null ? data.getData() : null; // Gets the video URI IM/2022/120
+                Toast.makeText(UpdateActivity.this, "Video selected!", Toast.LENGTH_SHORT).show(); // Displays a toast confirming video selection IM/2022/120
+            } else {
+                Toast.makeText(UpdateActivity.this, "No Video Selected!", Toast.LENGTH_SHORT).show(); // Displays a toast if no video is selected IM/2022/120
+            }
+        });
 
         // Set up listeners for selecting images and videos, and updating data IM/2022/120
         updateImage.setOnClickListener(view -> { // Listener for updating the image IM/2022/120

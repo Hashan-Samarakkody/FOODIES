@@ -10,12 +10,10 @@ public class NetworkUtils {
     // IM/2021/007 - Method to check if internet is available
     public static boolean isInternetAvailable(Context context) {
         // IM/2021/007 - Get the ConnectivityManager system service
-        ConnectivityManager connectivityManager = (ConnectivityManager) context
-                .getSystemService(Context.CONNECTIVITY_SERVICE);
+        ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         if (connectivityManager != null) {
             // IM/2021/007 - Get the capabilities of the active network
-            NetworkCapabilities capabilities = connectivityManager
-                    .getNetworkCapabilities(connectivityManager.getActiveNetwork());
+            NetworkCapabilities capabilities = connectivityManager.getNetworkCapabilities(connectivityManager.getActiveNetwork());
             // IM/2021/007 - Check if the network has internet capability
             return capabilities != null && capabilities.hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET);
         }

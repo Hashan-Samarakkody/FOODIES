@@ -12,7 +12,9 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -111,8 +113,7 @@ public class ProfileActivity extends AppCompatActivity {
                 .addOnSuccessListener(aVoid -> {
                     Toast.makeText(ProfileActivity.this, "Name updated successfully!", Toast.LENGTH_SHORT).show(); // Notify user
                     userName.setText(newName); // Update displayed name
-                })
-                .addOnFailureListener(e -> Toast.makeText(ProfileActivity.this, "Failed to update name!", Toast.LENGTH_SHORT).show()); // Handle errors
+                }).addOnFailureListener(e -> Toast.makeText(ProfileActivity.this, "Failed to update name!", Toast.LENGTH_SHORT).show()); // Handle errors
     }
 
     private void showLogOutConfirmationDialog() {
@@ -181,11 +182,9 @@ public class ProfileActivity extends AppCompatActivity {
                                         Toast.makeText(ProfileActivity.this, "Account deleted successfully!", Toast.LENGTH_SHORT).show(); // Notify user
                                         startActivity(new Intent(ProfileActivity.this, LoginActivity.class)); // Navigate to login activity
                                         finish(); // Finish current activity
-                                    })
-                                    .addOnFailureListener(e -> Toast.makeText(ProfileActivity.this, "Failed to delete user data!", Toast.LENGTH_SHORT).show()); // Handle errors
+                                    }).addOnFailureListener(e -> Toast.makeText(ProfileActivity.this, "Failed to delete user data!", Toast.LENGTH_SHORT).show()); // Handle errors
                         } else {
-                            Toast.makeText(ProfileActivity.this,
-                                    isGoogleUser ? "Failed to delete Google account!" : "Failed to delete email account!", // Notify user of failure
+                            Toast.makeText(ProfileActivity.this, isGoogleUser ? "Failed to delete Google account!" : "Failed to delete email account!", // Notify user of failure
                                     Toast.LENGTH_SHORT).show();
                         }
                     });

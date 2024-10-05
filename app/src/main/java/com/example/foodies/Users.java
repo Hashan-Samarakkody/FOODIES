@@ -1,4 +1,4 @@
-package com.example.foodies; // Package declaration IM/2022/070
+package com.example.foodies;
 
 public class Users { // Users class to represent user data IM/2022/070
     private String name; // Variable to store the user's name IM/2022/070

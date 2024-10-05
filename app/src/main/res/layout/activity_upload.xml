@@ -1,20 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
-    android:background="@drawable/background_fill"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/background_fill"
     tools:context=".UploadActivity">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
         android:layout_marginTop="30dp"
         android:layout_marginEnd="20dp"
-        android:layout_marginStart="20dp"
         app:cardCornerRadius="30dp"
         app:cardElevation="10dp">
 
@@ -79,11 +78,11 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="10dp"
-                android:text="Upload Video"
                 android:backgroundTint="#46A020"
                 android:fontFamily="@font/poppins_medium"
-                android:textSize="15sp"
-                android:scaleType="centerCrop" />
+                android:scaleType="centerCrop"
+                android:text="Upload Video"
+                android:textSize="15sp" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -147,7 +146,6 @@
 
             <EditText
                 android:id="@+id/uploadTime"
-                android:singleLine="true"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/text_bg"
@@ -155,6 +153,7 @@
                 android:gravity="start|center_vertical"
                 android:hint="Enter Time (00h 00min)"
                 android:padding="12sp"
+                android:singleLine="true"
                 android:textColor="@color/black" />
 
             <TextView

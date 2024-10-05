@@ -3,12 +3,14 @@ package com.example.foodies;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ImageView;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -22,7 +24,7 @@ import java.util.List;
 
 public class ViewOthersRecipeActivity extends AppCompatActivity {
 
-    FloatingActionButton fabAdd,fabFavourite,fabProfile,fabHome;
+    FloatingActionButton fabAdd, fabFavourite, fabProfile, fabHome;
     SearchView searchView;
     RecyclerView recyclerView;
     List<DataClass> dataList;
@@ -72,7 +74,7 @@ public class ViewOthersRecipeActivity extends AppCompatActivity {
                 dataList.clear();
                 for (DataSnapshot itemSnapshot : snapshot.getChildren()) {
                     DataClass dataClass = itemSnapshot.getValue(DataClass.class);
-                    if (dataClass != null  && !dataClass.getOwner().equals(userId)) {
+                    if (dataClass != null && !dataClass.getOwner().equals(userId)) {
                         dataClass.setKey(itemSnapshot.getKey());
                         dataList.add(dataClass);
                     }
@@ -90,7 +92,7 @@ public class ViewOthersRecipeActivity extends AppCompatActivity {
 
 // IM/2021/038 - Handle the back button click to return to the main activity.
         backIcon.setOnClickListener(view -> {
-            startActivity(new Intent(ViewOthersRecipeActivity.this,MainActivity.class));
+            startActivity(new Intent(ViewOthersRecipeActivity.this, MainActivity.class));
             finish();
         });
 

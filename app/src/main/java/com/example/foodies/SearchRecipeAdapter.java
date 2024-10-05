@@ -8,9 +8,11 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
+
 import com.bumptech.glide.Glide;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -49,9 +51,7 @@ public class SearchRecipeAdapter extends RecyclerView.Adapter<SearchViewHolder> 
         DataClass data = dataList.get(position);
 
         // IM/2021/007 - Load recipe image using Glide
-        Glide.with(context)
-                .load(data.getDataImage())
-                .placeholder(R.drawable.r_2) // Optional: add a placeholder image
+        Glide.with(context).load(data.getDataImage()).placeholder(R.drawable.r_2) // Optional: add a placeholder image
                 .into(holder.recImage);
 
         // IM/2021/007 - Set recipe title and cooking time text
@@ -97,8 +97,7 @@ public class SearchRecipeAdapter extends RecyclerView.Adapter<SearchViewHolder> 
 
     // IM/2021/007 - Method to fetch average rating from the database
     public void getAverageRating(String recipeKey, OnAverageRatingReceivedListener listener) {
-        DatabaseReference ratingsRef = FirebaseDatabase.getInstance().getReference("Recipes").child(recipeKey)
-                .child("ratings");
+        DatabaseReference ratingsRef = FirebaseDatabase.getInstance().getReference("Recipes").child(recipeKey).child("ratings");
 
         // IM/2021/007 - Listen for changes in the ratings data
         ratingsRef.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -107,8 +106,7 @@ public class SearchRecipeAdapter extends RecyclerView.Adapter<SearchViewHolder> 
                 List<Float> ratingsList = new ArrayList<>();
                 // IM/2021/007 - Collect ratings from the snapshot
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    OthersRecipeDetailActivity.RatingData ratingData = snapshot
-                            .getValue(OthersRecipeDetailActivity.RatingData.class);
+                    OthersRecipeDetailActivity.RatingData ratingData = snapshot.getValue(OthersRecipeDetailActivity.RatingData.class);
                     if (ratingData != null) {
                         ratingsList.add(ratingData.rating);
                     }

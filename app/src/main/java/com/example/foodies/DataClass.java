@@ -17,9 +17,7 @@ public class DataClass {
 
     // Regex patterns for validating input data
     // TIME_PATTERN: matches valid time formats
-    private static final Pattern TIME_PATTERN = Pattern.compile(
-            "^(\\d{1,2}h\\s*\\d{1,2}min|\\d{1,2}h|\\d{1,2}min|\\d{1,2}-\\d{1,2}|\\d{1,2})$"
-    );
+    private static final Pattern TIME_PATTERN = Pattern.compile("^(\\d{1,2}h\\s*\\d{1,2}min|\\d{1,2}h|\\d{1,2}min|\\d{1,2}-\\d{1,2}|\\d{1,2})$");
     // NAME_PATTERN: allows letters, spaces, and special characters in names
     private static final Pattern NAME_PATTERN = Pattern.compile("^[a-zA-Z\\s\\W]+$");
     // CATEGORY_PATTERN: allows letters, spaces, and special characters in categories
@@ -30,8 +28,7 @@ public class DataClass {
     }
 
     // Parameterized constructor to initialize all fields
-    public DataClass(String dataName, String dataCategory, String dataTime, String dataIngredients,
-                     String dataDescription, String dataImage, String dataVideo, String owner) {
+    public DataClass(String dataName, String dataCategory, String dataTime, String dataIngredients, String dataDescription, String dataImage, String dataVideo, String owner) {
         this.dataName = dataName;
         this.dataCategory = dataCategory;
         this.dataTime = dataTime;

@@ -7,7 +7,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -68,8 +70,7 @@ public class RegisterActivity extends AppCompatActivity {
                                 Toast.makeText(RegisterActivity.this, "User Registered Successfully!", Toast.LENGTH_SHORT).show(); // Show success message IM/2021/110
                                 startActivity(new Intent(RegisterActivity.this, LoginActivity.class)); // Navigate to login activity IM/2021/110
                                 finish(); // Finish current activity IM/2021/110
-                            })
-                            .addOnFailureListener(e -> Toast.makeText(RegisterActivity.this, "Failed to save user data!", Toast.LENGTH_SHORT).show()); // Handle failure to save data IM/2021/110
+                            }).addOnFailureListener(e -> Toast.makeText(RegisterActivity.this, "Failed to save user data!", Toast.LENGTH_SHORT).show()); // Handle failure to save data IM/2021/110
                 } else {
                     Toast.makeText(RegisterActivity.this, "Registration Failed!", Toast.LENGTH_SHORT).show(); // Show registration failure message IM/2021/110
                 }

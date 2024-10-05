@@ -8,10 +8,12 @@ import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.media3.common.MediaItem;
 import androidx.media3.exoplayer.ExoPlayer;
 import androidx.media3.ui.PlayerView;
+
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
@@ -154,13 +156,7 @@ public class OthersRecipeDetailActivity extends AppCompatActivity {
     }
 
     private void shareRecipe() {
-        String recipeDetails = "Check out this recipe:\n\n" +
-                "Name: " + detailName.getText().toString() + "\n\n" +
-                "Time: " + detailTime.getText().toString() + "\n\n" +
-                "Category: " + detailCategory.getText().toString() + "\n" +
-                "Ingredients: " + detailIngredients.getText().toString() + "\n\n" +
-                "Description: " + detailDesc.getText().toString() + "\n\n" +
-                "Click here to view image: " + imageUrl; // Optionally include image URL IM/2021/038
+        String recipeDetails = "Check out this recipe:\n\n" + "Name: " + detailName.getText().toString() + "\n\n" + "Time: " + detailTime.getText().toString() + "\n\n" + "Category: " + detailCategory.getText().toString() + "\n" + "Ingredients: " + detailIngredients.getText().toString() + "\n\n" + "Description: " + detailDesc.getText().toString() + "\n\n" + "Click here to view image: " + imageUrl; // Optionally include image URL IM/2021/038
 
         if (videoUrl != null && !videoUrl.isEmpty()) {
             recipeDetails += "\nWatch video: " + videoUrl; // Optionally include video URL IM/2021/038
@@ -184,16 +180,13 @@ public class OthersRecipeDetailActivity extends AppCompatActivity {
 
     private void showSubmitRatingDialog(float rating) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Submit Rating")
-                .setMessage("Are you sure you want to submit a rating of " + rating + " stars?") // Confirm rating IM/2021/038
+        builder.setTitle("Submit Rating").setMessage("Are you sure you want to submit a rating of " + rating + " stars?") // Confirm rating IM/2021/038
                 .setPositiveButton("Yes", (dialog, which) -> {
                     submitRating(rating); // Submit the rating IM/2021/038
-                })
-                .setNegativeButton("No", (dialog, which) -> {
+                }).setNegativeButton("No", (dialog, which) -> {
                     // Reset rating if cancelled, but keep the current rating IM/2021/038
                     loadExistingRating();
-                })
-                .show();
+                }).show();
     }
 
     private void submitRating(float rating) {

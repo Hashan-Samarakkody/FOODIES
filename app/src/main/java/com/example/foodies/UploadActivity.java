@@ -54,34 +54,28 @@ public class UploadActivity extends AppCompatActivity {
         dialog = builder.create(); // Creates the dialog IM/2022/120
 
         // Image selection logic using activity result launcher IM/2022/120
-        ActivityResultLauncher<Intent> imageActivityResultLauncher = registerForActivityResult(
-                new ActivityResultContracts.StartActivityForResult(),
-                result -> {
-                    if (result.getResultCode() == Activity.RESULT_OK) { // Checks if the result is OK IM/2022/120
-                        Intent data = result.getData(); // Retrieves the data from the result IM/2022/120
-                        assert data != null; // Asserts that data is not null IM/2022/120
-                        imageUri = data.getData(); // Gets the image URI IM/2022/120
-                        uploadImage.setImageURI(imageUri); // Updates the ImageView with the selected image IM/2022/120
-                    } else {
-                        Toast.makeText(UploadActivity.this, "No Image Selected!", Toast.LENGTH_SHORT).show(); // Displays a toast if no image is selected IM/2022/120
-                    }
-                }
-        );
+        ActivityResultLauncher<Intent> imageActivityResultLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
+            if (result.getResultCode() == Activity.RESULT_OK) { // Checks if the result is OK IM/2022/120
+                Intent data = result.getData(); // Retrieves the data from the result IM/2022/120
+                assert data != null; // Asserts that data is not null IM/2022/120
+                imageUri = data.getData(); // Gets the image URI IM/2022/120
+                uploadImage.setImageURI(imageUri); // Updates the ImageView with the selected image IM/2022/120
+            } else {
+                Toast.makeText(UploadActivity.this, "No Image Selected!", Toast.LENGTH_SHORT).show(); // Displays a toast if no image is selected IM/2022/120
+            }
+        });
 
         // Video selection logic using activity result launcher IM/2022/120
-        ActivityResultLauncher<Intent> videoActivityResultLauncher = registerForActivityResult(
-                new ActivityResultContracts.StartActivityForResult(),
-                result -> {
-                    if (result.getResultCode() == Activity.RESULT_OK) { // Checks if the result is OK IM/2022/120
-                        Intent data = result.getData(); // Retrieves the data from the result IM/2022/120
-                        assert data != null; // Asserts that data is not null IM/2022/120
-                        videoUri = data.getData(); // Gets the video URI IM/2022/120
-                        Toast.makeText(UploadActivity.this, "Video selected!", Toast.LENGTH_SHORT).show(); // Displays a toast confirming video selection IM/2022/120
-                    } else {
-                        Toast.makeText(UploadActivity.this, "No Video Selected!", Toast.LENGTH_SHORT).show(); // Displays a toast if no video is selected IM/2022/120
-                    }
-                }
-        );
+        ActivityResultLauncher<Intent> videoActivityResultLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
+            if (result.getResultCode() == Activity.RESULT_OK) { // Checks if the result is OK IM/2022/120
+                Intent data = result.getData(); // Retrieves the data from the result IM/2022/120
+                assert data != null; // Asserts that data is not null IM/2022/120
+                videoUri = data.getData(); // Gets the video URI IM/2022/120
+                Toast.makeText(UploadActivity.this, "Video selected!", Toast.LENGTH_SHORT).show(); // Displays a toast confirming video selection IM/2022/120
+            } else {
+                Toast.makeText(UploadActivity.this, "No Video Selected!", Toast.LENGTH_SHORT).show(); // Displays a toast if no video is selected IM/2022/120
+            }
+        });
 
         // Set up listeners for image and video selection, and saving data IM/2022/120
         uploadImage.setOnClickListener(view -> { // Listener for selecting an image IM/2022/120
@@ -117,11 +111,7 @@ public class UploadActivity extends AppCompatActivity {
         }
 
         // Validate input fields IM/2022/120
-        if (uploadName.getText().toString().isEmpty() ||
-                uploadCategory.getText().toString().isEmpty() ||
-                uploadTime.getText().toString().isEmpty() ||
-                uploadIngredients.getText().toString().isEmpty() ||
-                uploadDescription.getText().toString().isEmpty()) { // Checks if any field is empty IM/2022/120
+        if (uploadName.getText().toString().isEmpty() || uploadCategory.getText().toString().isEmpty() || uploadTime.getText().toString().isEmpty() || uploadIngredients.getText().toString().isEmpty() || uploadDescription.getText().toString().isEmpty()) { // Checks if any field is empty IM/2022/120
             Toast.makeText(this, "Please fill all fields!", Toast.LENGTH_SHORT).show(); // Displays a toast for empty fields IM/2022/120
             return; // Exits the method IM/2022/120
         }
@@ -182,17 +172,16 @@ public class UploadActivity extends AppCompatActivity {
 
         // If all validations pass, proceed to upload the data to Firebase IM/2022/120
         String recipeId = FirebaseDatabase.getInstance().getReference("Recipes").push().getKey(); // Creates a unique ID for the recipe IM/2022/120
-        FirebaseDatabase.getInstance().getReference("Recipes").child(recipeId).setValue(dataClass)
-                .addOnCompleteListener(task -> {
-                    dialog.dismiss(); // Dismisses the progress dialog after upload completes IM/2022/120
-                    if (task.isSuccessful()) { // Checks if the upload was successful IM/2022/120
-                        Toast.makeText(UploadActivity.this, "Saved", Toast.LENGTH_SHORT).show(); // Displays a success message IM/2022/120
-                        startActivity(new Intent(UploadActivity.this, MainActivity.class)); // Navigates back to the MainActivity IM/2022/120
-                        finish(); // Closes the current activity IM/2022/120
-                    }
-                }).addOnFailureListener(e -> {
-                    dialog.dismiss(); // Dismisses the dialog on failure IM/2022/120
-                    Toast.makeText(UploadActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show(); // Displays an error message IM/2022/120
-                });
+        FirebaseDatabase.getInstance().getReference("Recipes").child(recipeId).setValue(dataClass).addOnCompleteListener(task -> {
+            dialog.dismiss(); // Dismisses the progress dialog after upload completes IM/2022/120
+            if (task.isSuccessful()) { // Checks if the upload was successful IM/2022/120
+                Toast.makeText(UploadActivity.this, "Saved", Toast.LENGTH_SHORT).show(); // Displays a success message IM/2022/120
+                startActivity(new Intent(UploadActivity.this, MainActivity.class)); // Navigates back to the MainActivity IM/2022/120
+                finish(); // Closes the current activity IM/2022/120
+            }
+        }).addOnFailureListener(e -> {
+            dialog.dismiss(); // Dismisses the dialog on failure IM/2022/120
+            Toast.makeText(UploadActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show(); // Displays an error message IM/2022/120
+        });
     }
 }

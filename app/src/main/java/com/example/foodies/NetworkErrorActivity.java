@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.widget.Button;
 import android.widget.TextView;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 // IM/2021/007 - Activity to display a network error message and retry connection

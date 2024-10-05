@@ -1,56 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="@drawable/background_fill_2"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/background_fill_2"
     tools:context=".ViewOthersRecipeActivity">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="View Others Recipes"
-        android:textStyle="bold"
-        android:textColor="@color/black"
+        android:layout_marginStart="90dp"
         android:layout_marginTop="25dp"
         android:fontFamily="@font/poppins_medium"
+        android:text="View Others Recipes"
+        android:textColor="@color/black"
         android:textSize="23sp"
-        android:layout_marginStart="90dp" />
+        android:textStyle="bold" />
+
     <ImageView
         android:id="@+id/back"
         android:layout_width="45dp"
         android:layout_height="45dp"
-        android:layout_marginTop="20dp"
         android:layout_marginStart="10dp"
+        android:layout_marginTop="20dp"
         app:srcCompat="@drawable/baseline_arrow_back_24" />
 
     <androidx.appcompat.widget.SearchView
-        android:layout_marginTop="125dp"
-        android:gravity="center_horizontal"
+        android:id="@+id/searchOthers"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="60dp"
+        android:layout_marginTop="125dp"
         android:layout_marginEnd="50dp"
-        android:id="@+id/searchOthers"
-        app:iconifiedByDefault="false"
-        app:searchHintIcon="@drawable/baseline_search_24"
-        app:queryHint="Search..."
-        android:focusable="false"
         android:background="@drawable/text_bg"
+        android:focusable="false"
+        android:gravity="center_horizontal"
         app:closeIcon="@drawable/baseline_close_24"
+        app:iconifiedByDefault="false"
+        app:queryHint="Search..."
+        app:searchHintIcon="@drawable/baseline_search_24"
         app:searchIcon="@drawable/baseline_search_24" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
-        android:textAlignment="center"
         android:layout_marginTop="70dp"
         android:fontFamily="@font/poppins_medium"
         android:text="Explore Delicious Recipes Shared by Others!"
+        android:textAlignment="center"
         android:textColor="@color/black"
         android:textSize="18sp" />
 
@@ -58,64 +58,64 @@
     <ImageView
         android:layout_width="45dp"
         android:layout_height="45dp"
-        android:src="@drawable/logo_1"
+        android:layout_marginStart="345dp"
         android:layout_marginTop="15dp"
-        android:layout_marginStart="345dp"/>
+        android:src="@drawable/logo_1" />
 
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/recyclerView"
-        android:scrollbars="vertical"
+        android:layout_below="@+id/searchOthers"
         android:layout_margin="5dp"
-        android:layout_below="@+id/searchOthers"/>
+        android:scrollbars="vertical" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabFav"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/fabFav"
-        android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
+        android:layout_alignParentBottom="true"
         android:layout_marginStart="55dp"
         android:layout_marginBottom="50dp"
-        android:src="@drawable/baseline_bookmark_24"
         android:backgroundTint="#82E451"
-        android:tint="@color/white"/>
+        android:src="@drawable/baseline_bookmark_24"
+        android:tint="@color/white" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabProfile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/fabProfile"
-        android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
+        android:layout_alignParentBottom="true"
         android:layout_marginStart="136dp"
         android:layout_marginBottom="50dp"
-        android:src="@drawable/baseline_person_24"
         android:backgroundTint="#82E451"
-        android:tint="@color/white"/>
+        android:src="@drawable/baseline_person_24"
+        android:tint="@color/white" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabAdd"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/fabAdd"
-        android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
+        android:layout_alignParentBottom="true"
         android:layout_marginStart="217dp"
         android:layout_marginBottom="50dp"
-        android:src="@drawable/baseline_add_24"
         android:backgroundTint="#82E451"
-        android:tint="@color/white"/>
+        android:src="@drawable/baseline_add_24"
+        android:tint="@color/white" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabHome"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/fabHome"
-        android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
         android:layout_marginEnd="55dp"
         android:layout_marginBottom="50dp"
-        android:src="@drawable/baseline_home_24"
         android:backgroundTint="#82E451"
-        android:tint="@color/white"/>
+        android:src="@drawable/baseline_home_24"
+        android:tint="@color/white" />
 </RelativeLayout>

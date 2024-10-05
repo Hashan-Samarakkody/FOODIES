@@ -4,9 +4,11 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+
 import androidx.appcompat.app.AppCompatActivity;
 
-@SuppressLint("CustomSplashScreen") // Suppresses lint warning for custom splash screen usage IM/2022/070
+@SuppressLint("CustomSplashScreen")
+// Suppresses lint warning for custom splash screen usage IM/2022/070
 public class SplashActivity extends AppCompatActivity {
 
     final int DELAY = 1500; // Delay in milliseconds IM/2022/070

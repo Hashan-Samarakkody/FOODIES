@@ -1,68 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    app:cardElevation="8dp"
-    app:cardBackgroundColor="@color/white">
+    app:cardBackgroundColor="@color/white"
+    app:cardElevation="8dp">
 
     <LinearLayout
-        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:orientation="vertical"
         android:padding="10dp">
 
         <LinearLayout
-            android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center_vertical">
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
 
             <ImageView
-                android:src="@drawable/baseline_warning_24"
                 android:layout_width="40dp"
-                android:layout_height="40dp"/>
+                android:layout_height="40dp"
+                android:src="@drawable/baseline_warning_24" />
 
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:textAlignment="center"
-                android:text="Do you want to log out from this account?"
-                android:textSize="16sp"
                 android:fontFamily="@font/poppins_medium"
-                android:textStyle="bold"
-                android:textColor="@color/black"/>
+                android:text="Do you want to log out from this account?"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:textStyle="bold" />
         </LinearLayout>
 
         <LinearLayout
-            android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center">
+            android:gravity="center"
+            android:orientation="horizontal">
 
             <Button
                 android:id="@+id/button_no"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/poppins_medium"
-                android:textStyle="bold"
-                android:textSize="15sp"
-                android:layout_marginEnd="16dp"
                 android:layout_marginStart="26dp"
+                android:layout_marginEnd="16dp"
                 android:backgroundTint="#313131"
-                android:text="No" />
+                android:fontFamily="@font/poppins_medium"
+                android:text="No"
+                android:textSize="15sp"
+                android:textStyle="bold" />
 
             <Button
                 android:id="@+id/button_yes"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/poppins_medium"
-                android:textStyle="bold"
-                android:textSize="15sp"
                 android:backgroundTint="#FF7700"
-                android:text="Yes" />
+                android:fontFamily="@font/poppins_medium"
+                android:text="Yes"
+                android:textSize="15sp"
+                android:textStyle="bold" />
         </LinearLayout>
     </LinearLayout>
 </androidx.cardview.widget.CardView>
