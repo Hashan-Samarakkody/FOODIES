@@ -20,21 +20,26 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-// Interface for the callback to retrieve average rating
+// IM/2021/007 - Interface for callback to get average rating
 interface OnAverageRatingReceivedListener {
     void onAverageRatingReceived(float averageRating);
 }
 
+// IM/2021/007 - Adapter class for displaying others' recipes in a RecyclerView
 public class ViewOthersRecipeAdapter extends RecyclerView.Adapter<ViewOthersViewHolder> {
 
+    // IM/2021/007 - Context for accessing resources and starting activities
     final Context context;
+    // IM/2021/007 - List to hold recipe data
     private List<DataClass> dataList;
 
+    // IM/2021/007 - Constructor to initialize context and data list
     public ViewOthersRecipeAdapter(Context context, List<DataClass> dataList) {
         this.context = context;
         this.dataList = dataList;
     }
 
+    // IM/2021/007 - Inflate the layout for each item in the RecyclerView
     @NonNull
     @Override
     public ViewOthersViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -42,33 +47,35 @@ public class ViewOthersRecipeAdapter extends RecyclerView.Adapter<ViewOthersView
         return new ViewOthersViewHolder(view);
     }
 
+    // IM/2021/007 - Bind data to the views in each item of the RecyclerView
     @Override
     public void onBindViewHolder(@NonNull ViewOthersViewHolder holder, int position) {
         DataClass data = dataList.get(position);
 
-        // Load image using Glide
+        // IM/2021/007 - Load recipe image using Glide
         Glide.with(context)
                 .load(data.getDataImage())
                 .placeholder(R.drawable.r_2) // Optional: add a placeholder image
                 .into(holder.recImage);
 
-        // Set text views
+        // IM/2021/007 - Set recipe title and cooking time text
         holder.recTitle.setText(data.getDataName());
         holder.recTime.setText(data.getDataTime());
 
-        // Fetch average rating and set it to the rating bar
+        // IM/2021/007 - Fetch average rating for the recipe and update the RatingBar
         getAverageRating(data.getKey(), averageRating -> {
-            if(averageRating>4){
+            // IM/2021/007 - Cap the rating at 4 if it's higher than 4
+            if (averageRating > 4) {
                 holder.recRatingbar.setRating(4);
-            }else{
-                holder.recRatingbar.setRating(averageRating);
+            } else {
+                holder.recRatingbar.setRating(averageRating); // Set the average rating
             }
-
         });
 
-        // Set click listener
+        // IM/2021/007 - Set click listener to navigate to recipe detail activity
         holder.recCard.setOnClickListener(view -> {
             Intent intent = new Intent(context, OthersRecipeDetailActivity.class);
+            // IM/2021/007 - Pass recipe data to the detail activity
             intent.putExtra("Image", data.getDataImage());
             intent.putExtra("Name", data.getDataName());
             intent.putExtra("Time", data.getDataTime());
@@ -79,30 +86,36 @@ public class ViewOthersRecipeAdapter extends RecyclerView.Adapter<ViewOthersView
             intent.putExtra("Owner", data.getOwner());
             intent.putExtra("Video", data.getDataVideo());
 
-            context.startActivity(intent);
+            context.startActivity(intent); // Start the detail activity
         });
     }
 
+    // IM/2021/007 - Return the total number of items in the data list
     @Override
     public int getItemCount() {
         return dataList.size();
     }
 
-    // Method to fetch average rating from the database
+    // IM/2021/007 - Method to fetch average rating from the database
     public void getAverageRating(String recipeKey, OnAverageRatingReceivedListener listener) {
-        DatabaseReference ratingsRef = FirebaseDatabase.getInstance().getReference("Recipes").child(recipeKey).child("ratings");
+        DatabaseReference ratingsRef = FirebaseDatabase.getInstance().getReference("Recipes").child(recipeKey)
+                .child("ratings");
 
+        // IM/2021/007 - Listen for changes in the ratings data
         ratingsRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 List<Float> ratingsList = new ArrayList<>();
+                // IM/2021/007 - Collect ratings from the snapshot
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    OthersRecipeDetailActivity.RatingData ratingData = snapshot.getValue(OthersRecipeDetailActivity.RatingData.class);
+                    OthersRecipeDetailActivity.RatingData ratingData = snapshot
+                            .getValue(OthersRecipeDetailActivity.RatingData.class);
                     if (ratingData != null) {
                         ratingsList.add(ratingData.rating);
                     }
                 }
                 float averageRating = 0;
+                // IM/2021/007 - Calculate average rating if ratings exist
                 if (!ratingsList.isEmpty()) {
                     float total = 0;
                     for (float rating : ratingsList) {
@@ -110,9 +123,10 @@ public class ViewOthersRecipeAdapter extends RecyclerView.Adapter<ViewOthersView
                     }
                     averageRating = roundToFirstDecimal(total / ratingsList.size());
                 }
-                listener.onAverageRatingReceived(averageRating);
+                listener.onAverageRatingReceived(averageRating); // Return the average rating
             }
 
+            // IM/2021/007 - Handle errors by returning a default rating of 0
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
                 listener.onAverageRatingReceived(0); // Return 0 if there was an error
@@ -120,24 +134,28 @@ public class ViewOthersRecipeAdapter extends RecyclerView.Adapter<ViewOthersView
         });
     }
 
-    // Method to round the rating to the first decimal place
+    // IM/2021/007 - Method to round the rating to the first decimal place
     private float roundToFirstDecimal(float rating) {
         return (float) (Math.round(rating * 10)) / 10; // Round to the first decimal
     }
 
+    // IM/2021/007 - Update the data list with search results and refresh the
+    // RecyclerView
     public void searchDataList(ArrayList<DataClass> searchList) {
         dataList = searchList;
-        notifyDataSetChanged();
+        notifyDataSetChanged(); // Notify the adapter to refresh the view
     }
 }
 
+// IM/2021/007 - ViewHolder class to hold the UI components for each recipe item
 class ViewOthersViewHolder extends RecyclerView.ViewHolder {
 
-    ImageView recImage;
-    TextView recTitle, recTime;
-    CardView recCard;
-    RatingBar recRatingbar;
+    ImageView recImage; // IM/2021/007 - ImageView for displaying recipe image
+    TextView recTitle, recTime; // IM/2021/007 - TextViews for recipe title and time
+    CardView recCard; // IM/2021/007 - CardView to hold the recipe item
+    RatingBar recRatingbar; // IM/2021/007 - RatingBar for displaying the recipe rating
 
+    // IM/2021/007 - Constructor to initialize UI components
     public ViewOthersViewHolder(@NonNull View itemView) {
         super(itemView);
 
@@ -145,6 +163,6 @@ class ViewOthersViewHolder extends RecyclerView.ViewHolder {
         recTitle = itemView.findViewById(R.id.otherRecTitle);
         recTime = itemView.findViewById(R.id.otherRecTime);
         recCard = itemView.findViewById(R.id.otherRecCard);
-        recRatingbar = itemView.findViewById(R.id.recRatingBar); // Ensure this view is initialized
+        recRatingbar = itemView.findViewById(R.id.recRatingBar); // Initialize RatingBar
     }
 }
