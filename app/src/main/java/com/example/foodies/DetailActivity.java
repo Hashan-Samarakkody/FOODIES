@@ -161,7 +161,7 @@ public class DetailActivity extends AppCompatActivity {
                 "Category: " + detailCategory.getText().toString() + "\n" +
                 "Ingredients: " + detailIngredients.getText().toString() + "\n\n" +
                 "Description: " + detailDesc.getText().toString() + "\n\n" +
-                "Click here to view image: " + imageUrl + "\n" +
+                "Click here to view image: " + imageUrl + "\n\n" +
                 "Watch video: " + videoUrl; // Optionally include video URL
 
         Intent shareIntent = new Intent(Intent.ACTION_SEND);

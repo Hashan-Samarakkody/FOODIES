@@ -151,7 +151,7 @@ public class UpdateActivity extends AppCompatActivity {
             StorageReference imageRef = storageReference.child("Android Images").child(imageFileName);
             imageRef.putFile(newImageUri).addOnSuccessListener(taskSnapshot -> imageRef.getDownloadUrl().addOnSuccessListener(uri -> {
                 imageUrl = uri.toString(); // Get the download URL
-                uploadVideo(dialog, storageReference, videoFileName); // Proceed to upload video
+                uploadVideo(dialog, storageReference, videoFileName);// Proceed to upload video
             }).addOnFailureListener(e -> {
                 Toast.makeText(UpdateActivity.this, "Failed to get image URL", Toast.LENGTH_SHORT).show();
                 dialog.dismiss();
@@ -171,7 +171,8 @@ public class UpdateActivity extends AppCompatActivity {
             StorageReference videoRef = storageReference.child("Android Videos").child(videoFileName);
             videoRef.putFile(newVideoUri).addOnSuccessListener(taskSnapshot -> videoRef.getDownloadUrl().addOnSuccessListener(uri -> {
                 videoUrl = uri.toString(); // Get the download URL
-                updateData(dialog); // Proceed to update the database
+                updateData(dialog);
+                dialog.dismiss();
             }).addOnFailureListener(e -> {
                 Toast.makeText(UpdateActivity.this, "Failed to get video URL", Toast.LENGTH_SHORT).show();
                 dialog.dismiss();
@@ -199,30 +200,27 @@ public class UpdateActivity extends AppCompatActivity {
         // Validate the data using DataClass methods
         if (!dataClass.isValidTime(time)) {
             Toast.makeText(this, "Invalid Time Format!", Toast.LENGTH_SHORT).show();
-            dialog.dismiss();
-            return;
+            dialog.dismiss(); // Dismiss the dialog here
         } else if (!dataClass.isValidName(name)) {
             Toast.makeText(this, "Invalid Name!", Toast.LENGTH_SHORT).show();
-            dialog.dismiss();
-            return;
+            dialog.dismiss(); // Dismiss the dialog here
         } else if (!dataClass.isValidCategory(category)) {
-            Toast.makeText(this, "Invalid Category!", Toast.LENGTH_SHORT).show();
-            dialog.dismiss();
-            return;
+            Toast.makeText(this, "Invalid Category", Toast.LENGTH_SHORT).show();
+            dialog.dismiss(); // Dismiss the dialog here
+        } else {
+            // Update the database
+            databaseReference.setValue(dataClass).addOnCompleteListener(task -> {
+                dialog.dismiss(); // Dismiss the dialog here as well
+                if (task.isSuccessful()) {
+                    Toast.makeText(UpdateActivity.this, "Updated Successfully", Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(UpdateActivity.this, MainActivity.class));
+                    finish();
+                } else {
+                    Toast.makeText(UpdateActivity.this, "Update Failed", Toast.LENGTH_SHORT).show();
+                }
+            });
         }
-
-        // Update the database
-        databaseReference.setValue(dataClass).addOnCompleteListener(task -> {
-            if (task.isSuccessful()) {
-                Toast.makeText(UpdateActivity.this, "Updated Successfully", Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(UpdateActivity.this, MainActivity.class));
-                dialog.dismiss();
-                finish();
-            } else {
-                Toast.makeText(UpdateActivity.this, "Update Failed", Toast.LENGTH_SHORT).show();
-                dialog.dismiss();
-            }
-        });
     }
+
 }
 

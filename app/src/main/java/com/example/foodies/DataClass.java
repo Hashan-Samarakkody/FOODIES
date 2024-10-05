@@ -78,11 +78,22 @@ public class DataClass {
 
 
     public boolean isValidTime(String time) {
+        // First, check if it matches the pattern
         if (!TIME_PATTERN.matcher(time).matches()) {
             return false;
         }
 
-        if (time.contains("h")) {
+        // Ensure that the string contains either "h" or "min"
+        boolean containsHours = time.contains("h");
+        boolean containsMinutes = time.contains("min");
+
+        // If it doesn't contain either, return false
+        if (!containsHours && !containsMinutes) {
+            return false;
+        }
+
+        // Time validation logic
+        if (containsHours) {
             String[] parts = time.split("h");
             int hours = Integer.parseInt(parts[0].trim());
 
@@ -92,27 +103,31 @@ public class DataClass {
             } else if (parts[1].contains("min")) {
                 String[] minutesPart = parts[1].split("min");
                 int minutes = Integer.parseInt(minutesPart[0].trim());
-                return (hours >= 0 && hours <= 24 && minutes >= 0 && minutes <= 60);
+                return (hours >= 0 && hours < 24 && minutes >= 0 && minutes < 60);
             }
-        } else if (time.contains("min")) {
+        }
+
+        if (containsMinutes) {
             String[] parts = time.split("min");
             int minutes = Integer.parseInt(parts[0].trim());
             return (minutes >= 0 && minutes < 60);
-        } else {
-            String[] parts = time.split("-");
-            if (parts.length == 2) {
-                // Validate hour and minute
-                int hours = Integer.parseInt(parts[0].trim());
-                int minutes = Integer.parseInt(parts[1].trim());
-                return (hours >= 0 && hours < 24 && minutes >= 0 && minutes <= 60);
-            } else if (parts.length == 1) {
-                // Validate if only hours are present
-                int hours = Integer.parseInt(parts[0].trim());
-                return (hours >= 0 && hours <= 24);
-            }
         }
+
+        String[] parts = time.split("-");
+        if (parts.length == 2) {
+            // Validate hour and minute
+            int hours = Integer.parseInt(parts[0].trim());
+            int minutes = Integer.parseInt(parts[1].trim());
+            return (hours >= 0 && hours < 24 && minutes >= 0 && minutes < 60);
+        } else if (parts.length == 1) {
+            // Validate if only hours are present
+            int hours = Integer.parseInt(parts[0].trim());
+            return (hours >= 0 && hours < 24);
+        }
+
         return false;
     }
+
 
     public boolean isValidName(String name) {
         return NAME_PATTERN.matcher(name).matches();

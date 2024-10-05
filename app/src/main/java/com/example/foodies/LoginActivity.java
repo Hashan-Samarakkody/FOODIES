@@ -11,8 +11,10 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+
 import com.developer.gbuttons.GoogleSignInButton;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -84,10 +86,9 @@ public class LoginActivity extends AppCompatActivity {
                 etEmail.setError("Email required!");
             } else if (userPassword.isEmpty()) {
                 etPassword.setError("Password required!");
-            } else if(!Patterns.EMAIL_ADDRESS.matcher(userEmail).matches()){
+            } else if (!Patterns.EMAIL_ADDRESS.matcher(userEmail).matches()) {
                 etEmail.setError("Invalid Email");
-            }
-            else {
+            } else {
                 // Save the email and password in SharedPreferences
                 SharedPreferences.Editor editor = sharedPreferences.edit();
                 editor.putString(EMAIL_KEY, userEmail);
@@ -124,7 +125,7 @@ public class LoginActivity extends AppCompatActivity {
         googleBtn.setOnClickListener(view -> signIn());
 
         forgotPassword.setOnClickListener(view -> {
-            startActivity(new Intent(LoginActivity.this,ForgotPasswordActivity.class));
+            startActivity(new Intent(LoginActivity.this, ForgotPasswordActivity.class));
             finish();
         });
     }

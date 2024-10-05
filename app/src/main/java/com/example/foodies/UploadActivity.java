@@ -8,15 +8,18 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
+
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+
 import java.util.Objects;
 
 public class UploadActivity extends AppCompatActivity {
@@ -26,6 +29,7 @@ public class UploadActivity extends AppCompatActivity {
     EditText uploadName, uploadCategory, uploadTime, uploadIngredients, uploadDescription;
     String imageURL, videoURL;
     Uri imageUri, videoUri;
+    AlertDialog dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +46,12 @@ public class UploadActivity extends AppCompatActivity {
         uploadDescription = findViewById(R.id.uploadDescription);
         save_button = findViewById(R.id.saveButton);
         uploadVideoButton = findViewById(R.id.uploadVideo); // Add video upload button
+
+        // Initialize the progress dialog
+        AlertDialog.Builder builder = new AlertDialog.Builder(UploadActivity.this);
+        builder.setCancelable(false);
+        builder.setView(R.layout.progress_layout);
+        dialog = builder.create();
 
         // Image selection
         ActivityResultLauncher<Intent> imageActivityResultLauncher = registerForActivityResult(
@@ -118,11 +128,7 @@ public class UploadActivity extends AppCompatActivity {
         String videoFileName = "video_" + System.currentTimeMillis() + "_" + Objects.requireNonNull(videoUri.getLastPathSegment());
         StorageReference storageReference = FirebaseStorage.getInstance().getReference();
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(UploadActivity.this);
-        builder.setCancelable(false);
-        builder.setView(R.layout.progress_layout);
-        AlertDialog dialog = builder.create();
-        dialog.show();
+        dialog.show(); // Show the progress dialog before starting uploads
 
         // Upload image
         StorageReference imageRef = storageReference.child("Android Images").child(imageFileName);
@@ -133,15 +139,14 @@ public class UploadActivity extends AppCompatActivity {
             StorageReference videoRef = storageReference.child("Android Videos").child(videoFileName);
             videoRef.putFile(videoUri).addOnSuccessListener(taskSnapshot1 -> videoRef.getDownloadUrl().addOnSuccessListener(uri1 -> {
                 videoURL = uri1.toString();
-                uploadData();
-                dialog.dismiss();
+                uploadData(); // Call uploadData without dialog parameter
             })).addOnFailureListener(e -> {
                 Toast.makeText(UploadActivity.this, "Failed to upload video: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-                dialog.dismiss();
+                dialog.dismiss(); // Dismiss on failure
             });
         })).addOnFailureListener(e -> {
             Toast.makeText(UploadActivity.this, "Failed to upload image: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-            dialog.dismiss();
+            dialog.dismiss(); // Dismiss on failure
         });
     }
 
@@ -155,22 +160,34 @@ public class UploadActivity extends AppCompatActivity {
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
         DataClass dataClass = new DataClass(name, category, time, ingredients, description, imageURL, videoURL, currentUser.getUid());
 
+        // Validate the data using DataClass methods
         if (!dataClass.isValidTime(time)) {
             Toast.makeText(this, "Invalid Time Format!", Toast.LENGTH_SHORT).show();
+            dialog.dismiss(); // Dismiss the dialog here
+            return;  // Exit the method after dismissing
         } else if (!dataClass.isValidName(name)) {
             Toast.makeText(this, "Invalid Name!", Toast.LENGTH_SHORT).show();
+            dialog.dismiss(); // Dismiss the dialog here
+            return;  // Exit the method after dismissing
         } else if (!dataClass.isValidCategory(category)) {
-            Toast.makeText(this, "Invalid Category", Toast.LENGTH_SHORT).show();
-        } else {
-            String recipeId = FirebaseDatabase.getInstance().getReference("Recipes").push().getKey();
-            FirebaseDatabase.getInstance().getReference("Recipes").child(recipeId).setValue(dataClass)
-                    .addOnCompleteListener(task -> {
-                        if (task.isSuccessful()) {
-                            Toast.makeText(UploadActivity.this, "Saved", Toast.LENGTH_SHORT).show();
-                            startActivity(new Intent(UploadActivity.this,MainActivity.class));
-                            finish();
-                        }
-                    }).addOnFailureListener(e -> Toast.makeText(UploadActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show());
+            Toast.makeText(this, "Invalid Category!", Toast.LENGTH_SHORT).show();
+            dialog.dismiss(); // Dismiss the dialog here
+            return;  // Exit the method after dismissing
         }
+
+        // If all validations pass, proceed to upload the data
+        String recipeId = FirebaseDatabase.getInstance().getReference("Recipes").push().getKey();
+        FirebaseDatabase.getInstance().getReference("Recipes").child(recipeId).setValue(dataClass)
+                .addOnCompleteListener(task -> {
+                    dialog.dismiss(); // Dismiss the dialog here as well
+                    if (task.isSuccessful()) {
+                        Toast.makeText(UploadActivity.this, "Saved", Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(UploadActivity.this, MainActivity.class));
+                        finish();
+                    }
+                }).addOnFailureListener(e -> {
+                    dialog.dismiss(); // Dismiss the dialog on failure as well
+                    Toast.makeText(UploadActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                });
     }
 }
