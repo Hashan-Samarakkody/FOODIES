@@ -1,30 +1,37 @@
+// Done by IM/2021/120 - Rajapaksha.L.S
 package com.example.foodies;
 
 import java.util.regex.Pattern;
 
 public class DataClass {
-    private String dataName;
-    private String dataCategory;
-    private String dataTime;
-    private String dataIngredients;
-    private String dataDescription;
-    private String dataImage;
-    private String dataVideo;
-    private String key;
-    private String owner;
+    // Instance variables to hold data about a food item
+    private String dataName;        // Name of the food item
+    private String dataCategory;    // Category of the food item (e.g., dessert, main course)
+    private String dataTime;        // Time required to prepare the food item
+    private String dataIngredients;  // Ingredients required for the food item
+    private String dataDescription;  // Description of the food item
+    private String dataImage;        // URL or path of the food item's image
+    private String dataVideo;        // URL or path of the food item's video
+    private String key;              // Unique key for the food item (e.g., database ID)
+    private String owner;            // Owner of the food item (e.g., creator or uploader)
 
-    // Updated patterns to allow special characters in name and category
+    // Regex patterns for validating input data
+    // TIME_PATTERN: matches valid time formats
     private static final Pattern TIME_PATTERN = Pattern.compile(
             "^(\\d{1,2}h\\s*\\d{1,2}min|\\d{1,2}h|\\d{1,2}min|\\d{1,2}-\\d{1,2}|\\d{1,2})$"
     );
-    private static final Pattern NAME_PATTERN = Pattern.compile("^[a-zA-Z\\s\\W]+$"); // Allow special chars
-    private static final Pattern CATEGORY_PATTERN = Pattern.compile("^[a-zA-Z\\s\\W]+$"); // Allow special chars
+    // NAME_PATTERN: allows letters, spaces, and special characters in names
+    private static final Pattern NAME_PATTERN = Pattern.compile("^[a-zA-Z\\s\\W]+$");
+    // CATEGORY_PATTERN: allows letters, spaces, and special characters in categories
+    private static final Pattern CATEGORY_PATTERN = Pattern.compile("^[a-zA-Z\\s\\W]+$");
 
+    // Default constructor
     public DataClass() {
     }
 
-    // Parameterized constructor
-    public DataClass(String dataName, String dataCategory, String dataTime, String dataIngredients, String dataDescription, String dataImage,String dataVideo, String owner) {
+    // Parameterized constructor to initialize all fields
+    public DataClass(String dataName, String dataCategory, String dataTime, String dataIngredients,
+                     String dataDescription, String dataImage, String dataVideo, String owner) {
         this.dataName = dataName;
         this.dataCategory = dataCategory;
         this.dataTime = dataTime;
@@ -35,7 +42,7 @@ public class DataClass {
         this.owner = owner;
     }
 
-    // Getters
+    // Getters for accessing private fields
     public String getDataName() {
         return dataName;
     }
@@ -72,18 +79,19 @@ public class DataClass {
         return owner;
     }
 
+    // Setter for the key field
     public void setKey(String key) {
         this.key = key;
     }
 
-
+    // Method to validate time input
     public boolean isValidTime(String time) {
-        // First, check if it matches the pattern
+        // Check if the time string matches the defined pattern
         if (!TIME_PATTERN.matcher(time).matches()) {
-            return false;
+            return false; // Invalid format
         }
 
-        // Ensure that the string contains either "h" or "min"
+        // Ensure that the time contains either "h" or "min"
         boolean containsHours = time.contains("h");
         boolean containsMinutes = time.contains("min");
 
@@ -113,6 +121,7 @@ public class DataClass {
             return (minutes >= 0 && minutes < 60);
         }
 
+        // Check for time ranges like "1-30"
         String[] parts = time.split("-");
         if (parts.length == 2) {
             // Validate hour and minute
@@ -125,14 +134,15 @@ public class DataClass {
             return (hours >= 0 && hours < 24);
         }
 
-        return false;
+        return false; // Time format is invalid
     }
 
-
+    // Method to validate food name input
     public boolean isValidName(String name) {
         return NAME_PATTERN.matcher(name).matches();
     }
 
+    // Method to validate food category input
     public boolean isValidCategory(String category) {
         return CATEGORY_PATTERN.matcher(category).matches();
     }

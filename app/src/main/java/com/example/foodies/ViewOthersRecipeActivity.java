@@ -30,11 +30,13 @@ public class ViewOthersRecipeActivity extends AppCompatActivity {
     ValueEventListener eventListener;
     ViewOthersRecipeAdapter adapter;
     ImageView backIcon;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_others_recipe);
 
+// IM/2021/038 - Check if the user is logged in. If not, redirect to LoginActivity.
         if (FirebaseAuth.getInstance().getCurrentUser() == null) {
             startActivity(new Intent(this, LoginActivity.class));
             finish();
@@ -44,9 +46,11 @@ public class ViewOthersRecipeActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.recyclerView);
         backIcon = findViewById(R.id.back);
 
+// IM/2021/038 - Set up RecyclerView with a grid layout manager (1 column).
         GridLayoutManager gridLayoutManager = new GridLayoutManager(ViewOthersRecipeActivity.this, 1);
         recyclerView.setLayoutManager(gridLayoutManager);
 
+// IM/2021/038 - Create a loading dialog to show progress while data is being loaded.
         AlertDialog.Builder builder = new AlertDialog.Builder(ViewOthersRecipeActivity.this);
         builder.setCancelable(false);
         builder.setView(R.layout.progress_layout);
@@ -57,10 +61,11 @@ public class ViewOthersRecipeActivity extends AppCompatActivity {
         adapter = new ViewOthersRecipeAdapter(ViewOthersRecipeActivity.this, dataList);
         recyclerView.setAdapter(adapter);
 
-        // Set the database reference and listener
+// IM/2021/038 - Set up the database reference to fetch recipes from Firebase.
         String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
         databaseReference = FirebaseDatabase.getInstance().getReference("Recipes");
 
+// IM/2021/038 - Add a ValueEventListener to listen for data changes in Firebase.
         eventListener = databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -73,22 +78,26 @@ public class ViewOthersRecipeActivity extends AppCompatActivity {
                     }
                 }
                 adapter.notifyDataSetChanged();
-                dialog.dismiss();
+                dialog.dismiss();  // IM/2021/038 - Dismiss the loading dialog once data is loaded.
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
+                // IM/2021/038 - Dismiss the loading dialog if there is an error.
                 dialog.dismiss();
             }
         });
 
+// IM/2021/038 - Handle the back button click to return to the main activity.
         backIcon.setOnClickListener(view -> {
             startActivity(new Intent(ViewOthersRecipeActivity.this,MainActivity.class));
             finish();
         });
 
+
         searchView = findViewById(R.id.searchOthers);
         searchView.clearFocus();
+// IM/2021/038 - Set up search functionality to filter recipes based on query.
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -107,31 +116,36 @@ public class ViewOthersRecipeActivity extends AppCompatActivity {
         fabAdd = findViewById(R.id.fabAdd);
         fabProfile = findViewById(R.id.fabProfile);
 
+// IM/2021/038 - Redirect to SavedRecipesActivity when the Favourite button is clicked.
         fabFavourite.setOnClickListener(view -> {
             Intent intent = new Intent(ViewOthersRecipeActivity.this, SavedRecipesActivity.class);
             startActivity(intent);
             finish();
         });
 
+// IM/2021/038 - Redirect to MainActivity when the Home button is clicked.
         fabHome.setOnClickListener(view -> {
             Intent intent = new Intent(ViewOthersRecipeActivity.this, MainActivity.class);
             startActivity(intent);
             finish();
         });
 
+// IM/2021/038 - Redirect to UploadActivity when the Add button is clicked.
         fabAdd.setOnClickListener(view -> {
             Intent intent = new Intent(ViewOthersRecipeActivity.this, UploadActivity.class);
             startActivity(intent);
             finish();
         });
 
-
+// IM/2021/038 - Redirect to ProfileActivity when the Profile button is clicked.
         fabProfile.setOnClickListener(view -> {
             Intent intent = new Intent(ViewOthersRecipeActivity.this, ProfileActivity.class);
             startActivity(intent);
             finish();
         });
     }
+
+    // IM/2021/038 - Search the recipe list and filter based on the search query.
     public void searchList(String text) {
         ArrayList<DataClass> searchList = new ArrayList<>();
         for (DataClass dataClass : dataList) {
@@ -139,7 +153,8 @@ public class ViewOthersRecipeActivity extends AppCompatActivity {
                 searchList.add(dataClass);
             }
         }
-        // Check if adapter is not null before calling its method
+
+// IM/2021/038 - Update the adapter with the filtered search results.
         if (adapter != null) {
             adapter.searchDataList(searchList);
         }

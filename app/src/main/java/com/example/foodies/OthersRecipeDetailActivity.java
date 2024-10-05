@@ -22,7 +22,7 @@ import com.google.firebase.database.DatabaseError;
 
 public class OthersRecipeDetailActivity extends AppCompatActivity {
 
-    // Declare UI components
+    // Declare UI components IM/2021/038
     RatingBar ratingBar;
     PlayerView detailVideo;
     ExoPlayer player;
@@ -30,7 +30,7 @@ public class OthersRecipeDetailActivity extends AppCompatActivity {
     ImageView shareDataImage, backIcon, saveIcon;
     String key = "";
     String imageUrl = "";
-    String videoUrl = ""; // Variable for video URL
+    String videoUrl = ""; // Variable for video URL IM/2021/038
     FirebaseUser currentUser;
     DatabaseReference favoritesRef;
 
@@ -39,9 +39,9 @@ public class OthersRecipeDetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_others_recipe_detail);
 
-        // Initialize views
+        // Initialize views IM/2021/038
         detailVideo = findViewById(R.id.detailVideo);
-        ratingBar = findViewById(R.id.ratingBar); // Initialize the rating bar
+        ratingBar = findViewById(R.id.ratingBar); // Initialize the rating bar IM/2021/038
         shareDataImage = findViewById(R.id.shareData);
         backIcon = findViewById(R.id.back);
         saveIcon = findViewById(R.id.save);
@@ -61,23 +61,23 @@ public class OthersRecipeDetailActivity extends AppCompatActivity {
             detailDesc.setText(bundle.getString("Description"));
             key = bundle.getString("Key");
             imageUrl = bundle.getString("Image");
-            videoUrl = bundle.getString("Video"); // Get video URL
+            videoUrl = bundle.getString("Video"); // Get video URL IM/2021/038
 
             if (videoUrl != null && !videoUrl.isEmpty()) {
-                setupPlayer(Uri.parse(videoUrl)); // Setup player
+                setupPlayer(Uri.parse(videoUrl)); // Setup player IM/2021/038
             }
         }
 
         currentUser = FirebaseAuth.getInstance().getCurrentUser();
         favoritesRef = FirebaseDatabase.getInstance().getReference("Favorites").child(currentUser.getUid());
 
-        // Check if the recipe is already saved
+        // Check if the recipe is already saved IM/2021/038
         checkIfFavorite();
 
-        // Set up a listener for the recipe
+        // Set up a listener for the recipe IM/2021/038
         setupRecipeListener();
 
-        // Set click listeners
+        // Set click listeners IM/2021/038
         shareDataImage.setOnClickListener(view -> shareRecipe());
         backIcon.setOnClickListener(view -> {
             startActivity(new Intent(OthersRecipeDetailActivity.this, ViewOthersRecipeActivity.class));
@@ -85,10 +85,10 @@ public class OthersRecipeDetailActivity extends AppCompatActivity {
         });
         saveIcon.setOnClickListener(view -> toggleFavorite());
 
-        // Setup rating bar listener
+        // Setup rating bar listener IM/2021/038
         setupRatingBarListener();
 
-        // Load existing rating from the database
+        // Load existing rating from the database IM/2021/038
         loadExistingRating();
     }
 
@@ -107,16 +107,16 @@ public class OthersRecipeDetailActivity extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if (!dataSnapshot.exists()) {
-                    // Recipe has been deleted, remove from favorites and finish the activity
-                    favoritesRef.child(key).removeValue(); // Ensure it's removed from favorites
+                    // Recipe has been deleted, remove from favorites and finish the activity IM/2021/038
+                    favoritesRef.child(key).removeValue(); // Ensure it's removed from favorites IM/2021/038
                     Toast.makeText(OthersRecipeDetailActivity.this, "This recipe has been deleted.", Toast.LENGTH_SHORT).show();
-                    finish(); // Optionally finish the activity
+                    finish(); // Optionally finish the activity IM/2021/038
                 }
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-                // Handle possible errors
+                // Handle possible errors IM/2021/038
             }
         });
     }
@@ -124,9 +124,9 @@ public class OthersRecipeDetailActivity extends AppCompatActivity {
     private void checkIfFavorite() {
         favoritesRef.child(key).get().addOnCompleteListener(task -> {
             if (task.isSuccessful() && task.getResult().exists()) {
-                saveIcon.setImageResource(R.drawable.img_5_2); // Change to saved icon
+                saveIcon.setImageResource(R.drawable.img_5_2); // Change to saved icon IM/2021/038
             } else {
-                saveIcon.setImageResource(R.drawable.img_5); // Change to save icon
+                saveIcon.setImageResource(R.drawable.img_5); // Change to save icon IM/2021/038
             }
         });
     }
@@ -134,18 +134,18 @@ public class OthersRecipeDetailActivity extends AppCompatActivity {
     private void toggleFavorite() {
         favoritesRef.child(key).get().addOnCompleteListener(task -> {
             if (task.isSuccessful() && task.getResult().exists()) {
-                // Recipe is currently saved, so remove it
+                // Recipe is currently saved, so remove it IM/2021/038
                 favoritesRef.child(key).removeValue().addOnCompleteListener(removeTask -> {
                     if (removeTask.isSuccessful()) {
-                        saveIcon.setImageResource(R.drawable.img_5); // Change to save icon
+                        saveIcon.setImageResource(R.drawable.img_5); // Change to save icon IM/2021/038
                         Toast.makeText(OthersRecipeDetailActivity.this, "Removed from favorites", Toast.LENGTH_SHORT).show();
                     }
                 });
             } else {
-                // Recipe is not saved, so add it
+                // Recipe is not saved, so add it IM/2021/038
                 favoritesRef.child(key).setValue(true).addOnCompleteListener(addTask -> {
                     if (addTask.isSuccessful()) {
-                        saveIcon.setImageResource(R.drawable.img_5_2); // Change to saved icon
+                        saveIcon.setImageResource(R.drawable.img_5_2); // Change to saved icon IM/2021/038
                         Toast.makeText(OthersRecipeDetailActivity.this, "Saved to favorites", Toast.LENGTH_SHORT).show();
                     }
                 });
@@ -160,10 +160,10 @@ public class OthersRecipeDetailActivity extends AppCompatActivity {
                 "Category: " + detailCategory.getText().toString() + "\n" +
                 "Ingredients: " + detailIngredients.getText().toString() + "\n\n" +
                 "Description: " + detailDesc.getText().toString() + "\n\n" +
-                "Click here to view image: " + imageUrl; // Optionally include image URL
+                "Click here to view image: " + imageUrl; // Optionally include image URL IM/2021/038
 
         if (videoUrl != null && !videoUrl.isEmpty()) {
-            recipeDetails += "\nWatch video: " + videoUrl; // Optionally include video URL
+            recipeDetails += "\nWatch video: " + videoUrl; // Optionally include video URL IM/2021/038
         }
 
         Intent shareIntent = new Intent(Intent.ACTION_SEND);
@@ -173,11 +173,11 @@ public class OthersRecipeDetailActivity extends AppCompatActivity {
         startActivity(Intent.createChooser(shareIntent, "Share Recipe via"));
     }
 
-    // Rating functionality
+    // Rating functionality IM/2021/038
     private void setupRatingBarListener() {
         ratingBar.setOnRatingBarChangeListener((ratingBar, rating, fromUser) -> {
             if (fromUser) {
-                showSubmitRatingDialog(rating);
+                showSubmitRatingDialog(rating); // Show dialog for rating IM/2021/038
             }
         });
     }
@@ -185,12 +185,12 @@ public class OthersRecipeDetailActivity extends AppCompatActivity {
     private void showSubmitRatingDialog(float rating) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Submit Rating")
-                .setMessage("Are you sure you want to submit a rating of " + rating + " stars?")
+                .setMessage("Are you sure you want to submit a rating of " + rating + " stars?") // Confirm rating IM/2021/038
                 .setPositiveButton("Yes", (dialog, which) -> {
-                    submitRating(rating);
+                    submitRating(rating); // Submit the rating IM/2021/038
                 })
                 .setNegativeButton("No", (dialog, which) -> {
-                    // Reset rating if cancelled, but keep the current rating
+                    // Reset rating if cancelled, but keep the current rating IM/2021/038
                     loadExistingRating();
                 })
                 .show();
@@ -203,7 +203,7 @@ public class OthersRecipeDetailActivity extends AppCompatActivity {
             recipeRatingsRef.setValue(new RatingData(rating)).addOnCompleteListener(task -> {
                 if (task.isSuccessful()) {
                     Toast.makeText(OthersRecipeDetailActivity.this, "Rating submitted!", Toast.LENGTH_SHORT).show();
-                    ratingBar.setRating(rating); // Update the displayed rating
+                    ratingBar.setRating(rating); // Update the displayed rating IM/2021/038
                 } else {
                     Toast.makeText(OthersRecipeDetailActivity.this, "Failed to submit rating.", Toast.LENGTH_SHORT).show();
                 }
@@ -221,27 +221,27 @@ public class OthersRecipeDetailActivity extends AppCompatActivity {
                     if (dataSnapshot.exists()) {
                         RatingData ratingData = dataSnapshot.getValue(RatingData.class);
                         if (ratingData != null) {
-                            ratingBar.setRating(ratingData.rating); // Set the existing rating
+                            ratingBar.setRating(ratingData.rating); // Set the existing rating IM/2021/038
                         }
                     } else {
-                        ratingBar.setRating(0); // No existing rating
+                        ratingBar.setRating(0); // No existing rating IM/2021/038
                     }
                 }
 
                 @Override
                 public void onCancelled(DatabaseError databaseError) {
-                    // Handle possible errors
+                    // Handle possible errors IM/2021/038
                 }
             });
         }
     }
 
-    // This is a simple model for storing ratings
+    // This is a simple model for storing ratings IM/2021/038
     public static class RatingData {
         public float rating;
 
         public RatingData() {
-            // Default constructor required for calls to DataSnapshot.getValue(RatingData.class)
+            // Default constructor required for calls to DataSnapshot.getValue(RatingData.class) IM/2021/038
         }
 
         public RatingData(float rating) {
@@ -254,7 +254,7 @@ public class OthersRecipeDetailActivity extends AppCompatActivity {
         super.onStop();
         if (player != null) {
             player.release();
-            player = null;
+            player = null; // Release player resources IM/2021/038
         }
     }
 }
