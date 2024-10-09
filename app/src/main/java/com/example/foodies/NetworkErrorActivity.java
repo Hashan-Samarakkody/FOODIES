@@ -11,9 +11,6 @@ import androidx.appcompat.app.AppCompatActivity;
 // IM/2021/007 - Activity to display a network error message and retry connection
 public class NetworkErrorActivity extends AppCompatActivity {
 
-    // IM/2021/007 - Delay time for checking network connection in milliseconds
-    private final int CHECK_DELAY = 2000;
-
     // IM/2021/007 - Create the activity and set up UI elements
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +33,8 @@ public class NetworkErrorActivity extends AppCompatActivity {
 
     // IM/2021/007 - Method to check internet connection and proceed if available
     private void checkConnectionAndProceed() {
+        // IM/2021/007 - Delay time for checking network connection in milliseconds
+        int CHECK_DELAY = 2000;
         new Handler().postDelayed(() -> {
             // IM/2021/007 - Check if internet is available using a utility method
             if (NetworkUtils.isInternetAvailable(NetworkErrorActivity.this)) {

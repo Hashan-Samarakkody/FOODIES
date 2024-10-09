@@ -2,7 +2,6 @@ package com.example.foodies;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View; // Added import for View
 import android.widget.ImageView;
 import android.widget.Toast;
 
