@@ -13,6 +13,6 @@
         android:id="@+id/imageView"
         android:layout_width="343dp"
         android:layout_height="336dp"
-        app:srcCompat="@drawable/logo_without_backgound" />
+        app:srcCompat="@drawable/logo_without_background" />
 
 </RelativeLayout>
