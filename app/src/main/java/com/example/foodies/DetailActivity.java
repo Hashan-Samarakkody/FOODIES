@@ -174,7 +174,14 @@ public class DetailActivity extends AppCompatActivity {
 
     // IM/2021/116 Method to share the recipe details via other apps
     private void shareRecipe() {
-        String recipeDetails = "Check out this recipe:\n\n" + "Name: " + detailName.getText().toString() + "\n\n" + "Time: " + detailTime.getText().toString() + "\n\n" + "Category: " + detailCategory.getText().toString() + "\n\n" + "Ingredients: " + detailIngredients.getText().toString() + "\n\n" + "Description: " + detailDesc.getText().toString() + "\n\n" + "Click here to view image: " + imageUrl + "\n\n" + "Watch video: " + videoUrl; // IM/2021/116 Optionally include video URL
+        String recipeDetails = "Check out this recipe:\n\n" +
+                "Name: " + detailName.getText().toString() + "\n\n" +
+                "Time: " + detailTime.getText().toString() + "\n\n" +
+                "Category: " + detailCategory.getText().toString() + "\n\n" +
+                "Ingredients: " +detailIngredients.getText().toString() + "\n\n" +
+                "Description: " + detailDesc.getText().toString() + "\n\n" +
+                "Click here to view image: " + imageUrl + "\n\n" +
+                "Watch video: " + videoUrl; // IM/2021/116 Optionally include video URL
 
         Intent shareIntent = new Intent(Intent.ACTION_SEND); // IM/2021/116 Create share intent
         shareIntent.setType("text/plain");
