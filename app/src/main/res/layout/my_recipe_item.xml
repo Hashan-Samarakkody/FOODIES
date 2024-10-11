@@ -58,7 +58,6 @@
             android:layout_marginStart="32dp"
             android:layout_marginBottom="7dp"
             android:fontFamily="@font/poppins_medium"
-            android:maxLength="7"
             android:text="30 mins"
             android:textColor="@color/white"
             android:textSize="11sp"
@@ -67,13 +66,13 @@
 
         <RatingBar
             android:id="@+id/recRatingBar"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="105dp"
+            android:layout_marginTop="115dp"
             android:isIndicator="true"
             android:numStars="4"
-            android:scaleX="0.4"
-            android:scaleY="0.4"
+            android:scaleX="0.35"
+            android:scaleY="0.35"
             android:stepSize="0.1"
             android:theme="@style/RatingBar" />
 
