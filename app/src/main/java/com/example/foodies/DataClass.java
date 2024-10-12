@@ -23,6 +23,7 @@ public class DataClass {
     // CATEGORY_PATTERN: allows letters, spaces, and special characters in categories
     private static final Pattern CATEGORY_PATTERN = Pattern.compile("^[a-zA-Z\\s\\W]+$");
 
+
     // Default constructor
     public DataClass() {
     }

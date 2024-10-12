@@ -1,6 +1,8 @@
 package com.example.foodies;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Patterns;
 import android.widget.Button;
@@ -22,6 +24,9 @@ import com.google.firebase.database.FirebaseDatabase;
  */
 
 public class RegisterActivity extends AppCompatActivity {
+
+    final String SHARED_PREFS = "shared_prefs";
+
     // UI components
     EditText emailInput, passwordInput, nameInput;
     Button registerButton;
@@ -70,6 +75,11 @@ public class RegisterActivity extends AppCompatActivity {
                     String userId = auth.getCurrentUser().getUid(); // Get unique user ID from Firebase
                     databaseReference.child(userId).setValue(user)
                             .addOnSuccessListener(aVoid -> {
+                                SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE); // Clear shared preferences
+                                SharedPreferences.Editor editor = sharedPreferences.edit();
+                                editor.clear();
+                                editor.apply();
+
                                 Toast.makeText(RegisterActivity.this, "User Registered Successfully!", Toast.LENGTH_SHORT).show();
                                 // Redirect to login screen after successful registration
                                 startActivity(new Intent(RegisterActivity.this, LoginActivity.class));

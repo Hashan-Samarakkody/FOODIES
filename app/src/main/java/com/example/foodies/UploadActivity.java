@@ -153,16 +153,16 @@ public class UploadActivity extends AppCompatActivity {
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
         DataClass dataClass = new DataClass(name, category, time, ingredients, description, imageURL, videoURL, currentUser.getUid());
 
-        if (!dataClass.isValidTime(time)) {
-            Toast.makeText(this, "Invalid Time Format!", Toast.LENGTH_SHORT).show();
-            dialog.dismiss();
-            return;
-        } else if (!dataClass.isValidName(name)) {
-            Toast.makeText(this, "Invalid Name!", Toast.LENGTH_SHORT).show();
+        if (!dataClass.isValidName(name)) {
+            Toast.makeText(this, "Name can't have numbers!", Toast.LENGTH_SHORT).show();
             dialog.dismiss();
             return;
         } else if (!dataClass.isValidCategory(category)) {
-            Toast.makeText(this, "Invalid Category!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Category can't have number!", Toast.LENGTH_SHORT).show();
+            dialog.dismiss();
+            return;
+        } else if (!dataClass.isValidTime(time)) {
+            Toast.makeText(this, "Invalid Time Format!", Toast.LENGTH_SHORT).show();
             dialog.dismiss();
             return;
         }

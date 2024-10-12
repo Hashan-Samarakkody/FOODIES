@@ -115,7 +115,7 @@ public class LoginActivity extends AppCompatActivity {
                     } else {
                         Toast.makeText(LoginActivity.this, "User Authentication Failed!", Toast.LENGTH_SHORT).show();
                     }
-                }).addOnFailureListener(e -> Toast.makeText(LoginActivity.this, "User Login Failed: " + e.getMessage(), Toast.LENGTH_SHORT).show());
+                }).addOnFailureListener(e -> Toast.makeText(LoginActivity.this, "User Login Failed!", Toast.LENGTH_SHORT).show());
             }
         });
 
@@ -162,8 +162,7 @@ public class LoginActivity extends AppCompatActivity {
                 GoogleSignInAccount account = task.getResult(ApiException.class);
                 auth(account.getIdToken()); // Authenticate with Firebase
             } catch (ApiException e) {
-                Log.e("LoginActivity", "Google sign-in failed: " + e.getStatusCode());
-                Toast.makeText(this, "Sign-in failed: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Sign-in failed!", Toast.LENGTH_SHORT).show();
             }
         }
     }
