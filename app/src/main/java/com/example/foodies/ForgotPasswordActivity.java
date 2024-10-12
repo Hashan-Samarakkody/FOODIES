@@ -20,33 +20,38 @@ import com.google.firebase.auth.FirebaseAuth;
  */
 
 public class ForgotPasswordActivity extends AppCompatActivity {
-    Button btnResetPass, btnCancel; // IM/2021/110 Buttons for resetting and canceling
-    EditText emailBox; // IM/2021/110 EditText for user email input
-    FirebaseAuth auth; // IM/2021/110 Firebase authentication instance
+    // UI components
+    Button btnResetPass, btnCancel;
+    EditText emailBox;
+
+    // Firebase authentication instance
+    FirebaseAuth auth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.activity_forgot_password); // IM/2021/110 Set the content view for the activity
+        setContentView(R.layout.activity_forgot_password); // Set the content view for this activity
 
-        btnResetPass = findViewById(R.id.btnResetPass); // IM/2021/110 Initialize reset password button
-        btnCancel = findViewById(R.id.btnCancel); // IM/2021/110 Initialize cancel button
-        emailBox = findViewById(R.id.sendEmailBox); // IM/2021/110 Initialize email input box
+        // Initialize UI components
+        btnResetPass = findViewById(R.id.btnResetPass);
+        btnCancel = findViewById(R.id.btnCancel);
+        emailBox = findViewById(R.id.sendEmailBox);
 
-        auth = FirebaseAuth.getInstance(); // IM/2021/110 Initialize FirebaseAuth instance
+        // Initialize FirebaseAuth instance
+        auth = FirebaseAuth.getInstance();
 
-        // IM/2021/110 Set onClickListener for reset password button
+
         btnResetPass.setOnClickListener(view -> {
-            String userEmail = emailBox.getText().toString().trim(); // IM/2021/110 Get user input from email box
+            String userEmail = emailBox.getText().toString().trim(); // Get user input
 
-            // IM/2021/110 Validate email input
+            // Validate email input
             if (TextUtils.isEmpty(userEmail) || !Patterns.EMAIL_ADDRESS.matcher(userEmail).matches()) {
-                Toast.makeText(ForgotPasswordActivity.this, "Invalid Email!", Toast.LENGTH_SHORT).show(); // IM/2021/110 Show error message
-                return; // IM/2021/110 Exit if email is invalid
+                Toast.makeText(ForgotPasswordActivity.this, "Invalid Email!", Toast.LENGTH_SHORT).show();
+                return; // Stop if email is invalid
             }
 
-            // IM/2021/110 Send password reset email
+            // Send password reset email via Firebase
             auth.sendPasswordResetEmail(userEmail).addOnCompleteListener(task -> {
                 if (task.isSuccessful()) {
                     Toast.makeText(ForgotPasswordActivity.this, "Please check the email you provided!", Toast.LENGTH_SHORT).show(); // IM/2021/110 Show success message
@@ -56,11 +61,10 @@ public class ForgotPasswordActivity extends AppCompatActivity {
             });
         });
 
-        // IM/2021/110 Set onClickListener for cancel button
-
+        // Handle cancel button click
         btnCancel.setOnClickListener(view -> {
-            startActivity(new Intent(ForgotPasswordActivity.this, LoginActivity.class)); // IM/2021/110 Navigate to LoginActivity
-            finish(); // IM/2021/110 Close this activity
+            startActivity(new Intent(ForgotPasswordActivity.this, LoginActivity.class)); // Navigate to LoginActivity
+            finish(); // Close this activity
         });
     }
 }
