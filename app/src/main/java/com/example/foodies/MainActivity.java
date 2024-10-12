@@ -28,13 +28,14 @@ import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
 
-    FloatingActionButton fabAdd, fabView, fabProfile, fabFavourite; // Floating action buttons for different actions IM/2021/070
-    RecyclerView recyclerView; // RecyclerView to display the list of recipes IM/2021/070
-    List<DataClass> dataList; // List to hold recipe data IM/2021/070
-    DatabaseReference databaseReference; // Reference to Firebase Database IM/2021/070
-    ValueEventListener eventListener; // Listener to respond to database changes IM/2021/070
-    MyRecipeAdapter adapter; // Adapter to bind data to the RecyclerView IM/2021/070
-    ImageView search; // ImageView for the search functionality IM/2021/070
+    // Initialize variables
+    FloatingActionButton fabAdd, fabView, fabProfile, fabFavourite;
+    RecyclerView recyclerView;
+    List<DataClass> dataList;
+    DatabaseReference databaseReference;
+    ValueEventListener eventListener;
+    MyRecipeAdapter adapter;
+    ImageView search;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
         imageSlider.setImageList(slideModels, ScaleTypes.FIT); // Set the image list to the slider IM/2021/070
 
         recyclerView = findViewById(R.id.recyclerView); // Initialize the RecyclerView IM/2021/070
-        search = findViewById(R.id.search); // Initialize the search ImageView IM/2021/070
+        search = findViewById(R.id.search);
 
         // Set click listener for the search ImageView to open the search activity IM/2021/070
         search.setOnClickListener(view -> {
@@ -78,8 +79,8 @@ public class MainActivity extends AppCompatActivity {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this); // Builder for the progress dialog IM/2021/070
         builder.setCancelable(false);
-        builder.setView(R.layout.progress_layout); // Set the layout for the dialog IM/2021/070
-        AlertDialog dialog = builder.create(); // Create the dialog instance IM/2021/070
+        builder.setView(R.layout.progress_layout);
+        AlertDialog dialog = builder.create();
         dialog.show(); // Show the dialog IM/2021/070
 
         dataList = new ArrayList<>(); // Initialize the data list IM/2021/070

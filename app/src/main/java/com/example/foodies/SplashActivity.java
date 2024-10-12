@@ -20,18 +20,15 @@ public class SplashActivity extends AppCompatActivity {
 
         if (!NetworkUtils.isInternetAvailable(this)) { // Checks if internet is available IM/2022/070
             // No internet connection, navigate to NetworkError activity IM/2022/070
-            Intent intent = new Intent(SplashActivity.this, NetworkErrorActivity.class); // Creates intent for
-            // NetworkErrorActivity
-            // IM/2022/070
+            Intent intent = new Intent(SplashActivity.this, NetworkErrorActivity.class);
             startActivity(intent); // Starts the NetworkErrorActivity IM/2022/070
             finish(); // Closes the current activity IM/2022/070
         } else {
             // Internet is available, proceed to RegisterActivity after a delay IM/2022/070
             new Handler().postDelayed(() -> { // Delays the execution of the following code block IM/2022/070
                 Intent intent = new Intent(SplashActivity.this, RegisterActivity.class); // Creates intent for
-                // RegisterActivity IM/2022/070
                 startActivity(intent); // Starts the RegisterActivity IM/2022/070
-                finish(); // Closes the current activity IM/2022/070
+                finish();
             }, DELAY); // Sets the delay to the defined constant IM/2022/070
         }
     }

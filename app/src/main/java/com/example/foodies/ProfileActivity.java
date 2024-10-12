@@ -26,14 +26,15 @@ import com.google.firebase.database.ValueEventListener;
 
 public class ProfileActivity extends AppCompatActivity {
 
-    FloatingActionButton fabHome; // Floating action button for home IM/2021/070
-    FirebaseAuth auth; // Firebase authentication instance IM/2021/070
-    Button logOut, save, deleteAccount, cancel; // Button instances IM/2021/070
-    ImageView backIcon; // Back icon image view IM/2021/070
-    final String SHARED_PREFS = "shared_prefs"; // Shared preferences key IM/2021/070
-    TextView userName, userEmail; // Text views for user info IM/2021/070
-    EditText editName; // Edit text for name input IM/2021/070
-    DatabaseReference databaseReference; // Database reference for user data IM/2021/070
+    // Initialize variables by IM/2021/070
+    FloatingActionButton fabHome;
+    FirebaseAuth auth;
+    Button logOut, save, deleteAccount, cancel;
+    ImageView backIcon;
+    final String SHARED_PREFS = "shared_prefs";
+    TextView userName, userEmail;
+    EditText editName;
+    DatabaseReference databaseReference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -156,7 +156,7 @@ public class OthersRecipeDetailActivity extends AppCompatActivity {
     }
 
     private void shareRecipe() {
-        String recipeDetails = "Check out this recipe:\n\n" + "Name: " + detailName.getText().toString() + "\n\n" + "Time: " + detailTime.getText().toString() + "\n\n" + "Category: " + detailCategory.getText().toString() + "\n" + "Ingredients: " + detailIngredients.getText().toString() + "\n\n" + "Description: " + detailDesc.getText().toString() + "\n\n" + "Click here to view image: " + imageUrl; // Optionally include image URL IM/2021/038
+        String recipeDetails = "Check out this recipe:\n\n" + "Name: " + detailName.getText().toString() + "\n\n" + "Time: " + detailTime.getText().toString() + "\n\n" + "Category: " + detailCategory.getText().toString() + "\n\n" + "Ingredients: " + detailIngredients.getText().toString() + "\n\n" + "Description: " + detailDesc.getText().toString() + "\n\n" + "Click here to view image: " + imageUrl; // Optionally include image URL IM/2021/038
 
         if (videoUrl != null && !videoUrl.isEmpty()) {
             recipeDetails += "\nWatch video: " + videoUrl; // Optionally include video URL IM/2021/038

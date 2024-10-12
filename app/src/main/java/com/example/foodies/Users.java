@@ -1,9 +1,10 @@
 package com.example.foodies;
 
-public class Users { // Users class to represent user data IM/2022/070
-    private String name; // Variable to store the user's name IM/2022/070
-    private String email; // Variable to store the user's email IM/2022/070
-    private String key; // Variable to store the user's unique key IM/2022/070
+public class Users {
+    // Users class to represent user data IM/2022/070
+    private String name;
+    private String email;
+    private String key;
 
     // No-argument constructor (required for Firebase) IM/2022/070
     public Users() {
