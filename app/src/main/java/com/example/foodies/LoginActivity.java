@@ -39,146 +39,153 @@ import java.util.HashMap;
 
 public class LoginActivity extends AppCompatActivity {
 
-    static final int RC_SIGN_IN = 21; // IM/2021/110 Request code for Google sign-in
+    static final int RC_SIGN_IN = 21; // Request code for Google sign-in
 
-    GoogleSignInButton googleBtn; // IM/2021/110 Button for Google sign-in
-    GoogleSignInOptions gOptions; // IM/2021/110 Options for Google sign-in
-    GoogleSignInClient gClient; // IM/2021/110 Google sign-in client
-    FirebaseDatabase database; // IM/2021/110 Firebase database instance
+    GoogleSignInButton googleBtn;
+    GoogleSignInOptions gOptions;
+    GoogleSignInClient gClient;
+    FirebaseDatabase database;
 
-    TextView forgotPassword; // IM/2021/110 TextView for forgot password link
-    EditText etEmail, etPassword; // IM/2021/110 EditTexts for email and password input
-    Button login; // IM/2021/110 Button for login
-    ImageView gotoRegister; // IM/2021/110 ImageView for navigating to registration
-    FirebaseAuth auth; // IM/2021/110 Firebase authentication instance
-    SharedPreferences sharedPreferences; // IM/2021/110 SharedPreferences for storing credentials
+    TextView forgotPassword;
+    EditText etEmail, etPassword;
+    Button login;
+    ImageView gotoRegister;
+    FirebaseAuth auth;
+    SharedPreferences sharedPreferences;
 
-    final String EMAIL_KEY = "email_key"; // IM/2021/110 Key for email in SharedPreferences
-    final String PASSWORD_KEY = "password_key"; // IM/2021/110 Key for password in SharedPreferences
-    final String SHARED_PREFS = "shared_prefs"; // IM/2021/110 Name of SharedPreferences
+    final String EMAIL_KEY = "email_key";
+    final String PASSWORD_KEY = "password_key";
+    final String SHARED_PREFS = "shared_prefs";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login); // IM/2021/110 Set the content view for the activity
+        setContentView(R.layout.activity_login);
 
-        forgotPassword = findViewById(R.id.forgotPass); // IM/2021/110 Initialize forgot password TextView
-        etEmail = findViewById(R.id.etEmail); // IM/2021/110 Initialize email EditText
-        etPassword = findViewById(R.id.etPassword); // IM/2021/110 Initialize password EditText
-        login = findViewById(R.id.login); // IM/2021/110 Initialize login Button
-        gotoRegister = findViewById(R.id.backIcon); // IM/2021/110 Initialize register navigation ImageView
-        googleBtn = findViewById(R.id.googleBtn); // IM/2021/110 Initialize Google sign-in Button
+        // Initialize views and components
+        forgotPassword = findViewById(R.id.forgotPass);
+        etEmail = findViewById(R.id.etEmail);
+        etPassword = findViewById(R.id.etPassword);
+        login = findViewById(R.id.login);
+        gotoRegister = findViewById(R.id.backIcon);
+        googleBtn = findViewById(R.id.googleBtn);
 
-        auth = FirebaseAuth.getInstance(); // IM/2021/110 Initialize FirebaseAuth instance
-        database = FirebaseDatabase.getInstance(); // IM/2021/110 Initialize FirebaseDatabase instance
-        sharedPreferences = getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE); // IM/2021/110 Initialize SharedPreferences
+        // Firebase and SharedPreferences setup
+        auth = FirebaseAuth.getInstance();
+        database = FirebaseDatabase.getInstance();
+        sharedPreferences = getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE);
 
-        // IM/2021/110 Fetch and set email and password if they exist
+        // Load email and password from SharedPreferences, if available
         String email = sharedPreferences.getString(EMAIL_KEY, null);
         String password = sharedPreferences.getString(PASSWORD_KEY, null);
 
         if (email != null) {
-            etEmail.setText(email); // IM/2021/110 Set email in EditText
+            etEmail.setText(email);
         }
 
         if (password != null) {
-            etPassword.setText(password); // IM/2021/110 Set password in EditText
+            etPassword.setText(password);
         }
 
-        // IM/2021/110 Set onClickListener for login button
+        // Login button click listener
         login.setOnClickListener(view -> {
-            String userEmail = etEmail.getText().toString().trim(); // IM/2021/110 Get user email input
-            String userPassword = etPassword.getText().toString().trim(); // IM/2021/110 Get user password input
+            String userEmail = etEmail.getText().toString().trim();
+            String userPassword = etPassword.getText().toString().trim();
 
-            // IM/2021/110 Validate user input
+            // Validate user input
             if (userEmail.isEmpty()) {
-                etEmail.setError("Email required!"); // IM/2021/110 Show error for empty email
+                etEmail.setError("Email required!");
             } else if (userPassword.isEmpty()) {
-                etPassword.setError("Password required!"); // IM/2021/110 Show error for empty password
+                etPassword.setError("Password required!");
             } else if (!Patterns.EMAIL_ADDRESS.matcher(userEmail).matches()) {
-                etEmail.setError("Invalid Email"); // IM/2021/110 Show error for invalid email format
+                etEmail.setError("Invalid Email");
             } else {
-                // IM/2021/110 Save the email and password in SharedPreferences
+                // Save credentials and authenticate user
                 SharedPreferences.Editor editor = sharedPreferences.edit();
                 editor.putString(EMAIL_KEY, userEmail);
                 editor.putString(PASSWORD_KEY, userPassword);
-                editor.apply(); // IM/2021/110 Apply changes to SharedPreferences
+                editor.apply();
 
-                // IM/2021/110 Authenticate the user
+
                 auth.signInWithEmailAndPassword(userEmail, userPassword).addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
-                        Toast.makeText(LoginActivity.this, "Logged In Successfully!", Toast.LENGTH_SHORT).show(); // IM/2021/110 Show success message
-                        startActivity(new Intent(LoginActivity.this, MainActivity.class)); // IM/2021/110 Navigate to MainActivity
+                        Toast.makeText(LoginActivity.this, "Logged In Successfully!", Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(LoginActivity.this, MainActivity.class));
                         finish(); // IM/2021/110 End the LoginActivity
                     } else {
-                        Toast.makeText(LoginActivity.this, "User Authentication Failed!", Toast.LENGTH_SHORT).show(); // IM/2021/110 Show error message
+                        Toast.makeText(LoginActivity.this, "User Authentication Failed!", Toast.LENGTH_SHORT).show();
                     }
-                }).addOnFailureListener(e -> Toast.makeText(LoginActivity.this, "User Login Failed: " + e.getMessage(), Toast.LENGTH_SHORT).show()); // IM/2021/110 Handle login failure
+                }).addOnFailureListener(e -> Toast.makeText(LoginActivity.this, "User Login Failed: " + e.getMessage(), Toast.LENGTH_SHORT).show());
             }
         });
 
-        // IM/2021/110 Set onClickListener for register navigation
+        // Navigate to Registration screen
         gotoRegister.setOnClickListener(view -> {
-            Intent intent = new Intent(LoginActivity.this, RegisterActivity.class); // IM/2021/110 Navigate to RegisterActivity
+            Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
             startActivity(intent);
-            finish(); // IM/2021/110 End the LoginActivity
+            finish();
         });
 
-        gOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN) // IM/2021/110 Build Google Sign-In options
-                .requestIdToken(getString(R.string.default_web_client_id)) // IM/2021/110 Update with your client ID
+        // Configure Google Sign-in options
+        gOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken(getString(R.string.default_web_client_id)) // Use client ID from Firebase setup
                 .requestEmail().build();
 
-        gClient = GoogleSignIn.getClient(LoginActivity.this, gOptions); // IM/2021/110 Initialize GoogleSignInClient
+        gClient = GoogleSignIn.getClient(LoginActivity.this, gOptions);
 
-        googleBtn.setOnClickListener(view -> signIn()); // IM/2021/110 Set onClickListener for Google sign-in
 
-        // IM/2021/110 Set onClickListener for forgot password
+        // Google Sign-in button click listener
+        googleBtn.setOnClickListener(view -> signIn());
+
+        // Navigate to Forgot Password screen
         forgotPassword.setOnClickListener(view -> {
-            startActivity(new Intent(LoginActivity.this, ForgotPasswordActivity.class)); // IM/2021/110 Navigate to ForgotPasswordActivity
-            finish(); // IM/2021/110 End the LoginActivity
+            startActivity(new Intent(LoginActivity.this, ForgotPasswordActivity.class));
+            finish();
         });
     }
 
-    // IM/2021/110 Method to handle Google sign-in
+    // Start Google sign-in process
     private void signIn() {
-        Intent intent = gClient.getSignInIntent(); // IM/2021/110 Get Google sign-in intent
-        startActivityForResult(intent, RC_SIGN_IN); // IM/2021/110 Start the sign-in activity
+        Intent intent = gClient.getSignInIntent();
+        startActivityForResult(intent, RC_SIGN_IN);
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        // IM/2021/110 Check if the result is from Google sign-in
+
         if (requestCode == RC_SIGN_IN) {
-            Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data); // IM/2021/110 Get the signed-in account
+            Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
 
             try {
-                GoogleSignInAccount account = task.getResult(ApiException.class); // IM/2021/110 Get Google account
-                auth(account.getIdToken()); // IM/2021/110 Authenticate with Firebase using the ID token
+                GoogleSignInAccount account = task.getResult(ApiException.class);
+                auth(account.getIdToken()); // Authenticate with Firebase
             } catch (ApiException e) {
-                Log.e("LoginActivity", "Google sign-in failed: " + e.getStatusCode()); // IM/2021/110 Log sign-in failure
-                Toast.makeText(this, "Sign-in failed: " + e.getMessage(), Toast.LENGTH_SHORT).show(); // IM/2021/110 Show error message
+                Log.e("LoginActivity", "Google sign-in failed: " + e.getStatusCode());
+                Toast.makeText(this, "Sign-in failed: " + e.getMessage(), Toast.LENGTH_SHORT).show();
             }
         }
     }
 
-    // IM/2021/110 Authenticate with Firebase using Google credentials
+    // Authenticate Google user with Firebase
     private void auth(String idToken) {
-        AuthCredential credential = GoogleAuthProvider.getCredential(idToken, null); // IM/2021/110 Get GoogleAuthProvider credential
-        auth.signInWithCredential(credential) // IM/2021/110 Sign in with Firebase using the credential
+        AuthCredential credential = GoogleAuthProvider.getCredential(idToken, null);
+        auth.signInWithCredential(credential)
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
-                        FirebaseUser user = auth.getCurrentUser(); // IM/2021/110 Get the currently signed-in user
-                        HashMap<String, Object> map = new HashMap<>(); // IM/2021/110 Create a map to store user information
-                        map.put("email", user.getEmail()); // IM/2021/110 Put user email in the map
-                        map.put("name", user.getDisplayName()); // IM/2021/110 Put user name in the map
-                        database.getReference("users").child(user.getUid()).setValue(map); // IM/2021/110 Save user data to Firebase
-                        Toast.makeText(LoginActivity.this, "Logged In Successfully!", Toast.LENGTH_SHORT).show(); // IM/2021/110 Show success message
-                        startActivity(new Intent(LoginActivity.this, MainActivity.class)); // IM/2021/110 Navigate to MainActivity
-                        finish(); // IM/2021/110 End the LoginActivity
+                        FirebaseUser user = auth.getCurrentUser();
+                        HashMap<String, Object> map = new HashMap<>();
+                        map.put("email", user.getEmail());
+                        map.put("name", user.getDisplayName());
+
+                        // Store user data in Firebase Realtime Database
+                        database.getReference("users").child(user.getUid()).setValue(map);
+                        Toast.makeText(LoginActivity.this, "Logged In Successfully!", Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                        finish();
                     } else {
-                        Toast.makeText(LoginActivity.this, "Authentication Failed!", Toast.LENGTH_SHORT).show(); // IM/2021/110 Show authentication failure message
+                        Toast.makeText(LoginActivity.this, "Authentication Failed!", Toast.LENGTH_SHORT).show();
                     }
                 });
     }
