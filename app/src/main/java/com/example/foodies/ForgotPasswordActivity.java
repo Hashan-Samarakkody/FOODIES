@@ -54,9 +54,9 @@ public class ForgotPasswordActivity extends AppCompatActivity {
             // Send password reset email via Firebase
             auth.sendPasswordResetEmail(userEmail).addOnCompleteListener(task -> {
                 if (task.isSuccessful()) {
-                    Toast.makeText(ForgotPasswordActivity.this, "Please check the email you provided!", Toast.LENGTH_SHORT).show(); // IM/2021/110 Show success message
+                    Toast.makeText(ForgotPasswordActivity.this, "Please check the email you provided!", Toast.LENGTH_SHORT).show();
                 } else {
-                    Toast.makeText(ForgotPasswordActivity.this, "Unable to send the reset link!", Toast.LENGTH_SHORT).show(); // IM/2021/110 Show error message
+                    Toast.makeText(ForgotPasswordActivity.this, "Unable to send the reset link!", Toast.LENGTH_SHORT).show();
                 }
             });
         });
