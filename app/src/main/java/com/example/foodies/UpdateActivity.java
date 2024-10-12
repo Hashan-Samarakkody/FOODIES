@@ -199,10 +199,10 @@ public class UpdateActivity extends AppCompatActivity {
             Toast.makeText(this, "Invalid Time Format!", Toast.LENGTH_SHORT).show();
             dialog.dismiss();
         } else if (!dataClass.isValidName(name)) {
-            Toast.makeText(this, "Invalid Name!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Name can't have numbers!", Toast.LENGTH_SHORT).show();
             dialog.dismiss();
         } else if (!dataClass.isValidCategory(category)) {
-            Toast.makeText(this, "Invalid Category", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Category can't have numbers!", Toast.LENGTH_SHORT).show();
             dialog.dismiss();
         } else {
             // Update the database
