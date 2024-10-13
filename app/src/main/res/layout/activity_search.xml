@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:layout_gravity="center_horizontal"
     android:background="@drawable/background_fill_2"
-    tools:context=".SearchActivity">
+    tools:context=".UI.SearchActivity">
 
     <ImageView
         android:id="@+id/back"

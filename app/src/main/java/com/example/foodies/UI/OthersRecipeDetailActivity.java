@@ -1,4 +1,4 @@
-package com.example.foodies;
+package com.example.foodies.UI;
 
 import android.app.AlertDialog;
 import android.content.Intent;
@@ -14,6 +14,7 @@ import androidx.media3.common.MediaItem;
 import androidx.media3.exoplayer.ExoPlayer;
 import androidx.media3.ui.PlayerView;
 
+import com.example.foodies.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;

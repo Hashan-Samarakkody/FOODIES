@@ -1,4 +1,4 @@
-package com.example.foodies;
+package com.example.foodies.UI;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,6 +11,9 @@ import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.foodies.HelperClass.DataClass;
+import com.example.foodies.R;
+import com.example.foodies.Adapters.ViewOthersRecipeAdapter;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;

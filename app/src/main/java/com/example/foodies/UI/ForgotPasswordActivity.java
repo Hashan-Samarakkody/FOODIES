@@ -1,4 +1,4 @@
-package com.example.foodies;
+package com.example.foodies.UI;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,6 +10,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.foodies.R;
 import com.google.firebase.auth.FirebaseAuth;
 
 /*

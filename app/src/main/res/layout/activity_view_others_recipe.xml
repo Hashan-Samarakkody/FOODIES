@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background_fill_2"
-    tools:context=".ViewOthersRecipeActivity">
+    tools:context=".UI.ViewOthersRecipeActivity">
 
     <TextView
         android:layout_width="wrap_content"

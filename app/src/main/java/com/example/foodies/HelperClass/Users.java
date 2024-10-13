@@ -1,4 +1,4 @@
-package com.example.foodies;
+package com.example.foodies.HelperClass;
 
 public class Users {
     // Users class to represent user data IM/2022/070

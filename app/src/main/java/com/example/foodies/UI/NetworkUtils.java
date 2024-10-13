@@ -1,4 +1,4 @@
-package com.example.foodies;
+package com.example.foodies.UI;
 
 import android.content.Context;
 import android.net.ConnectivityManager;

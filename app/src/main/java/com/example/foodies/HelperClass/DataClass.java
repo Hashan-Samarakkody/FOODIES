@@ -1,5 +1,5 @@
 // Done by IM/2021/120 - Rajapaksha.L.S
-package com.example.foodies;
+package com.example.foodies.HelperClass;
 
 import java.util.regex.Pattern;
 

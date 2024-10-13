@@ -17,43 +17,43 @@
         android:theme="@style/Theme.FOODIES"
         tools:targetApi="31">
         <activity
-            android:name=".ForgotPasswordActivity"
+            android:name=".UI.ForgotPasswordActivity"
             android:exported="false" />
         <activity
-            android:name=".SavedRecipesActivity"
+            android:name=".UI.SavedRecipesActivity"
             android:exported="false" />
         <activity
-            android:name=".NetworkErrorActivity"
+            android:name=".UI.NetworkErrorActivity"
             android:exported="false" />
         <activity
-            android:name=".OthersRecipeDetailActivity"
+            android:name=".UI.OthersRecipeDetailActivity"
             android:exported="false" />
         <activity
-            android:name=".ProfileActivity"
+            android:name=".UI.ProfileActivity"
             android:exported="false" />
         <activity
-            android:name=".ViewOthersRecipeActivity"
+            android:name=".UI.ViewOthersRecipeActivity"
             android:exported="false" />
         <activity
-            android:name=".SearchActivity"
+            android:name=".UI.SearchActivity"
             android:exported="false" />
         <activity
-            android:name=".UpdateActivity"
+            android:name=".UI.UpdateActivity"
             android:exported="false" />
         <activity
-            android:name=".UploadActivity"
+            android:name=".UI.UploadActivity"
             android:exported="false" />
         <activity
-            android:name=".DetailActivity"
+            android:name=".UI.DetailActivity"
             android:exported="false" />
         <activity
-            android:name=".LoginActivity"
+            android:name=".UI.LoginActivity"
             android:exported="false" />
         <activity
-            android:name=".RegisterActivity"
+            android:name=".UI.RegisterActivity"
             android:exported="false" />
         <activity
-            android:name=".SplashActivity"
+            android:name=".UI.SplashActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -62,7 +62,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".MainActivity"
+            android:name=".UI.MainActivity"
             android:exported="false" />
 
         <meta-data

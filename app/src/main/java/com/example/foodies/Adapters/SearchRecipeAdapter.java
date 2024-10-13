@@ -1,4 +1,4 @@
-package com.example.foodies;
+package com.example.foodies.Adapters;
 
 import android.content.Context;
 import android.content.Intent;
@@ -14,6 +14,10 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.foodies.HelperClass.DataClass;
+import com.example.foodies.R;
+import com.example.foodies.UI.DetailActivity;
+import com.example.foodies.UI.OthersRecipeDetailActivity;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;

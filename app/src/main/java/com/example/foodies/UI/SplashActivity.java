@@ -1,4 +1,4 @@
-package com.example.foodies;
+package com.example.foodies.UI;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.os.Handler;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.foodies.R;
 
 @SuppressLint("CustomSplashScreen")
 // Suppresses lint warning for custom splash screen usage IM/2022/070

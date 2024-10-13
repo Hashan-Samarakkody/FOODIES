@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/bg_2"
     android:orientation="vertical"
-    tools:context=".DetailActivity">
+    tools:context=".UI.DetailActivity">
 
     <ImageView
         android:id="@+id/back"

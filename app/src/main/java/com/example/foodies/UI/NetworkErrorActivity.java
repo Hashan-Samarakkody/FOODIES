@@ -1,4 +1,4 @@
-package com.example.foodies;
+package com.example.foodies.UI;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,6 +7,8 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.foodies.R;
 
 // IM/2021/007 - Activity to display a network error message and retry connection
 public class NetworkErrorActivity extends AppCompatActivity {

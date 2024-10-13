@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/bg_2"
     android:orientation="vertical"
-    tools:context=".OthersRecipeDetailActivity">
+    tools:context=".UI.OthersRecipeDetailActivity">
 
     <ImageView
         android:id="@+id/back"
