@@ -120,10 +120,6 @@ Once the application is installed:
 #### Profile screen
 ![Profile Screen](16.png)
 
-
-## Testing
-Conducted unit testing to ensure each component's functionality. Refinements were made based on feedback from testing. A Test Document is available in the repository.
-
 ## Credits
 RecipeBook was developed as part of the INTE 22283 - Mobile Application Development course. Special thanks to all contributors for their hard work and dedication.
 
