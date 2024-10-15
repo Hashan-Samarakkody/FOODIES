@@ -42,22 +42,22 @@ To set up the RecipeBook application on your local machine:
 ### These sre the installation steps of theis project using Android Studio as of November 2022 (Ladybug//2024.2.1 version)
 
 1. Open the project in Android Studio.
-![alt text](image.png)
+![Open Android Studio](image.png)
 
 2. Click on "Get from VCS" icon. Then, you will be shown a dialog box.
-![alt text](image-1.png)
+![Click on "Get from VCS"](image-1.png)
 
 3. Paste the link of this repository inside that dialog box.
-![alt text](image-2.png)
+![Paste the link of this repository](image-2.png)
 
 ### If you are already opening a project, follow the below steps
 
    A. Navigate to "Project from Version Vontorl" as follows and click on it. 
    (File -> New -> Project from Version Vontorl)
-   ![alt text](image-3.png)
+   ![Navigate to "Project from Version Vontorl"](image-3.png)
 
    B.  Then, you will be shown a dialog box.Paste the link of this repository inside that dialog box.
-   ![alt text](image-4.png)
+   ![Paste the link of this repository](image-4.png)
 
 
 4. Click "Clone".
@@ -70,8 +70,56 @@ Once the application is installed:
 - Sign in using your Google account.
 - Explore the app's features, including adding, editing, and sharing recipes.
 
-## Screenshots
-Add additional screenshots as necessary.
+## Screenshots of the application
+
+#### Splash screen
+![Splash Screen](1.png)
+
+#### Sign in screen
+![Sign in Screen](2.png)
+
+#### Log in screen
+![Log in Screen](3.png)
+
+#### Google sign in screen
+![Google sign in Screen](4.png)
+
+#### Home screen
+![Home Screen](5.png)
+
+#### Recipe details screen
+![Recipe details Screen](6.png)
+
+#### Add recipe screen
+![Add recipe Screen](7.png)
+
+#### Edit recipe screen
+![Edit recipe Screen](8.png)
+
+#### Delete recipe screen
+![Delete recipe Screen](9.png)
+
+#### Share recipe screen
+![Share recipe Screen](10.png)
+
+#### Add rating screen
+![Add rating Screen](11.png)
+
+#### Add to favorites screen
+![Add to favorites Screen](12.png)
+
+#### View others' recipes screen
+![View others' recipes Screen](13.png)
+
+#### Search others' recipes screen
+![Search others' recipes Screen](14.png)
+
+#### Favorites screen
+![Favorites Screen](15.png)
+
+#### Profile screen
+![Profile Screen](16.png)
+
 
 ## Testing
 Conducted unit testing to ensure each component's functionality. Refinements were made based on feedback from testing. A Test Document is available in the repository.
