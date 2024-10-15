@@ -83,5 +83,5 @@ RecipeBook was developed as part of the INTE 22283 - Mobile Application Developm
 -   _[Dinithi](https://github.com/dinithiHM)_
 -   _[Koshali](https://github.com/fdo-koshali)_
 -   _[Subhani](https://github.com/Subhani-dilmini)_
--   _[Lakma] (https://github.com/lakma1019)_
+-   _[Lakma](https://github.com/lakma1019)_
 -   _[Zahri](https://github.com/Zahri-Affa)_
