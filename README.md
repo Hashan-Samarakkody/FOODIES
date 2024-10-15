@@ -42,22 +42,22 @@ To set up the FOODIES application on your local machine:
 ### These sre the installation steps of theis project using Android Studio as of November 2022 (Ladybug//2024.2.1 version)
 
 1. Open the project in Android Studio.
-![Open Android Studio](image.png)
+![Open Android Studio](/Readme%20file%20photos/image.png)
 
 2. Click on "Get from VCS" icon. Then, you will be shown a dialog box.
-![Click on "Get from VCS"](image-1.png)
+![Click on "Get from VCS"](/Readme%20file%20photos/image-1.png)
 
 3. Paste the link of this repository inside that dialog box.
-![Paste the link of this repository](image-2.png)
+![Paste the link of this repository](/Readme%20file%20photos/image-2.png)
 
 ### If you are already opening a project, follow the below steps
 
    A. Navigate to "Project from Version Vontorl" as follows and click on it. 
    (File -> New -> Project from Version Vontorl)
-   ![Navigate to "Project from Version Vontorl"](image-3.png)
+   ![Navigate to "Project from Version Vontorl"](/Readme%20file%20photos/image-3.png)
 
    B.  Then, you will be shown a dialog box.Paste the link of this repository inside that dialog box.
-   ![Paste the link of this repository](image-4.png)
+   ![Paste the link of this repository](/Readme%20file%20photos/image-4.png)
 
 
 4. Click "Clone".
@@ -73,52 +73,52 @@ Once the application is installed:
 ## Screenshots of the application
 
 #### Splash screen
-![Splash Screen](1.png)
+![Splash Screen](/Readme%20file%20photos/1.png)
 
 #### Sign in screen
-![Sign in Screen](2.png)
+![Sign in Screen](/Readme%20file%20photos/2.png)
 
 #### Log in screen
-![Log in Screen](3.png)
+![Log in Screen](/Readme%20file%20photos/3.png)
 
 #### Google sign in screen
-![Google sign in Screen](4.png)
+![Google sign in Screen](/Readme%20file%20photos/4.png)
 
 #### Home screen
-![Home Screen](5.png)
+![Home Screen](/Readme%20file%20photos/5.png)
 
 #### Recipe details screen
-![Recipe details Screen](6.png)
+![Recipe details Screen](/Readme%20file%20photos/6.png)
 
 #### Add recipe screen
-![Add recipe Screen](7.png)
+![Add recipe Screen](/Readme%20file%20photos/7.png)
 
 #### Edit recipe screen
-![Edit recipe Screen](8.png)
+![Edit recipe Screen](/Readme%20file%20photos/8.png)
 
 #### Delete recipe screen
-![Delete recipe Screen](9.png)
+![Delete recipe Screen](/Readme%20file%20photos/9.png)
 
 #### Share recipe screen
-![Share recipe Screen](10.png)
+![Share recipe Screen](/Readme%20file%20photos/10.png)
 
 #### Add rating screen
-![Add rating Screen](11.png)
+![Add rating Screen](/Readme%20file%20photos/11.png)
 
 #### Add to favorites screen
-![Add to favorites Screen](12.png)
+![Add to favorites Screen](/Readme%20file%20photos/12.png)
 
 #### View others' recipes screen
-![View others' recipes Screen](13.png)
+![View others' recipes Screen](/Readme%20file%20photos/13.png)
 
 #### Search others' recipes screen
-![Search others' recipes Screen](14.png)
+![Search others' recipes Screen](/Readme%20file%20photos/14.png)
 
 #### Favorites screen
-![Favorites Screen](15.png)
+![Favorites Screen](/Readme%20file%20photos/15.png)
 
 #### Profile screen
-![Profile Screen](16.png)
+![Profile Screen](/Readme%20file%20photos/16.png)
 
 ## Credits
 FOODIES was developed as part of the INTE 22283 - Mobile Application Development course. Special thanks to all contributors for their hard work and dedication.
