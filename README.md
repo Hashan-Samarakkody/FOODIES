@@ -1,6 +1,6 @@
-# RecipeBook - Recipe Management App
+# FOODEIS - Recipe Management App
 
-Welcome to RecipeBook, a user-friendly Android application developed for mobile application development. This project allows users to discover, share, and manage their recipe collections with ease. The application is built using Java and offers a rich set of features for a seamless cooking experience.
+Welcome to FOODIES, a user-friendly Android application developed for mobile application development. This project allows users to discover, share, and manage their recipe collections with ease. The application is built using Java and offers a rich set of features for a seamless cooking experience.
 
 ## Table of Contents
 - [Introduction](#introduction)
@@ -13,10 +13,10 @@ Welcome to RecipeBook, a user-friendly Android application developed for mobile 
 - [Credits](#credits)
 
 ## Introduction
-RecipeBook is designed to help users create, manage, and share their favorite recipes in an intuitive interface. With multimedia integration and social features, users can easily enhance their cooking journey by connecting with others.
+FOODIES is designed to help users create, manage, and share their favorite recipes in an intuitive interface. With multimedia integration and social features, users can easily enhance their cooking journey by connecting with others.
 
 ## Features
-RecipeBook includes the following key features:
+FOODIES includes the following key features:
 - User authentication via Google
 - Add, edit, and delete recipes
 - Mark recipes as favorites
@@ -27,13 +27,13 @@ RecipeBook includes the following key features:
 - Review and rating system for recipes
 
 ## Prerequisites
-Before running the RecipeBook application, ensure your environment meets the following requirements:
+Before running the FOODIES application, ensure your environment meets the following requirements:
 - Android Studio installed (version X or higher)
 - Android SDK (version X or higher)
 - Java Development Kit (JDK) (version X or higher)
 
 ## Installation
-To set up the RecipeBook application on your local machine:
+To set up the FOODIES application on your local machine:
 1. Clone the repository:
    ```bash
    https://github.com/Hashan-Samarakkody/FOODIES.git
@@ -66,7 +66,7 @@ To set up the RecipeBook application on your local machine:
 
 ## Usage
 Once the application is installed:
-- Launch the RecipeBook app from your device or emulator.
+- Launch the FOODIES app from your device or emulator.
 - Sign in using your Google account.
 - Explore the app's features, including adding, editing, and sharing recipes.
 
@@ -121,7 +121,7 @@ Once the application is installed:
 ![Profile Screen](16.png)
 
 ## Credits
-RecipeBook was developed as part of the INTE 22283 - Mobile Application Development course. Special thanks to all contributors for their hard work and dedication.
+FOODIES was developed as part of the INTE 22283 - Mobile Application Development course. Special thanks to all contributors for their hard work and dedication.
 
 ### Team Members:
 -   _[Dinithi](https://github.com/dinithiHM)_
