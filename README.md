@@ -39,9 +39,30 @@ To set up the RecipeBook application on your local machine:
    https://github.com/Hashan-Samarakkody/FOODIES.git
 
 ## Installation Steps
+### These sre the installation steps of theis project using Android Studio as of November 2022 (Ladybug//2024.2.1 version)
+
 1. Open the project in Android Studio.
-2. Sync the project with Gradle files.
-3. Ensure you have an emulator set up or connect a physical Android device.
+![alt text](image.png)
+
+2. Click on "Get from VCS" icon. Then, you will be shown a dialog box.
+![alt text](image-1.png)
+
+3. Paste the link of this repository inside that dialog box.
+![alt text](image-2.png)
+
+### If you are already opening a project, follow the below steps
+
+   A. Navigate to "Project from Version Vontorl" as follows and click on it. 
+   (File -> New -> Project from Version Vontorl)
+   ![alt text](image-3.png)
+
+   B.  Then, you will be shown a dialog box.Paste the link of this repository inside that dialog box.
+   ![alt text](image-4.png)
+
+
+4. Click "Clone".
+
+5. If you are asked to set up the SDK path do that as well.
 
 ## Usage
 Once the application is installed:
@@ -59,11 +80,8 @@ Conducted unit testing to ensure each component's functionality. Refinements wer
 RecipeBook was developed as part of the INTE 22283 - Mobile Application Development course. Special thanks to all contributors for their hard work and dedication.
 
 ### Team Members:
-- Nuzha
-- Hansini
-- Samadhi
-- Githmi
-- Mathumithan
-- Shenal
-- Dinan
-- Hashan
+-   _[Dinithi](https://github.com/dinithiHM)_
+-   _[Koshali](https://github.com/fdo-koshali)_
+-   _[Subhani](https://github.com/Subhani-dilmini)_
+-   _[Lakma] (https://github.com/lakma1019)_
+-   _[Zahri](https://github.com/Zahri-Affa)_
