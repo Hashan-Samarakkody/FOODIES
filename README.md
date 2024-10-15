@@ -36,7 +36,7 @@ Before running the RecipeBook application, ensure your environment meets the fol
 To set up the RecipeBook application on your local machine:
 1. Clone the repository:
    ```bash
-   git clone https://github.com/YOUR-USERNAME/RecipeBook.git
+   [git clone https://github.com/YOUR-USERNAME/RecipeBook.git](https://github.com/Hashan-Samarakkody/FOODIES.git)
 
 ## Installation Steps
 1. Open the project in Android Studio.
