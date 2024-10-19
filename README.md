@@ -79,7 +79,7 @@ To enable full functionality in the FOODIES app, please set up the following Fir
 Make sure to follow the video guides carefully to ensure proper configuration.
 
 ### Web Client ID
-Also, add the web client id in the [strings.xml]() file.
+Also, add the web client id in the [strings.xml](https://github.com/Hashan-Samarakkody/FOODIES/blob/ed79615b36f0b9e290e82c32c4b7d07c3bbf52db/app/src/main/res/values/strings.xml) file.
 
 
 ## Usage
