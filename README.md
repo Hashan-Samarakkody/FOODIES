@@ -64,6 +64,21 @@ To set up the FOODIES application on your local machine:
 
 5. If you are asked to set up the SDK path do that as well.
 
+### Firebase Setup
+To enable full functionality in the FOODIES app, please set up the following Firebase services:
+
+1. **Firebase Realtime Database**: Configure the database to store and manage recipes.  
+   [YouTube Setup Guide](https://youtu.be/Vl7VFoNWh6Y?feature=shared)
+
+2. **Firebase Authentication**: Enable Google sign-in for user authentication.  
+   [YouTube Setup Guide](https://youtu.be/-NEeSOqOJJs?feature=shared)
+
+3. **Firebase Cloud Storage**: Set up cloud storage for uploading and managing recipe images and videos.  
+   [YouTube Setup Guide](https://youtu.be/KkfNEpRq9pA?feature=shared)
+
+Make sure to follow the video guides carefully to ensure proper configuration.
+
+
 ## Usage
 Once the application is installed:
 - Launch the FOODIES app from your device or emulator.
