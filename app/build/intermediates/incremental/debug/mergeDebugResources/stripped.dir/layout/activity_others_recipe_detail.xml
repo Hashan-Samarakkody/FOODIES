@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_2"
+    android:orientation="vertical"
+    tools:context=".UI.OthersRecipeDetailActivity">
+
+    <ImageView
+        android:id="@+id/back"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_margin="10dp"
+        app:srcCompat="@drawable/baseline_arrow_back_24" />
+
+    <TextView
+        android:id="@+id/detailName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/inter_tight_medium"
+        android:text="Recipe Name"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardImage"
+        android:layout_width="match_parent"
+        android:layout_height="260dp"
+        android:layout_gravity="center"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="15dp"
+        app:cardCornerRadius="30dp"
+        app:cardElevation="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/detailName">
+
+        <androidx.media3.ui.PlayerView
+            android:id="@+id/detailVideo"
+            android:layout_width="match_parent"
+            android:layout_height="260dp"
+            android:layout_gravity="center"
+            android:scaleType="centerCrop" />
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardImage2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cardImage">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/save"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_margin="7dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:scaleType="centerCrop"
+                android:src="@drawable/img_5" />
+
+            <ImageView
+                android:id="@+id/shareData"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_margin="7dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:scaleType="centerCrop"
+                android:src="@drawable/img_8" />
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+
+    <!-- Wrap content from Duration label in ScrollView -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cardImage2">
+
+        <LinearLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            android:background="@color/white"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <!-- Category Text -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/inter_tight_medium"
+                android:text="Category:"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <!-- Category Text -->
+            <TextView
+                android:id="@+id/detailCategory"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp"
+                android:fontFamily="@font/inter_tight_medium"
+                android:text="category"
+                android:textSize="16sp" />
+
+            <!-- Duration Text -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/inter_tight_medium"
+                android:text="Duration:"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+
+            <!-- Time Text -->
+            <TextView
+                android:id="@+id/detailTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp"
+                android:fontFamily="@font/inter_tight_medium"
+                android:text="time"
+                android:textSize="16sp" />
+
+
+            <!-- Ingredients Label -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/inter_tight_medium"
+                android:text="Ingredients:"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <!-- Ingredients Text -->
+            <TextView
+                android:id="@+id/detailIngredients"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp"
+                android:fontFamily="@font/inter_tight_medium"
+                android:text="HuevosRancherosIngredients"
+                android:textSize="16sp" />
+
+            <!-- Steps Label -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/inter_tight_medium"
+                android:text="Steps:"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <!-- Steps Description -->
+            <TextView
+                android:id="@+id/detailDesc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="15dp"
+                android:fontFamily="@font/inter_tight_medium"
+                android:text="HuevosRancherosDesc"
+                android:textSize="16sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:fontFamily="@font/inter_tight_medium"
+                android:text="Rate This Recipe:"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <RatingBar
+                android:id="@+id/ratingBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:numStars="4"
+                android:scaleX="0.8"
+                android:scaleY="0.8"
+                android:stepSize="1"
+                android:theme="@style/RatingBar" />
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

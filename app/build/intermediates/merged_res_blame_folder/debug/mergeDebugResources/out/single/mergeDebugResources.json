@@ -1,0 +1,326 @@
+[
+    {
+        "merged": "com.example.foodies.app-debug-49:/drawable_baseline_arrow_back_24.xml.flat",
+        "source": "com.example.foodies.app-main-51:/drawable/baseline_arrow_back_24.xml"
+    },
+    {
+        "merged": "com.example.foodies.app-debug-49:/layout_activity_saved_recipes.xml.flat",
+        "source": "com.example.foodies.app-main-51:/layout/activity_saved_recipes.xml"
+    },
+    {
+        "merged": "com.example.foodies.app-debug-49:/mipmap-hdpi_ic_launcher.webp.flat",
+        "source": "com.example.foodies.app-main-51:/mipmap-hdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "com.example.foodies.app-debug-49:/layout_activity_others_recipe_detail.xml.flat",
+        "source": "com.example.foodies.app-main-51:/layout/activity_others_recipe_detail.xml"
+    },
+    {
+        "merged": "com.example.foodies.app-debug-49:/drawable_r_4.jpg.flat",
+        "source": "com.example.foodies.app-main-51:/drawable/r_4.jpg"
+    },
+    {
+        "merged": "com.example.foodies.app-debug-49:/layout_activity_update.xml.flat",
+        "source": "com.example.foodies.app-main-51:/layout/activity_update.xml"
+    },
+    {
+        "merged": "com.example.foodies.app-debug-49:/drawable_img_8.png.flat",
+        "source": "com.example.foodies.app-main-51:/drawable/img_8.png"
+    },
+    {
+        "merged": "com.example.foodies.app-debug-49:/drawable_ic_launcher_background.xml.flat",
+        "source": "com.example.foodies.app-main-51:/drawable/ic_launcher_background.xml"
+    },
+    {
+        "merged": "com.example.foodies.app-debug-49:/drawable_baseline_home_24.xml.flat",
+        "source": "com.example.foodies.app-main-51:/drawable/baseline_home_24.xml"
+    },
+    {
+        "merged": "com.example.foodies.app-debug-49:/layout_activity_register.xml.flat",
+        "source": "com.example.foodies.app-main-51:/layout/activity_register.xml"
+    },
+    {
+        "merged": "com.example.foodies.app-debug-49:/layout_activity_view_others_recipe.xml.flat",
+        "source": "com.example.foodies.app-main-51:/layout/activity_view_others_recipe.xml"
+    },
+    {
+        "merged": "com.example.foodies.app-debug-49:/drawable_r_7.jpg.flat",
+        "source": "com.example.foodies.app-main-51:/drawable/r_7.jpg"
+    },
+    {
+        "merged": "com.example.foodies.app-debug-49:/mipmap-xhdpi_ic_launcher.webp.flat",
+        "source": "com.example.foodies.app-main-51:/mipmap-xhdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "com.example.foodies.app-debug-49:/drawable_baseline_person_24.xml.flat",
+        "source": "com.example.foodies.app-main-51:/drawable/baseline_person_24.xml"
+    },
+    {
+        "merged": "com.example.foodies.app-debug-49:/drawable_text_bg.xml.flat",
+        "source": "com.example.foodies.app-main-51:/drawable/text_bg.xml"
+    },
+    {
+        "merged": "com.example.foodies.app-debug-49:/drawable_background_fill.png.flat",
+        "source": "com.example.foodies.app-main-51:/drawable/background_fill.png"
+    },
+    {
+        "merged": "com.example.foodies.app-debug-49:/mipmap-hdpi_ic_launcher_round.webp.flat",
+        "source": "com.example.foodies.app-main-51:/mipmap-hdpi/ic_launcher_round.webp"
+    },
+    {
+        "merged": "com.example.foodies.app-debug-49:/layout_popup_layout.xml.flat",
+        "source": "com.example.foodies.app-main-51:/layout/popup_layout.xml"
+    },
+    {
+        "merged": "com.example.foodies.app-debug-49:/drawable_baseline_error_24.xml.flat",
+        "source": "com.example.foodies.app-main-51:/drawable/baseline_error_24.xml"
+    },
+    {
+        "merged": "com.example.foodies.app-debug-49:/drawable_baseline_close_24.xml.flat",
+        "source": "com.example.foodies.app-main-51:/drawable/baseline_close_24.xml"
+    },
+    {
+        "merged": "com.example.foodies.app-debug-49:/drawable_baseline_search_24.xml.flat",
+        "source": "com.example.foodies.app-main-51:/drawable/baseline_search_24.xml"
+    },
+    {
+        "merged": "com.example.foodies.app-debug-49:/drawable_logo_1.png.flat",
+        "source": "com.example.foodies.app-main-51:/drawable/logo_1.png"
+    },
+    {
+        "merged": "com.example.foodies.app-debug-49:/mipmap-anydpi-v26_ic_launcher_round.xml.flat",
+        "source": "com.example.foodies.app-main-51:/mipmap-anydpi-v26/ic_launcher_round.xml"
+    },
+    {
+        "merged": "com.example.foodies.app-debug-49:/drawable_baseline_view_24.xml.flat",
+        "source": "com.example.foodies.app-main-51:/drawable/baseline_view_24.xml"
+    },
+    {
+        "merged": "com.example.foodies.app-debug-49:/drawable_baseline_add_24.xml.flat",
+        "source": "com.example.foodies.app-main-51:/drawable/baseline_add_24.xml"
+    },
+    {
+        "merged": "com.example.foodies.app-debug-49:/font_inter_tight_medium.xml.flat",
+        "source": "com.example.foodies.app-main-51:/font/inter_tight_medium.xml"
+    },
+    {
+        "merged": "com.example.foodies.app-debug-49:/layout_progress_layout.xml.flat",
+        "source": "com.example.foodies.app-main-51:/layout/progress_layout.xml"
+    },
+    {
+        "merged": "com.example.foodies.app-debug-49:/mipmap-xxhdpi_ic_launcher_round.webp.flat",
+        "source": "com.example.foodies.app-main-51:/mipmap-xxhdpi/ic_launcher_round.webp"
+    },
+    {
+        "merged": "com.example.foodies.app-debug-49:/layout_delete_account_pop_up.xml.flat",
+        "source": "com.example.foodies.app-main-51:/layout/delete_account_pop_up.xml"
+    },
+    {
+        "merged": "com.example.foodies.app-debug-49:/drawable_img_5.png.flat",
+        "source": "com.example.foodies.app-main-51:/drawable/img_5.png"
+    },
+    {
+        "merged": "com.example.foodies.app-debug-49:/mipmap-anydpi-v26_ic_launcher.xml.flat",
+        "source": "com.example.foodies.app-main-51:/mipmap-anydpi-v26/ic_launcher.xml"
+    },
+    {
+        "merged": "com.example.foodies.app-debug-49:/mipmap-xxxhdpi_ic_launcher.webp.flat",
+        "source": "com.example.foodies.app-main-51:/mipmap-xxxhdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "com.example.foodies.app-debug-49:/layout_activity_login.xml.flat",
+        "source": "com.example.foodies.app-main-51:/layout/activity_login.xml"
+    },
+    {
+        "merged": "com.example.foodies.app-debug-49:/layout_other_recipe_item.xml.flat",
+        "source": "com.example.foodies.app-main-51:/layout/other_recipe_item.xml"
+    },
+    {
+        "merged": "com.example.foodies.app-debug-49:/layout_search_item.xml.flat",
+        "source": "com.example.foodies.app-main-51:/layout/search_item.xml"
+    },
+    {
+        "merged": "com.example.foodies.app-debug-49:/drawable_baseline_access_time_24.xml.flat",
+        "source": "com.example.foodies.app-main-51:/drawable/baseline_access_time_24.xml"
+    },
+    {
+        "merged": "com.example.foodies.app-debug-49:/layout_activity_search.xml.flat",
+        "source": "com.example.foodies.app-main-51:/layout/activity_search.xml"
+    },
+    {
+        "merged": "com.example.foodies.app-debug-49:/layout_activity_upload.xml.flat",
+        "source": "com.example.foodies.app-main-51:/layout/activity_upload.xml"
+    },
+    {
+        "merged": "com.example.foodies.app-debug-49:/drawable_out_line.xml.flat",
+        "source": "com.example.foodies.app-main-51:/drawable/out_line.xml"
+    },
+    {
+        "merged": "com.example.foodies.app-debug-49:/drawable_img_6.png.flat",
+        "source": "com.example.foodies.app-main-51:/drawable/img_6.png"
+    },
+    {
+        "merged": "com.example.foodies.app-debug-49:/drawable_r_6.jpg.flat",
+        "source": "com.example.foodies.app-main-51:/drawable/r_6.jpg"
+    },
+    {
+        "merged": "com.example.foodies.app-debug-49:/drawable_baseline_image_24.xml.flat",
+        "source": "com.example.foodies.app-main-51:/drawable/baseline_image_24.xml"
+    },
+    {
+        "merged": "com.example.foodies.app-debug-49:/layout_log_out_pop_up.xml.flat",
+        "source": "com.example.foodies.app-main-51:/layout/log_out_pop_up.xml"
+    },
+    {
+        "merged": "com.example.foodies.app-debug-49:/font_poppins_medium.xml.flat",
+        "source": "com.example.foodies.app-main-51:/font/poppins_medium.xml"
+    },
+    {
+        "merged": "com.example.foodies.app-debug-49:/drawable_baseline_person_pin_24.xml.flat",
+        "source": "com.example.foodies.app-main-51:/drawable/baseline_person_pin_24.xml"
+    },
+    {
+        "merged": "com.example.foodies.app-debug-49:/mipmap-xxxhdpi_ic_launcher_round.webp.flat",
+        "source": "com.example.foodies.app-main-51:/mipmap-xxxhdpi/ic_launcher_round.webp"
+    },
+    {
+        "merged": "com.example.foodies.app-debug-49:/drawable_baseline_lock_reset_24.xml.flat",
+        "source": "com.example.foodies.app-main-51:/drawable/baseline_lock_reset_24.xml"
+    },
+    {
+        "merged": "com.example.foodies.app-debug-49:/mipmap-mdpi_ic_launcher_round.webp.flat",
+        "source": "com.example.foodies.app-main-51:/mipmap-mdpi/ic_launcher_round.webp"
+    },
+    {
+        "merged": "com.example.foodies.app-debug-49:/drawable_baseline_access_time_25.xml.flat",
+        "source": "com.example.foodies.app-main-51:/drawable/baseline_access_time_25.xml"
+    },
+    {
+        "merged": "com.example.foodies.app-debug-49:/drawable_img_5_2.png.flat",
+        "source": "com.example.foodies.app-main-51:/drawable/img_5_2.png"
+    },
+    {
+        "merged": "com.example.foodies.app-debug-49:/mipmap-xhdpi_ic_launcher_round.webp.flat",
+        "source": "com.example.foodies.app-main-51:/mipmap-xhdpi/ic_launcher_round.webp"
+    },
+    {
+        "merged": "com.example.foodies.app-debug-49:/xml_backup_rules.xml.flat",
+        "source": "com.example.foodies.app-main-51:/xml/backup_rules.xml"
+    },
+    {
+        "merged": "com.example.foodies.app-debug-49:/layout_activity_main.xml.flat",
+        "source": "com.example.foodies.app-main-51:/layout/activity_main.xml"
+    },
+    {
+        "merged": "com.example.foodies.app-debug-49:/drawable_baseline_edit_24.xml.flat",
+        "source": "com.example.foodies.app-main-51:/drawable/baseline_edit_24.xml"
+    },
+    {
+        "merged": "com.example.foodies.app-debug-49:/drawable_r_2.jpg.flat",
+        "source": "com.example.foodies.app-main-51:/drawable/r_2.jpg"
+    },
+    {
+        "merged": "com.example.foodies.app-debug-49:/layout_activity_network_error.xml.flat",
+        "source": "com.example.foodies.app-main-51:/layout/activity_network_error.xml"
+    },
+    {
+        "merged": "com.example.foodies.app-debug-49:/drawable_network_error.png.flat",
+        "source": "com.example.foodies.app-main-51:/drawable/network_error.png"
+    },
+    {
+        "merged": "com.example.foodies.app-debug-49:/drawable_img_7.png.flat",
+        "source": "com.example.foodies.app-main-51:/drawable/img_7.png"
+    },
+    {
+        "merged": "com.example.foodies.app-debug-49:/drawable_baseline_warning_24.xml.flat",
+        "source": "com.example.foodies.app-main-51:/drawable/baseline_warning_24.xml"
+    },
+    {
+        "merged": "com.example.foodies.app-debug-49:/layout_activity_splash.xml.flat",
+        "source": "com.example.foodies.app-main-51:/layout/activity_splash.xml"
+    },
+    {
+        "merged": "com.example.foodies.app-debug-49:/drawable_r_5.jpg.flat",
+        "source": "com.example.foodies.app-main-51:/drawable/r_5.jpg"
+    },
+    {
+        "merged": "com.example.foodies.app-debug-49:/drawable_ic_launcher_foreground.xml.flat",
+        "source": "com.example.foodies.app-main-51:/drawable/ic_launcher_foreground.xml"
+    },
+    {
+        "merged": "com.example.foodies.app-debug-49:/drawable_background_fill_2.png.flat",
+        "source": "com.example.foodies.app-main-51:/drawable/background_fill_2.png"
+    },
+    {
+        "merged": "com.example.foodies.app-debug-49:/drawable_bg_2.png.flat",
+        "source": "com.example.foodies.app-main-51:/drawable/bg_2.png"
+    },
+    {
+        "merged": "com.example.foodies.app-debug-49:/drawable_r_3.jpeg.flat",
+        "source": "com.example.foodies.app-main-51:/drawable/r_3.jpeg"
+    },
+    {
+        "merged": "com.example.foodies.app-debug-49:/drawable_forgot_password_background.xml.flat",
+        "source": "com.example.foodies.app-main-51:/drawable/forgot_password_background.xml"
+    },
+    {
+        "merged": "com.example.foodies.app-debug-49:/drawable_image_bottom_overlay.xml.flat",
+        "source": "com.example.foodies.app-main-51:/drawable/image_bottom_overlay.xml"
+    },
+    {
+        "merged": "com.example.foodies.app-debug-49:/layout_my_recipe_item.xml.flat",
+        "source": "com.example.foodies.app-main-51:/layout/my_recipe_item.xml"
+    },
+    {
+        "merged": "com.example.foodies.app-debug-49:/mipmap-mdpi_ic_launcher.webp.flat",
+        "source": "com.example.foodies.app-main-51:/mipmap-mdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "com.example.foodies.app-debug-49:/mipmap-xxhdpi_ic_launcher.webp.flat",
+        "source": "com.example.foodies.app-main-51:/mipmap-xxhdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "com.example.foodies.app-debug-49:/drawable_back_icon.xml.flat",
+        "source": "com.example.foodies.app-main-51:/drawable/back_icon.xml"
+    },
+    {
+        "merged": "com.example.foodies.app-debug-49:/xml_data_extraction_rules.xml.flat",
+        "source": "com.example.foodies.app-main-51:/xml/data_extraction_rules.xml"
+    },
+    {
+        "merged": "com.example.foodies.app-debug-49:/drawable_r_1.jpg.flat",
+        "source": "com.example.foodies.app-main-51:/drawable/r_1.jpg"
+    },
+    {
+        "merged": "com.example.foodies.app-debug-49:/drawable_transparent_bg.xml.flat",
+        "source": "com.example.foodies.app-main-51:/drawable/transparent_bg.xml"
+    },
+    {
+        "merged": "com.example.foodies.app-debug-49:/layout_activity_detail.xml.flat",
+        "source": "com.example.foodies.app-main-51:/layout/activity_detail.xml"
+    },
+    {
+        "merged": "com.example.foodies.app-debug-49:/drawable_baseline_bookmark_24.xml.flat",
+        "source": "com.example.foodies.app-main-51:/drawable/baseline_bookmark_24.xml"
+    },
+    {
+        "merged": "com.example.foodies.app-debug-49:/layout_activity_profile.xml.flat",
+        "source": "com.example.foodies.app-main-51:/layout/activity_profile.xml"
+    },
+    {
+        "merged": "com.example.foodies.app-debug-49:/drawable_logo_without_background.png.flat",
+        "source": "com.example.foodies.app-main-51:/drawable/logo_without_background.png"
+    },
+    {
+        "merged": "com.example.foodies.app-debug-49:/drawable_r_8.jpg.flat",
+        "source": "com.example.foodies.app-main-51:/drawable/r_8.jpg"
+    },
+    {
+        "merged": "com.example.foodies.app-debug-49:/layout_activity_forgot_password.xml.flat",
+        "source": "com.example.foodies.app-main-51:/layout/activity_forgot_password.xml"
+    },
+    {
+        "merged": "com.example.foodies.app-debug-49:/drawable_splash.png.flat",
+        "source": "com.example.foodies.app-main-51:/drawable/splash.png"
+    }
+]

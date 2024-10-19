@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background_fill"
+    tools:context=".UI.UpdateActivity">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="20dp"
+        app:cardCornerRadius="30dp"
+        app:cardElevation="10dp">
+
+        <ImageView
+            android:id="@+id/back"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_margin="10dp"
+            app:srcCompat="@drawable/baseline_arrow_back_24" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_horizontal"
+            android:orientation="vertical"
+            android:padding="15dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/inter_tight_medium"
+                android:text="Edit Recipe"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/inter_tight_medium"
+                android:text="Edit Preview Image"
+                android:textAlignment="textStart"
+                android:textColor="@color/black"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:id="@+id/updateImage"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:scaleType="fitXY"
+                android:src="@drawable/baseline_image_24" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/inter_tight_medium"
+                android:text="Edit Video"
+                android:textAlignment="textStart"
+                android:textColor="@color/black"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/updateVideo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:backgroundTint="#46A020"
+                android:fontFamily="@font/poppins_medium"
+                android:scaleType="centerCrop"
+                android:text="Edit Video"
+                android:textSize="15sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="3dp"
+                android:fontFamily="@font/inter_tight_medium"
+                android:text="Edit Name"
+                android:textAlignment="textStart"
+                android:textColor="@color/black"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/updateName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:autoSizeTextType="uniform"
+                android:background="@drawable/text_bg"
+                android:fontFamily="@font/inter_tight_medium"
+                android:gravity="start|center_vertical"
+                android:hint="Edit Recipe Name"
+                android:padding="12sp"
+                android:singleLine="false"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="3dp"
+                android:fontFamily="@font/inter_tight_medium"
+                android:text="Edit Category"
+                android:textAlignment="textStart"
+                android:textColor="@color/black"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/updateCategory"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/text_bg"
+                android:fontFamily="@font/inter_tight_medium"
+                android:gravity="start|center_vertical"
+                android:hint="Edit Category"
+                android:padding="12sp"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="3dp"
+                android:fontFamily="@font/inter_tight_medium"
+                android:text="Edit Time"
+                android:textAlignment="textStart"
+                android:textColor="@color/black"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/updateTime"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/text_bg"
+                android:fontFamily="@font/inter_tight_medium"
+                android:gravity="start|center_vertical"
+                android:hint="Edit Time"
+                android:padding="12sp"
+                android:singleLine="true"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="3dp"
+                android:fontFamily="@font/inter_tight_medium"
+                android:text="Edit Ingredients"
+                android:textAlignment="textStart"
+                android:textColor="@color/black"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/updateIngredients"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:autoSizeTextType="uniform"
+                android:background="@drawable/text_bg"
+                android:fontFamily="@font/inter_tight_medium"
+                android:gravity="start|center_vertical"
+                android:hint="Edit Ingredients"
+                android:padding="12sp"
+                android:singleLine="false"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="3dp"
+                android:fontFamily="@font/inter_tight_medium"
+                android:text="Edit Description"
+                android:textAlignment="textStart"
+                android:textColor="@color/black"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/updateDescription"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:autoSizeTextType="none"
+                android:background="@drawable/text_bg"
+                android:fontFamily="@font/inter_tight_medium"
+                android:gravity="start|center_vertical"
+                android:hint="Edit Recipe Description"
+                android:padding="12sp"
+                android:textColor="@color/black" />
+
+            <Button
+                android:id="@+id/updateButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="20dp"
+                android:backgroundTint="#3F9B17"
+                android:fontFamily="@font/inter_tight_medium"
+                android:text="UPDATE"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+</ScrollView>

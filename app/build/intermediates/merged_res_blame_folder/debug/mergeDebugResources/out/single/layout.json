@@ -1,0 +1,86 @@
+[
+    {
+        "merged": "com.example.foodies.app-mergeDebugResources-48:/layout/activity_detail.xml",
+        "source": "com.example.foodies.app-main-51:/layout/activity_detail.xml"
+    },
+    {
+        "merged": "com.example.foodies.app-mergeDebugResources-48:/layout/activity_forgot_password.xml",
+        "source": "com.example.foodies.app-main-51:/layout/activity_forgot_password.xml"
+    },
+    {
+        "merged": "com.example.foodies.app-mergeDebugResources-48:/layout/activity_update.xml",
+        "source": "com.example.foodies.app-main-51:/layout/activity_update.xml"
+    },
+    {
+        "merged": "com.example.foodies.app-mergeDebugResources-48:/layout/popup_layout.xml",
+        "source": "com.example.foodies.app-main-51:/layout/popup_layout.xml"
+    },
+    {
+        "merged": "com.example.foodies.app-mergeDebugResources-48:/layout/activity_upload.xml",
+        "source": "com.example.foodies.app-main-51:/layout/activity_upload.xml"
+    },
+    {
+        "merged": "com.example.foodies.app-mergeDebugResources-48:/layout/activity_view_others_recipe.xml",
+        "source": "com.example.foodies.app-main-51:/layout/activity_view_others_recipe.xml"
+    },
+    {
+        "merged": "com.example.foodies.app-mergeDebugResources-48:/layout/other_recipe_item.xml",
+        "source": "com.example.foodies.app-main-51:/layout/other_recipe_item.xml"
+    },
+    {
+        "merged": "com.example.foodies.app-mergeDebugResources-48:/layout/activity_saved_recipes.xml",
+        "source": "com.example.foodies.app-main-51:/layout/activity_saved_recipes.xml"
+    },
+    {
+        "merged": "com.example.foodies.app-mergeDebugResources-48:/layout/activity_network_error.xml",
+        "source": "com.example.foodies.app-main-51:/layout/activity_network_error.xml"
+    },
+    {
+        "merged": "com.example.foodies.app-mergeDebugResources-48:/layout/activity_search.xml",
+        "source": "com.example.foodies.app-main-51:/layout/activity_search.xml"
+    },
+    {
+        "merged": "com.example.foodies.app-mergeDebugResources-48:/layout/log_out_pop_up.xml",
+        "source": "com.example.foodies.app-main-51:/layout/log_out_pop_up.xml"
+    },
+    {
+        "merged": "com.example.foodies.app-mergeDebugResources-48:/layout/search_item.xml",
+        "source": "com.example.foodies.app-main-51:/layout/search_item.xml"
+    },
+    {
+        "merged": "com.example.foodies.app-mergeDebugResources-48:/layout/activity_register.xml",
+        "source": "com.example.foodies.app-main-51:/layout/activity_register.xml"
+    },
+    {
+        "merged": "com.example.foodies.app-mergeDebugResources-48:/layout/activity_main.xml",
+        "source": "com.example.foodies.app-main-51:/layout/activity_main.xml"
+    },
+    {
+        "merged": "com.example.foodies.app-mergeDebugResources-48:/layout/progress_layout.xml",
+        "source": "com.example.foodies.app-main-51:/layout/progress_layout.xml"
+    },
+    {
+        "merged": "com.example.foodies.app-mergeDebugResources-48:/layout/activity_login.xml",
+        "source": "com.example.foodies.app-main-51:/layout/activity_login.xml"
+    },
+    {
+        "merged": "com.example.foodies.app-mergeDebugResources-48:/layout/activity_splash.xml",
+        "source": "com.example.foodies.app-main-51:/layout/activity_splash.xml"
+    },
+    {
+        "merged": "com.example.foodies.app-mergeDebugResources-48:/layout/delete_account_pop_up.xml",
+        "source": "com.example.foodies.app-main-51:/layout/delete_account_pop_up.xml"
+    },
+    {
+        "merged": "com.example.foodies.app-mergeDebugResources-48:/layout/activity_others_recipe_detail.xml",
+        "source": "com.example.foodies.app-main-51:/layout/activity_others_recipe_detail.xml"
+    },
+    {
+        "merged": "com.example.foodies.app-mergeDebugResources-48:/layout/my_recipe_item.xml",
+        "source": "com.example.foodies.app-main-51:/layout/my_recipe_item.xml"
+    },
+    {
+        "merged": "com.example.foodies.app-mergeDebugResources-48:/layout/activity_profile.xml",
+        "source": "com.example.foodies.app-main-51:/layout/activity_profile.xml"
+    }
+]

@@ -1,1 +1,2 @@
-/build
+# ignore the google-services.json file that is used for Firebase
+google-services.json

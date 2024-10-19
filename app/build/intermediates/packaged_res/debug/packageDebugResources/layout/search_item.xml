@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/recCard"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="10dp"
+    android:layout_marginVertical="10dp"
+    android:layout_marginStart="12dp"
+    android:layout_marginEnd="12dp"
+    android:backgroundTint="#F3FFEC"
+    app:cardCornerRadius="20dp"
+    app:cardElevation="8dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:backgroundTint="#7DC572">
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/recImage"
+            android:layout_width="65dp"
+            android:layout_height="65dp"
+            android:padding="8dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/baseline_image_24"
+            app:shapeAppearanceOverlay="@style/roundedImageViewRounded" />
+
+        <TextView
+            android:id="@+id/recTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="1dp"
+            android:layout_marginTop="5dp"
+            android:layout_toEndOf="@+id/recImage"
+            android:fontFamily="@font/inter_tight_medium"
+            android:singleLine="false"
+            android:text="Name"
+            android:textColor="@color/black"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/recTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="215dp"
+            android:layout_marginTop="50dp"
+            android:layout_toEndOf="@+id/recImage"
+            android:fontFamily="@font/inter_tight_medium"
+            android:text="Time"
+            android:textAlignment="textEnd"
+            android:textColor="@color/black"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+
+        <RatingBar
+            android:id="@+id/ratingBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="29dp"
+            android:isIndicator="true"
+            android:numStars="4"
+            android:scaleX="0.45"
+            android:scaleY="0.45" />
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="17dp"
+            android:layout_height="17dp"
+            android:layout_marginStart="260dp"
+            android:layout_marginTop="50dp"
+            app:srcCompat="@drawable/baseline_access_time_25" />
+
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>
