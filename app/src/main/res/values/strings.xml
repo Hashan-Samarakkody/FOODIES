@@ -2,7 +2,8 @@
     <string name="app_name">FOODIES</string>
     <string name="quote">Cook, share, and enjoy delicious moments together!</string>
     <string name="quote2">Your creations are just a step away,</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="default_web_client_id">394255875272-42oih7f1phmg18hcjmlcjflkkd3qn9jf.apps.googleusercontent.com</string>
+    
+    <!-- Add the webclient id here -->
+    <string name="default_web_client_id"></string>
 </resources>

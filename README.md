@@ -78,6 +78,9 @@ To enable full functionality in the FOODIES app, please set up the following Fir
 
 Make sure to follow the video guides carefully to ensure proper configuration.
 
+### Web Client ID
+Also, add the web client id in the [strings.xml]() file.
+
 
 ## Usage
 Once the application is installed:
