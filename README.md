@@ -28,9 +28,9 @@ FOODIES includes the following key features:
 
 ## Prerequisites
 Before running the FOODIES application, ensure your environment meets the following requirements:
-- Android Studio installed (version X or higher)
-- Android SDK (version X or higher)
-- Java Development Kit (JDK) (version X or higher)
+- Android Studio installed
+- Android SDK
+- Java Development Kit (JDK)
 
 ## Installation
 To set up the FOODIES application on your local machine:
